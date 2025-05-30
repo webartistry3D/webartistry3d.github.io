@@ -1,0 +1,131 @@
+<!DOCTYPE html><html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebArtistry Creations</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <script type="module" src="https://unpkg.com/three@0.150.1/build/three.module.js"></script>
+    <script type="module" src="https://unpkg.com/three@0.150.1/examples/jsm/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 0;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-950 text-white font-sans relative overflow-x-hidden">
+    <!-- Hero Section -->
+    <section class="min-h-screen flex flex-col justify-center items-center text-center px-6 z-10 relative">
+      <h1 class="text-4xl md:text-6xl font-bold mb-4" data-aos="fade-up">Welcome to WebArtistry Creations</h1>
+      <p class="text-xl md:text-2xl max-w-2xl" data-aos="fade-up" data-aos-delay="200">Blending Web Design, 3D Visuals & Digital Art to Build Future-Ready Brands.</p>
+    </section><!-- About Section -->
+<section class="py-20 px-6 text-center bg-gray-900" id="about">
+  <h2 class="text-4xl font-bold mb-6" data-aos="fade-up">About Us</h2>
+  <p class="text-lg max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="150">
+    WebArtistry Creations is a creative digital studio based in Lagos, Nigeria. We specialize in web development, 3D modeling, motion graphics, and animated storytelling rooted in African culture. Our mission is to help businesses stand out with visually captivating, meaningful experiences.
+  </p>
+</section>
+
+<!-- Services Section -->
+<section class="py-20 px-6 text-center bg-gray-950" id="services">
+  <h2 class="text-4xl font-bold mb-6" data-aos="fade-up">Our Services</h2>
+  <div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+    <div class="p-6 bg-gray-800 rounded-xl shadow-xl" data-aos="zoom-in">
+      <h3 class="text-2xl font-bold mb-2">Web Development</h3>
+      <p>Responsive, fast and modern websites tailored for your brand and audience.</p>
+    </div>
+    <div class="p-6 bg-gray-800 rounded-xl shadow-xl" data-aos="zoom-in" data-aos-delay="150">
+      <h3 class="text-2xl font-bold mb-2">3D Visualization</h3>
+      <p>High-quality 3D modeling and rendering for immersive product and brand experiences.</p>
+    </div>
+    <div class="p-6 bg-gray-800 rounded-xl shadow-xl" data-aos="zoom-in" data-aos-delay="300">
+      <h3 class="text-2xl font-bold mb-2">Motion Graphics</h3>
+      <p>Short animations and VFX that amplify your message across social media and campaigns.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Portfolio Section -->
+<section class="py-20 px-6 text-center bg-gray-900" id="portfolio">
+  <h2 class="text-4xl font-bold mb-6" data-aos="fade-up">Portfolio</h2>
+  <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+    <div class="group relative overflow-hidden rounded-lg shadow-lg" data-aos="fade-up">
+      <img src="/images/project1.jpg" alt="Project 1" class="w-full h-60 object-cover group-hover:scale-110 transition-transform duration-300" />
+      <div class="absolute bottom-0 left-0 bg-black/70 text-white w-full p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        3D Product Showcase for Vaib
+      </div>
+    </div>
+    <div class="group relative overflow-hidden rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="150">
+      <img src="/images/project2.jpg" alt="Project 2" class="w-full h-60 object-cover group-hover:scale-110 transition-transform duration-300" />
+      <div class="absolute bottom-0 left-0 bg-black/70 text-white w-full p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        Animated Logo Reveal for Tech Brand
+      </div>
+    </div>
+    <div class="group relative overflow-hidden rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="300">
+      <img src="/images/project3.jpg" alt="Project 3" class="w-full h-60 object-cover group-hover:scale-110 transition-transform duration-300" />
+      <div class="absolute bottom-0 left-0 bg-black/70 text-white w-full p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        Culture Preserve Nation Series Teaser
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="py-20 px-6 text-center bg-gray-950" id="contact">
+  <h2 class="text-4xl font-bold mb-6" data-aos="fade-up">Contact Us</h2>
+  <p class="mb-6 max-w-xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+    Let’s bring your idea to life! Fill out the form below or email us at <a href="mailto:hello@webartistry.ng" class="underline text-blue-400">hello@webartistry.ng</a>.
+  </p>
+  <form class="grid gap-4 max-w-md mx-auto" data-aos="fade-up" data-aos-delay="200">
+    <input type="text" placeholder="Name" class="p-3 rounded bg-gray-800 border border-gray-700" required />
+    <input type="email" placeholder="Email" class="p-3 rounded bg-gray-800 border border-gray-700" required />
+    <textarea placeholder="Message" class="p-3 rounded bg-gray-800 border border-gray-700" rows="5" required></textarea>
+    <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-3 px-6 rounded">Send Message</button>
+  </form>
+</section>
+
+<!-- Three.js GLTF Model -->
+<script type="module">
+  import * as THREE from 'https://unpkg.com/three@0.150.1/build/three.module.js';
+  import { GLTFLoader } from 'https://unpkg.com/three@0.150.1/examples/jsm/loaders/GLTFLoader.js';
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  const renderer = new THREE.WebGLRenderer({ alpha: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.body.appendChild(renderer.domElement);
+
+  const loader = new GLTFLoader();
+  loader.load('/models/your_model.glb', function (gltf) {
+    const model = gltf.scene;
+    model.scale.set(2, 2, 2);
+    scene.add(model);
+    animate();
+  });
+
+  const light = new THREE.HemisphereLight(0xffffff, 0x000000, 1);
+  scene.add(light);
+
+  camera.position.z = 5;
+
+  function animate() {
+    requestAnimationFrame(animate);
+    scene.rotation.y += 0.003;
+    renderer.render(scene, camera);
+  }
+
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+</script>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>AOS.init();</script>
+
+  </body>
+</html>
