@@ -1,135 +1,69 @@
-<!DOCTYPE html>  <html lang="en">  
-  <head>  
-    <meta charset="UTF-8" />  
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />  
-    <title>WebArtistry Creations</title>  
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">  
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">  
-    <script type="module" src="https://cdn.jsdelivr.net/npm/@splinetool/viewer@0.9.476/build/spline-viewer.js"></script>  
-    <style>  
-      .fade-enter {  
-        opacity: 0;  
-        transform: translateY(20px);  
-        transition: all 0.5s ease-in-out;  
-      }  
-      .fade-enter-active {  
-        opacity: 1;  
-        transform: translateY(0);  
-      }  
-    </style>  
-  </head>  
-  <body class="bg-gray-900 text-white transition-all duration-700 ease-in-out">  
-    <div id="page" class="fade-enter">  
-      <!-- Navigation -->  
-      <nav class="p-4 bg-black bg-opacity-80 fixed w-full z-50">  
-        <ul class="flex justify-around">  
-          <li><a href="#home" class="hover:text-yellow-400">Home</a></li>  
-          <li><a href="#about" class="hover:text-yellow-400">About</a></li>  
-          <li><a href="#services" class="hover:text-yellow-400">Services</a></li>  
-          <li><a href="#portfolio" class="hover:text-yellow-400">Portfolio</a></li>  
-          <li><a href="#contact" class="hover:text-yellow-400">Contact</a></li>  
-        </ul>  
-      </nav>  <!-- Hero Section -->  
-  <section id="home" class="min-h-screen flex flex-col justify-center items-center pt-20">  
-    <h1 class="text-4xl md:text-6xl font-bold mb-4">Welcome to WebArtistry</h1>  
-    <p class="text-xl text-gray-400 mb-8">Where Digital Art Meets Web Innovation</p>  
-    <canvas id="three-canvas" class="w-full h-96"></canvas>  
-  </section>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsive Navbar</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
 
-  <!-- About Section -->  
-  <section id="about" class="p-10" data-aos="fade-up">  
-    <h2 class="text-3xl font-bold mb-6">About Us</h2>  
-    <p class="text-gray-300 max-w-2xl">We are a Lagos-based creative agency combining 3D art, web development, and marketing to bring brands to life with stunning visuals and interactivity.</p>  
-  </section>  
+  <!-- Navigation Bar -->
+  <nav class="bg-black bg-opacity-80 text-white fixed w-full z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Logo -->
+        <div class="flex-shrink-0">
+          <h1 class="text-xl font-bold">WebArtistry</h1>
+        </div>
 
-  <!-- Services Section -->  
-  <section id="services" class="p-10 bg-gray-800" data-aos="fade-up">  
-    <h2 class="text-3xl font-bold mb-6">Our Services</h2>  
-    <div class="grid md:grid-cols-3 gap-6">  
-      <div class="bg-gray-700 p-6 rounded-xl hover:shadow-2xl transition-all duration-500">  
-        <h3 class="text-xl font-semibold mb-2">Web Development</h3>  
-        <p class="text-gray-300">Custom-built, high-performance websites tailored for your business goals.</p>  
-      </div>  
-      <div class="bg-gray-700 p-6 rounded-xl hover:shadow-2xl transition-all duration-500">  
-        <h3 class="text-xl font-semibold mb-2">3D Animation & Renders</h3>  
-        <p class="text-gray-300">Visually striking 3D animations for product showcases and branding.</p>  
-      </div>  
-      <div class="bg-gray-700 p-6 rounded-xl hover:shadow-2xl transition-all duration-500">  
-        <h3 class="text-xl font-semibold mb-2">Digital Marketing</h3>  
-        <p class="text-gray-300">Strategic content for impactful online visibility and engagement.</p>  
-      </div>  
-    </div>  
-  </section>  
+        <!-- Hamburger Menu Button (Mobile) -->
+        <div class="md:hidden">
+          <button id="menu-btn" class="focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="white" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
 
-  <!-- Portfolio Section -->  
-  <section id="portfolio" class="p-10" data-aos="fade-up">  
-    <h2 class="text-3xl font-bold mb-6">Portfolio</h2>  
-    <div class="grid md:grid-cols-3 gap-6">  
-      <div class="bg-black p-4 rounded-xl hover:scale-105 transform transition duration-300">  
-        <img src="https://via.placeholder.com/300" class="rounded mb-4" alt="Portfolio item">  
-        <h4 class="text-xl font-semibold">3D Product Visual</h4>  
-      </div>  
-      <div class="bg-black p-4 rounded-xl hover:scale-105 transform transition duration-300">  
-        <img src="https://via.placeholder.com/300" class="rounded mb-4" alt="Portfolio item">  
-        <h4 class="text-xl font-semibold">E-commerce UI</h4>  
-      </div>  
-      <div class="bg-black p-4 rounded-xl hover:scale-105 transform transition duration-300">  
-        <img src="https://via.placeholder.com/300" class="rounded mb-4" alt="Portfolio item">  
-        <h4 class="text-xl font-semibold">Brand Animation</h4>  
-      </div>  
-    </div>  
-  </section>  
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex space-x-8">
+          <a href="#home" class="hover:text-yellow-400">Home</a>
+          <a href="#about" class="hover:text-yellow-400">About</a>
+          <a href="#services" class="hover:text-yellow-400">Services</a>
+          <a href="#portfolio" class="hover:text-yellow-400">Portfolio</a>
+          <a href="#contact" class="hover:text-yellow-400">Contact</a>
+        </div>
+      </div>
+    </div>
 
-  <!-- Contact Section -->  
-  <section id="contact" class="p-10 bg-gray-800" data-aos="fade-up">  
-    <h2 class="text-3xl font-bold mb-6">Contact Us</h2>  
-    <form class="space-y-4 max-w-lg">  
-      <input type="text" placeholder="Your Name" class="w-full p-3 rounded bg-gray-900 border border-gray-700" />  
-      <input type="email" placeholder="Your Email" class="w-full p-3 rounded bg-gray-900 border border-gray-700" />  
-      <textarea placeholder="Message" class="w-full p-3 rounded bg-gray-900 border border-gray-700 h-32"></textarea>  
-      <button class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold px-6 py-3 rounded">Send Message</button>  
-    </form>  
-  </section>  
-</div>  
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden hidden px-4 pb-4">
+      <a href="#home" class="block py-2 hover:text-yellow-400">Home</a>
+      <a href="#about" class="block py-2 hover:text-yellow-400">About</a>
+      <a href="#services" class="block py-2 hover:text-yellow-400">Services</a>
+      <a href="#portfolio" class="block py-2 hover:text-yellow-400">Portfolio</a>
+      <a href="#contact" class="block py-2 hover:text-yellow-400">Contact</a>
+    </div>
+  </nav>
 
-<!-- Scripts -->  
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>  
-<script src="https://unpkg.com/@google/model-viewer"></script>  
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>  
-<script>  
-  AOS.init();  
+  <!-- Content placeholder -->
+  <div class="pt-20 p-4">
+    <h2 class="text-2xl font-bold">Welcome to WebArtistry</h2>
+    <p class="mt-2">Scroll down to see the mobile nav in action...</p>
+  </div>
 
-  window.addEventListener('load', () => {  
-    const page = document.getElementById('page');  
-    page.classList.add('fade-enter-active');  
-  });  
-</script>  
-<script type="module">  
-  import * as THREE from 'https://cdn.skypack.dev/three';  
-  import { GLTFLoader } from 'https://cdn.skypack.dev/three/examples/jsm/loaders/GLTFLoader.js';  
+  <!-- Toggle Script -->
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
 
-  const scene = new THREE.Scene();  
-  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / 400, 0.1, 1000);  
-  const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('three-canvas'), alpha: true });  
-  renderer.setSize(window.innerWidth, 400);  
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
 
-  const light = new THREE.HemisphereLight(0xffffff, 0x444444);  
-  light.position.set(0, 20, 0);  
-  scene.add(light);  
-
-  const loader = new GLTFLoader();  
-  loader.load('/models/your_model.glb', function (gltf) {  
-    scene.add(gltf.scene);  
-  });  
-
-  camera.position.z = 5;  
-
-  function animate() {  
-    requestAnimationFrame(animate);  
-    renderer.render(scene, camera);  
-  }  
-  animate();  
-</script>
-
-  </body>  
+</body>
 </html>
