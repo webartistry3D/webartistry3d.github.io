@@ -4,145 +4,170 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WebArtistry.3D</title>
-    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <!-- AOS + Tailwind + Three.js -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="https://unpkg.com/three@0.150.1/build/three.module.js"></script>
+    <script type="module" src="https://unpkg.com/three@0.150.1/examples/jsm/loaders/GLTFLoader.js"></script>
+
     <style>
-      body {
+      body, html {
         margin: 0;
-        overflow: hidden;
-        background-color: #0f172a;
-        color: white;
+        padding: 0;
       }
+
       canvas {
-        display: block;
         position: fixed;
         top: 0;
         left: 0;
         z-index: 0;
-      }
-      main, header, section {
-        position: relative;
-        z-index: 10;
+        pointer-events: none;
       }
     </style>
   </head>
-  <body class="font-sans">
 
+  <body class="bg-gray-950 text-white font-sans relative overflow-x-hidden">
     <!-- Navbar -->
-    <header class="fixed top-0 w-full bg-gray-900 bg-opacity-90 z-50">
+    <header class="fixed top-0 w-full z-50 bg-gray-900 bg-opacity-90 shadow">
       <div class="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
         <h1 class="text-2xl font-bold">WebArtistry.3D</h1>
-        <nav class="hidden md:flex space-x-6 text-sm">
+        <button id="menu-toggle" class="text-white md:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+               viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+        <nav class="hidden md:flex space-x-6 text-sm" id="menu">
           <a href="#about" class="hover:text-blue-400">About</a>
           <a href="#services" class="hover:text-blue-400">Services</a>
           <a href="#portfolio" class="hover:text-blue-400">Portfolio</a>
           <a href="#contact" class="hover:text-blue-400">Contact</a>
         </nav>
       </div>
+      <div id="mobile-menu" class="md:hidden hidden px-6 pb-4 space-y-2">
+        <a href="#about" class="block hover:text-blue-400">About</a>
+        <a href="#services" class="block hover:text-blue-400">Services</a>
+        <a href="#portfolio" class="block hover:text-blue-400">Portfolio</a>
+        <a href="#contact" class="block hover:text-blue-400">Contact</a>
+      </div>
     </header>
 
-    <main class="pt-24">
-
+    <!-- Main Content -->
+    <main class="pt-24 relative z-10">
       <!-- Hero -->
       <section class="min-h-screen flex flex-col justify-center items-center text-center px-6">
-        <h1 class="text-4xl md:text-6xl font-bold mb-4" data-aos="fade-up">We Deliver Stunning Web Experiences in 3D</h1>
+        <h1 class="text-4xl md:text-6xl font-bold mb-4" data-aos="fade-up">
+          We Deliver Stunning Web Experiences in 3D
+        </h1>
         <p class="text-xl md:text-2xl max-w-2xl" data-aos="fade-up" data-aos-delay="200">
           3D Visuals | Motion Graphics | Websites | Branding
         </p>
       </section>
 
       <!-- About -->
-      <section class="py-20 px-6 text-center bg-gray-900" id="about">
+      <section id="about" class="py-20 px-6 text-center bg-gray-900">
         <h2 class="text-4xl font-bold mb-6" data-aos="fade-up">About Us</h2>
         <p class="text-lg max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="150">
-          We are a creative studio specialized in 3D modeling, motion graphics, and web development. We empower brilliant minds and brands to stand out with visually captivating web content.
+          We are a creative digital studio specialized in 3D modeling, motion graphics, web development, and animated storytelling. Our mission is to help individuals with the brightest ideas, as well as brands, shine and stand out with visually captivating, and meaningful web content.
         </p>
       </section>
 
       <!-- Services -->
-      <section class="py-20 px-6 text-center bg-gray-950" id="services">
+      <section id="services" class="py-20 px-6 text-center bg-gray-950">
         <h2 class="text-4xl font-bold mb-6" data-aos="fade-up">Our Services</h2>
         <div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
-          <div class="p-6 bg-gray-800 rounded-xl shadow-xl" data-aos="zoom-in">
+          <div class="p-6 bg-gray-800 rounded-xl shadow-xl" data-aos="zoom-in" data-aos-delay="150">
             <h3 class="text-2xl font-bold mb-2">3D Visualization</h3>
-            <p>Immersive modeling and rendering experiences.</p>
+            <p>High-quality 3D modeling and rendering for immersive product and brand experiences.</p>
           </div>
-          <div class="p-6 bg-gray-800 rounded-xl shadow-xl" data-aos="zoom-in" data-aos-delay="200">
+          <div class="p-6 bg-gray-800 rounded-xl shadow-xl" data-aos="zoom-in" data-aos-delay="300">
             <h3 class="text-2xl font-bold mb-2">Motion Graphics</h3>
-            <p>Short animations and VFX that amplify your story.</p>
+            <p>Short animations and VFX that amplify your message across social media and campaigns.</p>
           </div>
-          <div class="p-6 bg-gray-800 rounded-xl shadow-xl" data-aos="zoom-in" data-aos-delay="400">
+          <div class="p-6 bg-gray-800 rounded-xl shadow-xl" data-aos="zoom-in">
             <h3 class="text-2xl font-bold mb-2">Web Development</h3>
-            <p>Fast, responsive, modern websites tailored to you.</p>
+            <p>Responsive, fast and modern websites tailored for your brand and audience.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Portfolio -->
+      <section id="portfolio" class="py-20 px-6 text-center bg-gray-900">
+        <h2 class="text-4xl font-bold mb-6" data-aos="fade-up">Portfolio</h2>
+        <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div class="group relative overflow-hidden rounded-lg shadow-lg" data-aos="fade-up">
+            <img src="/images/project1.jpg" alt="Project 1"
+                 class="w-full h-60 object-cover group-hover:scale-110 transition-transform duration-300" />
+            <div class="absolute bottom-0 left-0 bg-black/70 text-white w-full p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              3D Product Showcase for Vaib
+            </div>
+          </div>
+          <div class="group relative overflow-hidden rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="150">
+            <img src="/images/project2.jpg" alt="Project 2"
+                 class="w-full h-60 object-cover group-hover:scale-110 transition-transform duration-300" />
+            <div class="absolute bottom-0 left-0 bg-black/70 text-white w-full p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              Animated Logo Reveal for Tech Brand
+            </div>
+          </div>
+          <div class="group relative overflow-hidden rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="300">
+            <img src="/images/project3.jpg" alt="Project 3"
+                 class="w-full h-60 object-cover group-hover:scale-110 transition-transform duration-300" />
+            <div class="absolute bottom-0 left-0 bg-black/70 text-white w-full p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              Culture Preserve Nation Series Teaser
+            </div>
           </div>
         </div>
       </section>
 
       <!-- Contact -->
-      <section class="py-20 px-6 text-center bg-gray-900" id="contact">
+      <section id="contact" class="py-20 px-6 text-center bg-gray-950">
         <h2 class="text-4xl font-bold mb-6" data-aos="fade-up">Contact Us</h2>
         <p class="mb-6 max-w-xl mx-auto" data-aos="fade-up" data-aos-delay="100">
-          Let’s bring your idea to life. Email us at <a href="mailto:hello@webartistry.ng" class="text-blue-400 underline">hello@webartistry.ng</a>.
+          Let’s bring your idea to life! Fill out the form below or email us at
+          <a href="mailto:hello@webartistry.ng" class="underline text-blue-400">hello@webartistry.ng</a>.
         </p>
         <form class="grid gap-4 max-w-md mx-auto" data-aos="fade-up" data-aos-delay="200">
-          <input type="text" placeholder="Name" class="p-3 rounded bg-gray-800 border border-gray-700" required />
-          <input type="email" placeholder="Email" class="p-3 rounded bg-gray-800 border border-gray-700" required />
-          <textarea placeholder="Message" class="p-3 rounded bg-gray-800 border border-gray-700" rows="5" required></textarea>
-          <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-3 px-6 rounded">Send Message</button>
+          <input type="text" placeholder="Name" required class="p-3 rounded bg-gray-800 border border-gray-700" />
+          <input type="email" placeholder="Email" required class="p-3 rounded bg-gray-800 border border-gray-700" />
+          <textarea placeholder="Message" rows="5" required class="p-3 rounded bg-gray-800 border border-gray-700"></textarea>
+          <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-3 px-6 rounded">
+            Send Message
+          </button>
         </form>
       </section>
     </main>
 
-    <!-- 3D Scene -->
+    <!-- 3D Background Scene -->
     <script type="module">
       import * as THREE from 'https://unpkg.com/three@0.150.1/build/three.module.js';
       import { GLTFLoader } from 'https://unpkg.com/three@0.150.1/examples/jsm/loaders/GLTFLoader.js';
-      import { OrbitControls } from 'https://unpkg.com/three@0.150.1/examples/jsm/controls/OrbitControls.js';
 
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-      camera.position.set(0, 1, 5);
-
-      const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+      const renderer = new THREE.WebGLRenderer({ alpha: true });
       renderer.setSize(window.innerWidth, window.innerHeight);
       document.body.appendChild(renderer.domElement);
 
-      // Lighting
-      const ambientLight = new THREE.AmbientLight(0xffffff, 1);
-      scene.add(ambientLight);
-
-      const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-      directionalLight.position.set(5, 10, 7.5);
-      scene.add(directionalLight);
-
-      // Load Model
       const loader = new GLTFLoader();
-      loader.load(
-        'spaceship1.glb',
-        (gltf) => {
-          const model = gltf.scene;
-          model.scale.set(1.5, 1.5, 1.5);
-          model.position.set(0, 0, 0);
-          scene.add(model);
+      loader.load('/models/spaceship1.glb', (gltf) => {
+        const model = gltf.scene;
+        model.scale.set(2, 2, 2);
+        scene.add(model);
+        animate();
+      });
 
-          const animate = () => {
-            requestAnimationFrame(animate);
-            model.rotation.y += 0.005;
-            renderer.render(scene, camera);
-          };
-          animate();
-        },
-        undefined,
-        (error) => {
-          console.error('An error occurred loading the model:', error);
-        }
-      );
+      const light = new THREE.HemisphereLight(0xffffff, 0x444444, 1);
+      scene.add(light);
+      camera.position.z = 5;
 
-      // Controls
-      const controls = new OrbitControls(camera, renderer.domElement);
-      controls.enableDamping = true;
+      function animate() {
+        requestAnimationFrame(animate);
+        scene.rotation.y += 0.003;
+        renderer.render(scene, camera);
+      }
 
-      // Handle Resize
       window.addEventListener('resize', () => {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
@@ -150,7 +175,13 @@
       });
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.js"></script>
-    <script>AOS.init();</script>
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+      document.getElementById('menu-toggle').addEventListener('click', () => {
+        document.getElementById('mobile-menu').classList.toggle('hidden');
+      });
+    </script>
   </body>
-</html>
+  </html>
