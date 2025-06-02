@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WebArtistry.3D</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="photoswipe.css" />
+  <script defer src="photoswipe.min.js"></script>
+</head>
+<body>
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Navbar -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">WebArtistry.3D</div>
+      <button class="hamburger" id="hamburger">&#9776;</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero">
+    <h1>Bring Your Imagination to Life</h1>
+    <p>We craft 3D visuals, immersive animations, and next-gen digital experiences.</p>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <h2>About Us</h2>
+    <p>At WebArtistry.3D, we turn creative ideas into visual reality. Our team specializes in 3D design, animation, and motion graphics with a passion for detail.</p>
+  </section>
+
+  <!-- Portfolio -->
+  <section id="portfolio">
+    <h2>Portfolio</h2>
+    <div class="portfolio-grid">
+      <div class="project" data-pswp-gallery="gallery1">
+        <img src="images/project1_thumb.jpg" alt="Project 1"/>
+        <h3>CGI Campaign</h3>
+        <p>Short-form animated campaign for social media virality.</p>
+        <button class="open-gallery" data-gallery="gallery1">View Gallery</button>
+
+        <div class="pswp-gallery" id="gallery1" style="display: none;">
+          <a href="images/project1_img1.jpg" data-pswp-width="1200" data-pswp-height="800"></a>
+          <a href="images/project1_img2.jpg" data-pswp-width="1200" data-pswp-height="800"></a>
+          <a href="images/project1_img3.jpg" data-pswp-width="1200" data-pswp-height="800"></a>
+        </div>
+      </div>
+
+      <!-- More projects can follow... -->
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p>Email us at <a href="mailto:hello@webartistry3d.com">hello@webartistry3d.com</a> or follow us on Instagram @WebArtistry.3D</p>
+  </section>
+
+  <!-- PhotoSwipe Core -->
+  <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true"></div>
+
+  <!-- Scripts -->
+  <script>
+    // Preloader
+    window.addEventListener("load", () => {
+      document.getElementById("preloader").style.display = "none";
+    });
+
+    // Hamburger toggle
+    document.getElementById("hamburger").addEventListener("click", () => {
+      document.getElementById("navLinks").classList.toggle("show");
+    });
+
+    // PhotoSwipe gallery open
+    document.querySelectorAll(".open-gallery").forEach(button => {
+      button.addEventListener("click", e => {
+        const galleryId = e.target.getAttribute("data-gallery");
+        const galleryElements = document.querySelectorAll(`#${galleryId} a`);
+        const items = Array.from(galleryElements).map(link => ({
+          src: link.href,
+          w: parseInt(link.getAttribute("data-pswp-width")),
+          h: parseInt(link.getAttribute("data-pswp-height"))
+        }));
+
+        const options = { index: 0 };
+        const pswp = new PhotoSwipe(document.querySelector('.pswp'), PhotoSwipe.UI_Default, items, options);
+        pswp.init();
+      });
+    });
+  </script>
+</body>
+</html>
