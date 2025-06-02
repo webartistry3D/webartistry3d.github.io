@@ -234,11 +234,14 @@
     currentProjectIndex = projectIndex;
     currentImageIndex = 0;
     document.getElementById('galleryModal').classList.remove('hidden');
-    updateGalleryImage();
+    // updateGalleryImage();
+    document.body.style.overflow = 'hidden'; //Prevents background scroll
   }
 
   function closeGallery() {
     document.getElementById('galleryModal').classList.add('hidden');
+    document.body.style.overflow = ''; //restore scroll
+
   }
 
   function updateGalleryImage() {
