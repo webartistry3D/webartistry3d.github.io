@@ -1,21 +1,112 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>WebArtistry.3D</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="photoswipe.css" />
-  <script defer src="photoswipe.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; background: #000; color: #fff; }/* Preloader */
+#preloader {
+  position: fixed;
+  background: #111;
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.spinner {
+  border: 6px solid #eee;
+  border-top: 6px solid #ff6600;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #111;
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.logo { font-size: 1.5rem; font-weight: bold; color: #ff6600; }
+.nav-links { display: flex; gap: 1rem; list-style: none; }
+.nav-links a { text-decoration: none; color: white; font-size: 1rem; }
+.hamburger {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: white;
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .nav-links {
+    flex-direction: column;
+    display: none;
+    background: #111;
+    position: absolute;
+    right: 1rem;
+    top: 60px;
+    padding: 1rem;
+    border-radius: 8px;
+  }
+  .nav-links.show {
+    display: flex;
+  }
+  .hamburger {
+    display: block;
+  }
+}
+
+section {
+  padding: 2rem;
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+.project {
+  background: #222;
+  padding: 1rem;
+  border-radius: 10px;
+  text-align: center;
+}
+.project img {
+  width: 100%;
+  border-radius: 6px;
+}
+.project button {
+  margin-top: 0.5rem;
+  background: #ff6600;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/photoswipe@5/dist/photoswipe.css">
 </head>
 <body>
   <!-- Preloader -->
   <div id="preloader">
     <div class="spinner"></div>
-  </div>
-
-  <!-- Navbar -->
-  <header>
+  </div>  <!-- Navbar -->  <header>
     <nav class="navbar">
       <div class="logo">WebArtistry.3D</div>
       <button class="hamburger" id="hamburger">&#9776;</button>
@@ -26,52 +117,44 @@
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
-  </header>
-
-  <!-- Hero Section -->
-  <section id="hero">
+  </header>  <!-- Hero Section -->  <section id="hero">
     <h1>Bring Your Imagination to Life</h1>
     <p>We craft 3D visuals, immersive animations, and next-gen digital experiences.</p>
-  </section>
-
-  <!-- About -->
-  <section id="about">
+  </section>  <!-- About -->  <section id="about">
     <h2>About Us</h2>
-    <p>At WebArtistry.3D, we turn creative ideas into visual reality. Our team specializes in 3D design, animation, and motion graphics with a passion for detail.</p>
-  </section>
-
-  <!-- Portfolio -->
-  <section id="portfolio">
+    <p>We turn ideas into visual stories. Our expertise lies in 3D animation, modeling, and digital storytelling for social and commercial brands.</p>
+  </section>  <!-- Portfolio -->  <section id="portfolio">
     <h2>Portfolio</h2>
     <div class="portfolio-grid">
       <div class="project" data-pswp-gallery="gallery1">
-        <img src="images/project1_thumb.jpg" alt="Project 1"/>
+        <img src="images/project1_thumb.jpg" alt="Project 1" />
         <h3>CGI Campaign</h3>
         <p>Short-form animated campaign for social media virality.</p>
-        <button class="open-gallery" data-gallery="gallery1">View Gallery</button>
-
-        <div class="pswp-gallery" id="gallery1" style="display: none;">
-          <a href="images/project1_img1.jpg" data-pswp-width="1200" data-pswp-height="800"></a>
-          <a href="images/project1_img2.jpg" data-pswp-width="1200" data-pswp-height="800"></a>
-          <a href="images/project1_img3.jpg" data-pswp-width="1200" data-pswp-height="800"></a>
-        </div>
-      </div>
-
-      <!-- More projects can follow... -->
+        <button class="open-gallery" data-gallery="gallery1">View Gallery</button><div class="pswp-gallery" id="gallery1" style="display: none;">
+      <a href="images/project1_img1.jpg" data-pswp-width="1200" data-pswp-height="800"></a>
+      <a href="images/project1_img2.jpg" data-pswp-width="1200" data-pswp-height="800"></a>
+      <a href="images/project1_img3.jpg" data-pswp-width="1200" data-pswp-height="800"></a>
     </div>
-  </section>
+  </div>
+</div>
 
-  <!-- Contact -->
-  <section id="contact">
+  </section>  <!-- Contact -->  <section id="contact">
     <h2>Contact Us</h2>
-    <p>Email us at <a href="mailto:hello@webartistry3d.com">hello@webartistry3d.com</a> or follow us on Instagram @WebArtistry.3D</p>
-  </section>
+    <p>Email: <a href="mailto:hello@webartistry3d.com">hello@webartistry3d.com</a></p>
+    <p>Instagram: @WebArtistry.3D</p>
+  </section>  <!-- PhotoSwipe Core -->  <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true"></div>  <script src="https://unpkg.com/photoswipe@5/dist/photoswipe.min.js"></script>  <script src="https://unpkg.com/photoswipe@5/dist/photoswipe-lightbox.esm.min.js" type="module"></script>  <script type="module">
+    import PhotoSwipeLightbox from 'https://unpkg.com/photoswipe@5/dist/photoswipe-lightbox.esm.min.js';
 
-  <!-- PhotoSwipe Core -->
-  <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    const lightbox = new PhotoSwipeLightbox({
+      gallery: '#gallery1',
+      children: 'a',
+      pswpModule: () => import('https://unpkg.com/photoswipe@5/dist/photoswipe.esm.min.js')
+    });
 
-  <!-- Scripts -->
-  <script>
+    lightbox.init();
+
+    // Touch swipe already supported by PhotoSwipe 5
+  </script>  <script>
     // Preloader
     window.addEventListener("load", () => {
       document.getElementById("preloader").style.display = "none";
@@ -81,23 +164,5 @@
     document.getElementById("hamburger").addEventListener("click", () => {
       document.getElementById("navLinks").classList.toggle("show");
     });
-
-    // PhotoSwipe gallery open
-    document.querySelectorAll(".open-gallery").forEach(button => {
-      button.addEventListener("click", e => {
-        const galleryId = e.target.getAttribute("data-gallery");
-        const galleryElements = document.querySelectorAll(`#${galleryId} a`);
-        const items = Array.from(galleryElements).map(link => ({
-          src: link.href,
-          w: parseInt(link.getAttribute("data-pswp-width")),
-          h: parseInt(link.getAttribute("data-pswp-height"))
-        }));
-
-        const options = { index: 0 };
-        const pswp = new PhotoSwipe(document.querySelector('.pswp'), PhotoSwipe.UI_Default, items, options);
-        pswp.init();
-      });
-    });
-  </script>
-</body>
+  </script></body>
 </html>
