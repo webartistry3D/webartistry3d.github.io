@@ -1,0 +1,64 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>WebArtistry.3D | Creative Studio</title>
+  <link rel="stylesheet" href="https://unpkg.com/photoswipe@5/dist/photoswipe.css" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head><body class="bg-black text-white font-sans">  <!-- Header -->  <header class="bg-gray-900 p-4 fixed w-full z-50">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-bold">WebArtistry.3D</h1>
+      <nav class="space-x-4 hidden md:block">
+        <a href="#about" class="hover:text-yellow-400">About</a>
+        <a href="#portfolio" class="hover:text-yellow-400">Portfolio</a>
+        <a href="#contact" class="hover:text-yellow-400">Contact</a>
+      </nav>
+    </div>
+  </header>  <!-- Hero -->  <section class="h-screen flex items-center justify-center text-center px-4 pt-20">
+    <div>
+      <h2 class="text-5xl md:text-6xl font-bold mb-4">Unleash Your Imagination</h2>
+      <p class="text-lg md:text-xl max-w-2xl mx-auto mb-6">We design visually compelling 3D, web and animated experiences that elevate your brand.</p>
+      <a href="#portfolio" class="bg-yellow-500 text-black px-6 py-3 rounded-full font-semibold hover:bg-yellow-400 transition">View Portfolio</a>
+    </div>
+  </section>  <!-- About -->  <section class="py-20 px-6 text-center bg-gray-800" id="about">
+    <h2 class="text-4xl font-bold mb-6">About Us</h2>
+    <p class="max-w-3xl mx-auto">WebArtistry.3D is a creative studio based in Lagos, Nigeria. We specialize in 3D product animations, web development, social media marketing, and brand storytelling through digital art and innovation. Our goal is to bring your vision to life with style and precision.</p>
+  </section>  <!-- Portfolio -->  <section class="py-20 px-6 text-center bg-gray-900" id="portfolio">
+    <h2 class="text-4xl font-bold mb-6">Portfolio</h2>
+    <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto" id="gallery">
+      <a href="/images/project1-large.jpg" data-pswp-width="1200" data-pswp-height="800" target="_blank" class="group relative overflow-hidden rounded-lg shadow-lg">
+        <img src="/images/project1.jpg" alt="Project 1" class="w-full h-60 object-cover group-hover:scale-110 transition-transform duration-300" />
+        <div class="absolute bottom-0 left-0 bg-black/70 text-white w-full p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          3D Product Showcase for Vaib
+        </div>
+      </a>
+      <!-- More projects below -->
+      <a href="/images/project2-large.jpg" data-pswp-width="1200" data-pswp-height="800" target="_blank" class="group relative overflow-hidden rounded-lg shadow-lg">
+        <img src="/images/project2.jpg" alt="Project 2" class="w-full h-60 object-cover group-hover:scale-110 transition-transform duration-300" />
+        <div class="absolute bottom-0 left-0 bg-black/70 text-white w-full p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          Web Animation for TechCo
+        </div>
+      </a>
+    </div>
+  </section>  <!-- Contact -->  <section class="py-20 px-6 text-center bg-gray-800" id="contact">
+    <h2 class="text-4xl font-bold mb-6">Contact Us</h2>
+    <p class="mb-4">Ready to start a project or just want to say hello? Let's connect.</p>
+    <a href="mailto:hello@webartistry3d.com" class="inline-block bg-yellow-500 text-black px-6 py-3 rounded-full font-semibold hover:bg-yellow-400 transition">hello@webartistry3d.com</a>
+  </section>  <!-- Footer -->  <footer class="bg-gray-900 p-6 text-center">
+    <p>&copy; 2025 WebArtistry.3D. All rights reserved.</p>
+  </footer>  <!-- PhotoSwipe script -->  <script type="module">
+    import PhotoSwipeLightbox from 'https://unpkg.com/photoswipe@5/dist/photoswipe-lightbox.esm.js';
+
+    const lightbox = new PhotoSwipeLightbox({
+      gallery: '#gallery',
+      children: 'a',
+      pswpModule: () => import('https://unpkg.com/photoswipe@5/dist/photoswipe.esm.js'),
+    });
+
+    lightbox.init();
+  </script></body></html>
