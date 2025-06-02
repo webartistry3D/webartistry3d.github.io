@@ -243,7 +243,7 @@
     document.body.style.overflow = ''; //restore scroll
 
   }
-
+  /*
   function updateGalleryImage() {
     const imageUrl = galleryData[currentProjectIndex][currentImageIndex];
     document.getElementById('galleryImage').src = imageUrl;
@@ -265,7 +265,48 @@
       currentImageIndex = 0;
     }
     updateGalleryImage();
+  }*/
+
+  function nextImage() {
+    currentIndex = (currentIndex + 1) % currentGallery.length;
+    updateModalImage();
   }
+
+  function prevImage() {
+    currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+    updateModalImage();
+  }
+
+  function updateModalImage() {
+    const modalImg = document.getElementById('modalImage');
+    modalImg.src = currentGallery[currentIndex];
+  }
+
+  // Touch Swipe Logic
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  const galleryModal = document.getElementById('galleryModal');
+
+  galleryModal.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+
+  galleryModal.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  });
+
+  function handleSwipe() {
+    const swipeThreshold = 50; // Minimum swipe distance
+    const distance = touchEndX - touchStartX;
+
+    if (Math.abs(distance) > swipeThreshold) {
+      if (distance > 0) {
+        prevImage(); // Swipe right
+      } else {
+        nextImage(); // Swipe left
+  
 </script>
 
     
