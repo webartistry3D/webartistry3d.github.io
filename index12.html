@@ -267,7 +267,12 @@
     <script>
       AOS.init();
 
+      document.getElementById('menu-toggle').addEventListener('click', function () {
+       const menu = document.getElementById('mobile-menu');
+       menu.classList.toggle('hidden');
+      });
       // Mobile menu toggle
+      /*
       const menuToggle = document.getElementById("menu-toggle");
       const menu = document.getElementById("menu");
       const mobileMenu = document.getElementById("mobile-menu");
@@ -281,7 +286,9 @@
           menu.classList.remove("hidden");
         }
       });
+      */
 
+      
       // Portfolio Gallery Modal Logic
       const galleryModal = document.getElementById("galleryModal");
       const galleryImage = document.getElementById("galleryImage");
