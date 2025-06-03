@@ -1,175 +1,325 @@
-<!DOCTYPE html><html lang="en"><head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dynamic Invoice Tracker Suite</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head><body>
-  <div class="container">
-    <header>
-      <h1>Dynamic Invoice Tracker Suite</h1>
-      <button id="clientListBtn">Client List</button>
-    </header><section class="client-input">
-  <input type="text" id="clientName" placeholder="Client Name" />
-  <input type="number" id="invoiceAmount" placeholder="Invoice Amount" />
-  <input type="date" id="invoiceDate" />
-  <select id="invoiceStatus">
-    <option value="pending">Pending</option>
-    <option value="paid">Paid</option>
-  </select>
-  <button onclick="addInvoice()">Add Invoice</button>
-</section>
-
-<section class="summary">
-  <h2>Summary</h2>
-  <p>Total Invoiced: ₦<span id="totalInvoiced">0</span></p>
-  <p>Total Paid: ₦<span id="totalPaid">0</span></p>
-  <p>Total Pending: ₦<span id="totalPending">0</span></p>
-</section>
-
-<section class="invoice-table">
-  <h2>Invoices</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Client</th>
-        <th>Amount (₦)</th>
-        <th>Date</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody id="invoiceList"></tbody>
-  </table>
-</section>
-
-<section class="chart">
-  <h2>Invoice Overview</h2>
-  <canvas id="invoiceChart"></canvas>
-</section>
-
-  </div>  <!-- Modal for Client List -->  <div id="clientListModal" class="modal">
-    <div class="modal-content">
-      <span id="clientListModalClose" class="close">&times;</span>
-      <h2>Client List</h2>
-      <ul id="clientListDisplay"></ul>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WebArtistry.3D</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <script type="module" src="https://unpkg.com/three@0.150.1/build/three.module.js"></script>
+    <script type="module" src="https://unpkg.com/three@0.150.1/examples/jsm/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 0;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-950 text-white font-sans relative overflow-x-hidden">
+    <!-- Portfolio Gallery Modal -->
+    <div
+      id="galleryModal"
+      class="fixed inset-0 z-50 hidden bg-black bg-opacity-80 flex items-center justify-center"
+      onclick="closeGallery()"
+      aria-modal="true"
+      role="dialog"
+      aria-labelledby="galleryTitle"
+      aria-describedby="galleryDesc"
+    >
+      <div
+        class="relative w-full max-w-3xl mx-auto px-4"
+        onclick="event.stopPropagation()"
+      >
+        <button
+          onclick="closeGallery(); event.stopPropagation();"
+          class="absolute top-4 right-4 text-white text-3xl z-60"
+          aria-label="Close Gallery Modal"
+        >
+          &times;
+        </button>
+        <div class="relative">
+          <img
+            id="galleryImage"
+            src=""
+            class="w-full max-h-[80vh] object-contain rounded"
+            alt="Gallery Image"
+          />
+          <button
+            onclick="prevImage(); event.stopPropagation();"
+            class="absolute top-1/2 left-0 transform -translate-y-1/2 text-white text-3xl bg-black bg-opacity-30 px-4 py-2"
+            aria-label="Previous Image"
+          >
+            &larr;
+          </button>
+          <button
+            onclick="nextImage(); event.stopPropagation();"
+            class="absolute top-1/2 right-0 transform -translate-y-1/2 text-white text-3xl bg-black bg-opacity-30 px-4 py-2"
+            aria-label="Next Image"
+          >
+            &rarr;
+          </button>
+        </div>
+      </div>
     </div>
-  </div>  <!-- Modal for Portfolio Section -->  <div id="portfolioModal" class="modal">
-    <div class="modal-content">
-      <span id="portfolioModalClose" class="close">&times;</span>
-      <h2>Portfolio</h2>
-      <div id="portfolioContent"></div>
-    </div>
-  </div>  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const invoiceList = document.getElementById("invoiceList");
-      const totalInvoiced = document.getElementById("totalInvoiced");
-      const totalPaid = document.getElementById("totalPaid");
-      const totalPending = document.getElementById("totalPending");
-      const clientListBtn = document.getElementById("clientListBtn");
-      const clientListModal = document.getElementById("clientListModal");
-      const clientListModalClose = document.getElementById("clientListModalClose");
-      const clientListDisplay = document.getElementById("clientListDisplay");
-      const portfolioModal = document.getElementById("portfolioModal");
-      const portfolioModalClose = document.getElementById("portfolioModalClose");
 
-      let invoices = [];
+    <!-- Navbar -->
+    <header class="fixed top-0 w-full z-50 bg-gray-900 bg-opacity-90">
+      <div
+        class="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto"
+      >
+        <h1 class="text-2xl font-bold">WebArtistry.3D</h1>
+        <button
+          id="menu-toggle"
+          class="text-white md:hidden focus:outline-none"
+          aria-label="Toggle Menu"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </button>
+        <nav id="menu" class="hidden md:flex space-x-6 text-sm">
+          <a href="#about" class="hover:text-blue-400">About</a>
+          <a href="#services" class="hover:text-blue-400">Services</a>
+          <a href="#portfolio" class="hover:text-blue-400">Portfolio</a>
+          <a href="#contact" class="hover:text-blue-400">Contact</a>
+        </nav>
+      </div>
+      <div id="mobile-menu" class="md:hidden hidden px-6 pb-4">
+        <a href="#about" class="block py-2 hover:text-blue-400">About</a>
+        <a href="#services" class="block py-2 hover:text-blue-400">Services</a>
+        <a href="#portfolio" class="block py-2 hover:text-blue-400">Portfolio</a>
+        <a href="#contact" class="block py-2 hover:text-blue-400">Contact</a>
+      </div>
+    </header>
 
-      function updateSummary() {
-        let total = 0,
-          paid = 0,
-          pending = 0;
-        invoices.forEach(inv => {
-          total += inv.amount;
-          if (inv.status === "paid") paid += inv.amount;
-          else pending += inv.amount;
-        });
-        totalInvoiced.textContent = total.toLocaleString();
-        totalPaid.textContent = paid.toLocaleString();
-        totalPending.textContent = pending.toLocaleString();
-      }
+    <main class="pt-24">
+      <!-- Hero Section -->
+      <section
+        class="min-h-screen flex flex-col justify-center items-center text-center px-6 z-10 relative bg-cover bg-no-repeat bg-center"
+        style="background-image: url('Lagos01.png')"
+      >
+        <div class="bg-black bg-opacity-20 absolute inset-0 z-0"></div>
+        <h1
+          class="text-4xl md:text-6xl font-bold mb-4 relative z-10"
+          data-aos="fade-up"
+        >
+          We Deliver Stunning Web Experiences in 3D
+        </h1>
+        <p
+          class="text-xl md:text-2xl max-w-2xl relative z-10"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
+          3D Visuals | Motion Graphics | Websites | Branding
+        </p>
+      </section>
 
-      function updateTable() {
-        invoiceList.innerHTML = "";
-        invoices.forEach(inv => {
-          const row = document.createElement("tr");
-          row.innerHTML = `<td>${inv.client}</td><td>${inv.amount.toLocaleString()}</td><td>${inv.date}</td><td>${inv.status}</td>`;
-          invoiceList.appendChild(row);
-        });
-        updateSummary();
-        updateChart();
-      }
+      <!-- About Section -->
+      <section class="py-20 px-6 text-center bg-gray-900" id="about">
+        <h2 class="text-4xl font-bold mb-6" data-aos="fade-up">About Us</h2>
+        <p class="text-lg max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="150">
+          We are a creative digital studio specialized in 3D modeling, motion
+          graphics, web development, and animated storytelling. Our mission is
+          to help individuals with the brightest ideas, as well as brands, shine
+          and stand out with visually captivating, and meaningful web content.
+        </p>
+      </section>
 
-      function updateClientList() {
-        const uniqueClients = [...new Set(invoices.map(inv => inv.client))];
-        clientListDisplay.innerHTML = "";
-        uniqueClients.forEach(client => {
-          const li = document.createElement("li");
-          li.textContent = client;
-          clientListDisplay.appendChild(li);
-        });
-      }
+      <!-- Services Section -->
+      <section class="py-20 px-6 text-center bg-gray-950" id="services">
+        <h2 class="text-4xl font-bold mb-6" data-aos="fade-up">Our Services</h2>
+        <div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+          <div
+            class="p-6 bg-gray-800 relative bg-cover bg-no-repeat bg-center rounded-xl shadow-xl"
+            data-aos="zoom-in"
+            data-aos-delay="150"
+            style="background-image: url('Lagos01.png')"
+          >
+            <div
+              class="bg-black bg-opacity-30 rounded-xl absolute inset-0 z-0"
+            ></div>
+            <h3 class="text-2xl font-bold mb-2 relative z-10">3D Visualization</h3>
+            <p class="relative z-10">
+              High-quality 3D modeling and rendering for immersive product and
+              brand experiences.
+            </p>
+          </div>
+          <div
+            class="p-6 bg-gray-800 relative bg-cover bg-no-repeat bg-center rounded-xl shadow-xl"
+            data-aos="zoom-in"
+            data-aos-delay="300"
+            style="background-image: url('Lagos01.png')"
+          >
+            <div
+              class="bg-black bg-opacity-30 rounded-xl absolute inset-0 z-0"
+            ></div>
+            <h3 class="text-2xl font-bold mb-2 relative z-10">Motion Graphics</h3>
+            <p class="relative z-10">
+              Short animations and VFX that amplify your message across social
+              media and campaigns.
+            </p>
+          </div>
+          <div
+            class="p-6 bg-gray-800 relative bg-cover bg-no-repeat bg-center rounded-xl shadow-xl"
+            data-aos="zoom-in"
+            data-aos-delay="450"
+            style="background-image: url('Lagos01.png')"
+          >
+            <div
+              class="bg-black bg-opacity-30 rounded-xl absolute inset-0 z-0"
+            ></div>
+            <h3 class="text-2xl font-bold mb-2 relative z-10">Web Development</h3>
+            <p class="relative z-10">
+              Responsive, fast and modern websites tailored for your brand and
+              audience.
+            </p>
+          </div>
+        </div>
+      </section>
 
-      window.addInvoice = function () {
-        const clientName = document.getElementById("clientName").value;
-        const invoiceAmount = parseFloat(document.getElementById("invoiceAmount").value);
-        const invoiceDate = document.getElementById("invoiceDate").value;
-        const invoiceStatus = document.getElementById("invoiceStatus").value;
+      <!-- Portfolio Section -->
+      <section id="portfolio" class="py-20 bg-gray-800">
+        <div class="max-w-6xl mx-auto px-4">
+          <h2 class="text-4xl font-bold text-center mb-12">Our Portfolio</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            <div
+              class="group relative overflow-hidden bg-gray-100 rounded-lg shadow-lg hover:shadow-xl cursor-pointer"
+              data-aos="fade-up"
+              onclick="openGallery(0)"
+              tabindex="0"
+              role="button"
+              aria-label="Open portfolio image 1"
+              onkeypress="if(event.key==='Enter'){openGallery(0)}"
+            >
+              <img
+                src="Lagos01.png"
+                alt="Project 1"
+                class="w-full h-60 object-cover group-hover:scale-110 transition-transform duration-300"
+              />
+            </div>
+            <div
+              class="group relative overflow-hidden bg-gray-100 rounded-lg shadow-lg hover:shadow-xl cursor-pointer"
+              data-aos="fade-up"
+              data-aos-delay="100"
+              onclick="openGallery(1)"
+              tabindex="0"
+              role="button"
+              aria-label="Open portfolio image 2"
+              onkeypress="if(event.key==='Enter'){openGallery(1)}"
+            >
+              <img
+                src="project2.jpg"
+                alt="Project 2"
+                class="w-full h-60 object-cover group-hover:scale-110 transition-transform duration-300"
+              />
+            </div>
+            <div
+              class="group relative overflow-hidden bg-gray-100 rounded-lg shadow-lg hover:shadow-xl cursor-pointer"
+              data-aos="fade-up"
+              data-aos-delay="200"
+              onclick="openGallery(2)"
+              tabindex="0"
+              role="button"
+              aria-label="Open portfolio image 3"
+              onkeypress="if(event.key==='Enter'){openGallery(2)}"
+            >
+              <img
+                src="project3.jpg"
+                alt="Project 3"
+                class="w-full h-60 object-cover group-hover:scale-110 transition-transform duration-300"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
 
-        if (!clientName || isNaN(invoiceAmount) || !invoiceDate) {
-          alert("Please fill out all fields correctly.");
-          return;
+      <!-- Contact Section -->
+      <section id="contact" class="py-20 px-6 bg-gray-900 text-center">
+        <h2 class="text-4xl font-bold mb-6" data-aos="fade-up">Contact Us</h2>
+        <p class="mb-6 max-w-xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+          Have a project or idea? Reach out and let's create something
+          extraordinary together.
+        </p>
+        <a
+          href="mailto:hello@webartistry3d.com"
+          class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded transition"
+          data-aos="fade-up"
+          data-aos-delay="200"
+          >Email Us</a
+        >
+      </section>
+    </main>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+
+      // Mobile menu toggle
+      const menuToggle = document.getElementById("menu-toggle");
+      const menu = document.getElementById("menu");
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      menuToggle.addEventListener("click", () => {
+        if (mobileMenu.classList.contains("hidden")) {
+          mobileMenu.classList.remove("hidden");
+          menu.classList.add("hidden");
+        } else {
+          mobileMenu.classList.add("hidden");
+          menu.classList.remove("hidden");
         }
-
-        invoices.push({ client: clientName, amount: invoiceAmount, date: invoiceDate, status: invoiceStatus });
-        updateTable();
-        updateClientList();
-        document.getElementById("clientName").value = "";
-        document.getElementById("invoiceAmount").value = "";
-        document.getElementById("invoiceDate").value = "";
-        document.getElementById("invoiceStatus").value = "pending";
-      };
-
-      clientListBtn.addEventListener("click", () => {
-        updateClientList();
-        clientListModal.style.display = "block";
       });
 
-      clientListModalClose.addEventListener("click", () => {
-        clientListModal.style.display = "none";
-      });
+      // Portfolio Gallery Modal Logic
+      const galleryModal = document.getElementById("galleryModal");
+      const galleryImage = document.getElementById("galleryImage");
 
-      portfolioModalClose.addEventListener("click", () => {
-        portfolioModal.style.display = "none";
-      });
+      // Array of portfolio image URLs — add your real images here
+      const portfolioImages = [
+        "Lagos01.png",
+        "project2.jpg",
+        "project3.jpg",
+      ];
 
-      window.addEventListener("click", function (event) {
-        if (event.target === clientListModal) {
-          clientListModal.style.display = "none";
-        } else if (event.target === portfolioModal) {
-          portfolioModal.style.display = "none";
-        }
-      });
+      let currentImageIndex = 0;
 
-      let chart;
-      function updateChart() {
-        const paid = invoices.filter(i => i.status === "paid").reduce((sum, i) => sum + i.amount, 0);
-        const pending = invoices.filter(i => i.status === "pending").reduce((sum, i) => sum + i.amount, 0);
-
-        const data = {
-          labels: ["Paid", "Pending"],
-          datasets: [{
-            label: "Invoice Breakdown",
-            data: [paid, pending],
-            backgroundColor: ["#4CAF50", "#FFC107"]
-          }]
-        };
-
-        if (chart) chart.destroy();
-        chart = new Chart(document.getElementById("invoiceChart"), {
-          type: "doughnut",
-          data: data
-        });
+      function openGallery(index) {
+        currentImageIndex = index;
+        galleryImage.src = portfolioImages[index];
+        galleryModal.classList.remove("hidden");
+        document.body.style.overflow = "hidden"; // Prevent background scroll
       }
-    });
-  </script></body></html>
+
+      function closeGallery() {
+        galleryModal.classList.add("hidden");
+        galleryImage.src = "";
+        document.body.style.overflow = ""; // Restore scroll
+      }
+
+      function nextImage() {
+        currentImageIndex =
+          (currentImageIndex + 1) % portfolioImages.length;
+        galleryImage.src = portfolioImages[currentImageIndex];
+      }
+
+      function prevImage() {
+        currentImageIndex =
+          (currentImageIndex - 1 + portfolioImages.length) %
+          portfolioImages.length;
+        galleryImage.src = portfolioImages[currentImageIndex];
+      }
+    </script>
+  </body>
+</html>
