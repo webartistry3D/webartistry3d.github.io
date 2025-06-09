@@ -27,25 +27,20 @@
       top: 0; left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(255, 255, 255, 0.85);
+      background-color: rgba(255, 255, 255, 0.88);
       z-index: 0;
     }
 
     header {
       position: relative;
       z-index: 2;
-      padding: 0.8rem 2rem;
+      padding: 1rem 1.5rem;
       background: rgba(255, 255, 255, 0.95);
       display: flex;
       align-items: center;
       justify-content: space-between;
+      flex-wrap: wrap;
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
-
-    .nav-left, .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
     }
 
     .logo {
@@ -54,20 +49,29 @@
       color: #084c61;
     }
 
+    .nav-toggle {
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: none;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
     .nav-link {
       font-size: 0.95rem;
       color: #444;
       text-decoration: none;
-      transition: color 0.3s ease;
     }
 
-    .nav-link:hover {
-      color: #084c61;
-    }
-
-    .icon {
-      font-size: 1.1rem;
-      cursor: pointer;
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-left: auto;
     }
 
     .user-profile {
@@ -84,14 +88,19 @@
       object-fit: cover;
     }
 
+    .icon {
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+
     .container {
       position: relative;
       z-index: 2;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: calc(100vh - 140px);
-      padding: 2rem;
+      min-height: calc(100vh - 160px);
+      padding: 2rem 1rem;
     }
 
     .approval-card {
@@ -125,13 +134,13 @@
     }
 
     .recipient-name {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       font-weight: 600;
     }
 
     .details {
-      margin: 1.5rem 0;
-      font-size: 1rem;
+      margin: 1.2rem 0;
+      font-size: 0.95rem;
       color: #444;
     }
 
@@ -150,17 +159,48 @@
       color: #555;
     }
 
+    /* Mobile styles */
+    @media (max-width: 768px) {
+      .nav-right, nav {
+        display: none;
+      }
+
+      .nav-toggle {
+        display: block;
+      }
+
+      .mobile-menu {
+        display: none;
+        flex-direction: column;
+        background: white;
+        padding: 1rem;
+        width: 100%;
+      }
+
+      .mobile-menu a {
+        margin: 0.5rem 0;
+        color: #333;
+        text-decoration: none;
+      }
+
+      .mobile-show {
+        display: flex !important;
+      }
+    }
   </style>
 </head>
 <body>
   <header>
-    <div class="nav-left">
-      <div class="logo">Atlantic City Bank</div>
+    <div class="logo">Atlantic City Bank</div>
+    <div class="nav-toggle" onclick="toggleMenu()">☰</div>
+
+    <nav>
       <a href="#" class="nav-link">Dashboard</a>
       <a href="#" class="nav-link">Transfers</a>
       <a href="#" class="nav-link">Accounts</a>
       <a href="#" class="nav-link">Support</a>
-    </div>
+    </nav>
+
     <div class="nav-right">
       <span class="icon">🔍</span>
       <span class="icon">🔔</span>
@@ -168,6 +208,15 @@
         <img src="https://randomuser.me/api/portraits/men/77.jpg" alt="User"/>
         <span style="font-size: 0.95rem;">Okoro J.</span>
       </div>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#">Dashboard</a>
+      <a href="#">Transfers</a>
+      <a href="#">Accounts</a>
+      <a href="#">Support</a>
+      <a href="#">Notifications</a>
+      <a href="#">Profile</a>
     </div>
   </header>
 
@@ -188,5 +237,12 @@
   <footer>
     Atlantic City Bank, Lagos — 42 Marina Road, Victoria Island, Lagos, Nigeria.
   </footer>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('mobile-show');
+    }
+  </script>
 </body>
 </html>
