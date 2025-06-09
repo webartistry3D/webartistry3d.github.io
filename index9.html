@@ -2,15 +2,51 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DJ Swag XO | Official Landing Page</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
     body {
       margin: 0;
       font-family: 'Orbitron', sans-serif;
       background-color: #000;
       color: #fff;
+    }
+
+    /* Navbar */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      z-index: 999;
+    }
+    nav .logo {
+      font-size: 1.5rem;
+      color: #ff0057;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+    nav ul li a:hover {
+      color: #ff0057;
     }
 
     header {
@@ -25,16 +61,26 @@
       position: relative;
     }
 
+    header::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 0;
+    }
+
+    header * {
+      z-index: 1;
+    }
+
     header h1 {
       font-size: 4rem;
       margin: 0;
-      z-index: 1;
     }
 
     header p {
       font-size: 1.5rem;
       margin: 1rem 0;
-      z-index: 1;
     }
 
     .btn {
@@ -46,35 +92,6 @@
       cursor: pointer;
       border-radius: 5px;
       text-decoration: none;
-      animation: pulse 1.5s infinite;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.05); opacity: 0.8; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-
-    .sound-toggle {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: #ff0057;
-      border: none;
-      padding: 10px;
-      border-radius: 50%;
-      cursor: pointer;
-      animation: bounce 2s infinite;
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
-    }
-
-    .sound-toggle img {
-      width: 24px;
-      height: 24px;
     }
 
     section {
@@ -121,43 +138,82 @@
       font-family: 'Orbitron', sans-serif;
     }
 
-    .tour-list {
-      list-style: none;
-      padding-left: 0;
+    /* Mute/Unmute Button */
+    .audio-control {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+      background: #ff0057;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 1.2rem;
+      cursor: pointer;
     }
 
-    .tour-list li {
-      padding: 10px 0;
-      border-bottom: 1px solid #333;
-    }
-
+    /* Responsive Design */
     @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        background: #000;
+        position: absolute;
+        top: 70px;
+        right: 0;
+        width: 100%;
+        display: none;
+      }
+      nav ul.active {
+        display: flex;
+      }
+      nav .menu-toggle {
+        display: block;
+        cursor: pointer;
+        font-size: 1.5rem;
+        color: #fff;
+      }
       header h1 {
         font-size: 2.5rem;
       }
       header p {
         font-size: 1.2rem;
       }
-      .btn {
-        font-size: 0.9rem;
-        padding: 0.6rem 1.2rem;
+    }
+    @media (min-width: 769px) {
+      nav .menu-toggle {
+        display: none;
       }
     }
   </style>
 </head>
 <body>
 
+  <!-- Background Audio -->
+  <audio id="bgAudio" autoplay loop>
+    <source src="your-audio-file.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+  <button class="audio-control" onclick="toggleAudio()" id="audioBtn">🔊</button>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">DJ Swag XO</div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <ul id="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#mixes">Mixes</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#tours">Tour Dates</a></li>
+      <li><a href="#booking">Booking</a></li>
+    </ul>
+  </nav>
+
   <header>
-    <button class="sound-toggle" onclick="toggleSound()" id="soundBtn">
-      <img src="https://img.icons8.com/ios-filled/50/ffffff/high-volume.png" id="soundIcon" alt="sound">
-    </button>
     <h1>DJ Swag XO</h1>
     <p>Turning Nights into Memories</p>
     <a href="#booking" class="btn">Book Now</a>
-    <audio id="bgMusic" autoplay loop>
-      <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
   </header>
 
   <section id="about">
@@ -165,19 +221,9 @@
     <p>I’m DJ Swag XO, spinning the best of Afrobeats, House, and EDM for over a decade. Known for electrifying stage presence and unforgettable mixes, I’ve performed at top clubs and festivals across Lagos and beyond.</p>
   </section>
 
-  <section id="tour">
-    <h2>Upcoming Tour Dates</h2>
-    <ul class="tour-list">
-      <li><strong>July 13, 2025</strong> — Quilox Club, Lagos</li>
-      <li><strong>August 3, 2025</strong> — Hard Rock Cafe, Victoria Island</li>
-      <li><strong>September 7, 2025</strong> — Mainland Block Party, Yaba</li>
-      <li><strong>October 12, 2025</strong> — AfroBeats Festival, Abuja</li>
-    </ul>
-  </section>
-
   <section id="mixes">
     <h2>Latest Mixes</h2>
-    <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+    <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" 
       src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/706415303&color=%23ff0057">
     </iframe>
   </section>
@@ -189,6 +235,16 @@
       <img src="https://source.unsplash.com/200x200/?party,club" alt="Gig 2">
       <img src="https://source.unsplash.com/200x200/?music,dj" alt="Gig 3">
     </div>
+  </section>
+
+  <section id="tours">
+    <h2>Upcoming Tour Dates</h2>
+    <ul>
+      <li>July 12 - Lagos, Nigeria - Eko Hotel</li>
+      <li>August 3 - Abuja, Nigeria - Cubana Lounge</li>
+      <li>September 5 - Accra, Ghana - SkyBar</li>
+      <li>October 14 - Johannesburg, SA - Taboo Club</li>
+    </ul>
   </section>
 
   <section id="booking">
@@ -212,18 +268,21 @@
   </div>
 
   <script>
-    const bgMusic = document.getElementById('bgMusic');
-    const soundBtn = document.getElementById('soundBtn');
-    const soundIcon = document.getElementById('soundIcon');
-
-    function toggleSound() {
-      if (bgMusic.paused) {
-        bgMusic.play();
-        soundIcon.src = "https://img.icons8.com/ios-filled/50/ffffff/high-volume.png";
+    function toggleAudio() {
+      const audio = document.getElementById('bgAudio');
+      const btn = document.getElementById('audioBtn');
+      if (audio.paused) {
+        audio.play();
+        btn.textContent = '🔊';
       } else {
-        bgMusic.pause();
-        soundIcon.src = "https://img.icons8.com/ios-filled/50/ffffff/mute.png";
+        audio.pause();
+        btn.textContent = '🔇';
       }
+    }
+
+    function toggleMenu() {
+      const nav = document.getElementById('nav-links');
+      nav.classList.toggle('active');
     }
   </script>
 
