@@ -3,165 +3,91 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WebArtistry.3D</title>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>Bank Transfer Approval</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    * {
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f4f6f8;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-      font-family: 'Outfit', sans-serif;
-    }
-    body {
-      background: #0f0f0f;
-      color: #fff;
-    }
-    header {
-      /*background: #1e1e1e;*/
-      padding: 20px 40px;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 999;
+      height: 100vh;
     }
-    .logo {
-      font-size: 24px;
+
+    .approval-card {
+      background: #ffffff;
+      width: 400px;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .bank-logo {
+      width: 100px;
+      margin-bottom: 1rem;
+    }
+
+    .profile-img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1rem;
+      border: 2px solid #0077b6;
+    }
+
+    .recipient-name {
+      font-size: 1.5rem;
       font-weight: 600;
-      color: #00ffd5;
+      margin-bottom: 0.25rem;
     }
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      margin-left: 25px;
-      font-weight: 300;
-      transition: color 0.3s ease;
+
+    .recipient-account {
+      color: #6b7280;
+      margin-bottom: 1rem;
     }
-    nav a:hover {
-      color: #00ffd5;
+
+    .approval-status {
+      background-color: #e0f7ec;
+      color: #008744;
+      padding: 0.5rem 1rem;
+      border-radius: 12px;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      display: inline-block;
     }
-    section {
-      padding: 80px 40px;
+
+    .details {
+      text-align: left;
+      margin-top: 1rem;
     }
-    .hero {
-      /*background: linear-gradient(135deg, #141414, #1f1f1f);*/
-      background-image: url('Lagos01.png');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      text-align: center;
-    }
-    .hero h1 {
-      font-size: 48px;
-      color: #00ffd5;
-      margin-bottom: 20px;
-    }
-    .hero h2 {
-      font-size: 24px;
-      color: #00ffd5;
-      margin-bottom: 20px;
-    }
-    .hero p {
-      font-size: 18px;
-      color: #ccc;
-    }
-    .about {
-      background: #181818;
-      margin-top: 20px;
-      border-radius: 10px;
-      padding: 40px;
-    }
-    .portfolio {
-      background: #181818;
-      margin-top: 20px;
-      border-radius: 10px;
-      padding: 40px;
-    }
-    .services {
-      background-image: url('Services.png');
-      background-size: contain;
-      background-position: right;
-      background-repeat: no-repeat;
-      /*background: #181818;*/
-      margin-top: 20px;
-      border-radius: 10px;
-      padding: 40px;
-    }
-    .contact {
-      background-image: url('Contact1.png');
-      background-size: contain;
-      background-position: right;
-      background-repeat: no-repeat;
-      /*background: #181818;*/
-      margin-top: 20px;
-      border-radius: 10px;
-      padding: 40px;
-    }
-    .section-title {
-      font-size: 32px;
-      margin-bottom: 20px;
-      color: #00ffd5;
-    }
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #1a1a1a;
-      color: #888;
-      font-size: 14px;
+
+    .details p {
+      margin: 0.25rem 0;
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="logo">WebArtistry.3D</div>
-    <nav>
-      <a href="#home">Home</a>
-      <a href="#about">About Us</a>
-      <a href="#services">Services</a>
-      <a href="#portfolio">Portfolio</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
+  <div class="approval-card">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/FirstBank_Logo.svg/2560px-FirstBank_Logo.svg.png" alt="Bank Logo" class="bank-logo">
 
-  <section class="hero" id="home">
-    <h2>Your Vision, Our Creation.</h2>
-    </br>
-    <p>We create captivating web experiences that elevate your brand and resonate with audiences.</p>
-  </section>
+    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile Image" class="profile-img">
 
-  <section class="about" id="about">
-    <h2 class="section-title">About Us</h2>
-    <p>At WebArtistry.3D, we blend innovative design with cutting-edge technology to create and deliver stunning visuals and interactive experiences on the Web.</p>
-  </section>
+    <div class="recipient-name">Michael Johnson</div>
+    <div class="recipient-account">Acct No: 3021234567 - First Bank</div>
 
-  <section class="services" id="services">
-    <h2 class="section-title">Our Services</h2>
-      <p>🎨 3D Modeling, Animation & Visualization</p>
-      <p>⚙️ Web Development</p>
-      <p>🖼️ Brand Design & Strategy</p>
-  </section>
+    <div class="approval-status">✔ Transfer Approved</div>
 
-  <section class="portfolio" id="portfolio">
-    <h2 class="section-title">Portfolio</h2>
-    <div></div>
-    <div></div>
-    <div></div>
-<p>Explore our gallery of high-impact 3D visuals and creative works.</p>
-    <!-- Placeholder for portfolio grid -->
-  </section>
-
-  <section class="contact" id="contact">
-    <h2 class="section-title">Contact Us</h2>
-    <p><i class="fas fa-envelope"> </i><a href="webartistry.io@gmail.com" target="_blank">  webartistry.io@gmail.com</p><br>
-    <p><i class="fab fa-whatsapp"> </i><a href="https://wa.me/2347017188070" target="_blank">  +234 701 718 8070</p><br>
-    <p><i class="fab fa-facebook"> </i><a href="https://www.facebook.com/share/1965xAzEeA/" target="_blank">  @webartistry.3d</p><br>
-    <p><i class="fab fa-tiktok"> </i><a href="https://vm.tiktok.com/ZMSM2AD9j/" target="_blank">  @webartistry.3d</p><br>
-  </section>
-
-  <footer>
-    &copy; 2025 WebArtistry Creations. All rights reserved.
-  </footer>
+    <div class="details">
+      <p><strong>Amount:</strong> ₦250,000.00</p>
+      <p><strong>Transfer Date:</strong> June 3, 2025</p>
+      <p><strong>Reference ID:</strong> TXR56482FNB</p>
+      <p><strong>Initiated By:</strong> Amanda Okoye</p>
+    </div>
+  </div>
 </body>
 </html>
