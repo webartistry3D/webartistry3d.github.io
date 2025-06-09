@@ -1,93 +1,139 @@
-<!DOCTYPE html><html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WebArtistry Creations</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-    <style>
-      html {
-        scroll-behavior: smooth;
-      }
-      canvas {
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 0;
-      }
-      #hero-content {
-        position: relative;
-        z-index: 1;
-      }
-    </style>
-  </head>
-  <body class="bg-gray-900 text-white font-sans">
-    <!-- Navbar -->
-    <nav class="flex justify-between items-center p-6 bg-gray-800 fixed top-0 w-full z-10 shadow-lg">
-      <h1 class="text-xl font-bold">WebArtistry</h1>
-      <div class="space-x-6">
-        <a href="#home" class="hover:text-pink-400">Home</a>
-        <a href="#about" class="hover:text-pink-400">About</a>
-        <a href="#services" class="hover:text-pink-400">Services</a>
-        <a href="#portfolio" class="hover:text-pink-400">Portfolio</a>
-        <a href="#contact" class="hover:text-pink-400">Contact</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Atlantic City Bank | Transfer Approval</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f7f9fc;
+      color: #333;
+    }
+
+    /* Top Navigation */
+    .top-nav {
+      background-color: #0b3d91;
+      color: #fff;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .top-nav .logo {
+      font-size: 1.25rem;
+      font-weight: bold;
+    }
+
+    .top-nav .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .nav-right img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #fff;
+    }
+
+    /* Main Section */
+    .approval-container {
+      max-width: 600px;
+      margin: 3rem auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    .approval-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .approval-header img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .approval-header .details {
+      font-size: 1.1rem;
+    }
+
+    .approval-header .details strong {
+      display: block;
+      font-size: 1.2rem;
+    }
+
+    .approval-details {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .approval-details div {
+      margin-bottom: 0.75rem;
+    }
+
+    .approve-btn {
+      display: block;
+      margin-top: 2rem;
+      width: 100%;
+      padding: 0.75rem;
+      background-color: #0b3d91;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .approve-btn:hover {
+      background-color: #092e70;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header class="top-nav">
+    <div class="logo">Atlantic City Bank, Lagos</div>
+    <div class="nav-right">
+      <span>Welcome, Manager</span>
+      <img src="https://i.pravatar.cc/150?img=32" alt="Manager Profile" />
+    </div>
+  </header>
+
+  <!-- Approval Page Content -->
+  <main class="approval-container">
+    <div class="approval-header">
+      <img src="https://i.pravatar.cc/150?img=45" alt="Recipient Profile" />
+      <div class="details">
+        <strong>Femi Johnson</strong>
+        Zenith Bank • 1234567890
       </div>
-    </nav><!-- Hero with Three.js canvas -->
-<section id="home" class="relative h-screen flex items-center justify-center text-center pt-20 overflow-hidden">
-  <canvas id="three-canvas"></canvas>
-  <div id="hero-content" data-aos="fade-up">
-    <h2 class="text-4xl md:text-6xl font-extrabold mb-4">We Build Stunning Web & 3D Experiences</h2>
-    <p class="text-xl">Websites | 3D Visuals | Motion Graphics | Branding</p>
-  </div>
-</section>
+    </div>
 
-<!-- Add your other sections here... -->
+    <div class="approval-details">
+      <div><strong>Amount:</strong> ₦850,000.00</div>
+      <div><strong>Transaction ID:</strong> TXN20250608ABC456</div>
+      <div><strong>Date & Time:</strong> June 9, 2025 • 2:15 PM</div>
+      <div><strong>Purpose:</strong> Equipment Purchase</div>
+      <div><strong>Status:</strong> Pending Approval</div>
+    </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r148/three.min.js"></script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-  AOS.init({ duration: 1000, once: true });
+    <button class="approve-btn">Approve Transfer</button>
+  </main>
 
-  // Three.js background animation
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(
-    75,
-    window.innerWidth / window.innerHeight,
-    0.1,
-    1000
-  );
-  const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('three-canvas'), alpha: true });
-  renderer.setSize(window.innerWidth, window.innerHeight);
-
-  const geometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
-  const material = new THREE.MeshStandardMaterial({ color: 0xff00ff, metalness: 0.5, roughness: 0.1 });
-  const torusKnot = new THREE.Mesh(geometry, material);
-  scene.add(torusKnot);
-
-  const light = new THREE.PointLight(0xffffff, 1);
-  light.position.set(25, 25, 25);
-  scene.add(light);
-
-  camera.position.z = 40;
-
-  function animate() {
-    requestAnimationFrame(animate);
-    torusKnot.rotation.x += 0.01;
-    torusKnot.rotation.y += 0.01;
-    renderer.render(scene, camera);
-  }
-  animate();
-
-  window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  });
-</script>
-
-  </body>
+</body>
 </html>
