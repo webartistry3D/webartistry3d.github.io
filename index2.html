@@ -1,129 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WebArtistry.3D</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://unpkg.com/aos@2.3.1/dist/aos.css"
-      rel="stylesheet"
-    />
-    <style>
-      html {
-        scroll-behavior: smooth;
-      }
-    </style>
-  </head>
-  <body class="bg-gray-900 text-white font-sans">
-    <!-- Navbar -->
-    <nav class="flex justify-between items-center p-6 bg-gray-800 fixed top-0 w-full z-10 shadow-lg">
-      <h1 class="text-xl font-bold">WebArtistry.3D</h1>
-      <div class="space-x-6">
-        <a href="#home" class="hover:text-pink-400">Home</a>
-        <a href="#about" class="hover:text-pink-400">About</a>
-        <a href="#services" class="hover:text-pink-400">Services</a>
-        <a href="#portfolio" class="hover:text-pink-400">Portfolio</a>
-        <a href="#contact" class="hover:text-pink-400">Contact</a>
-      </div>
-    </nav>
-
-    <!-- Hero -->
-    <section id="home" class="h-screen flex items-center justify-center text-center bg-gradient-to-r from-purple-700 to-pink-500 pt-20">
-      <div data-aos="fade-up">
-        <h2 class="text-4xl md:text-6xl font-extrabold mb-4">We Build Web Experiences in 3D</h2>
-        <p class="text-xl">3D Visuals | Motion Graphics | Websites | Branding</p>
-      </div>
-    </section>
-
-    <!-- About Us -->
-    <section id="about" class="py-24 px-6 bg-gray-900">
-      <div class="max-w-4xl mx-auto text-center" data-aos="fade-right">
-        <h3 class="text-3xl font-bold mb-6">About Us</h3>
-        <p class="text-lg leading-relaxed text-gray-300">
-          WebArtistry.3D is a Lagos-based digital studio focused on delivering immersive web experiences, captivating motion graphics, and 3D marketing content that converts.
-        </p>
-      </div>
-    </section>
-
-    <!-- Services -->
-    <section id="services" class="py-24 px-6 bg-gray-800">
-      <div class="max-w-6xl mx-auto text-center">
-        <h3 class="text-3xl font-bold mb-12" data-aos="fade-up">Our Services</h3>
-        <div class="grid md:grid-cols-3 gap-10">
-          <div class="bg-gray-700 p-6 rounded-xl shadow-lg" data-aos="fade-up">
-            <h4 class="text-xl font-semibold mb-4">Web Design</h4>
-            <p>Responsive, clean websites built for performance and engagement.</p>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Transfer Approval - Atlantic City Bank, Lagos</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      display: flex;
+      height: 100vh;
+      background-color: #f4f7fb;
+    }
+    .sidebar {
+      width: 240px;
+      background-color: #002b5b;
+      color: #fff;
+      padding: 20px;
+    }
+    .sidebar h2 {
+      margin-bottom: 40px;
+    }
+    .sidebar ul {
+      list-style: none;
+    }
+    .sidebar ul li {
+      margin: 20px 0;
+      cursor: pointer;
+    }
+    .header {
+      height: 60px;
+      background-color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+    }
+    .main {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .content {
+      padding: 30px;
+    }
+    .approval-card {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 25px;
+      max-width: 600px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+    .approval-card img.profile {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin-right: 20px;
+    }
+    .approval-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .recipient-info {
+      flex-grow: 1;
+    }
+    .approval-details {
+      margin-bottom: 20px;
+    }
+    .btn-group button {
+      padding: 10px 20px;
+      margin-right: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .btn-approve {
+      background-color: #28a745;
+      color: #fff;
+    }
+    .btn-decline {
+      background-color: #dc3545;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h2>Atlantic City Bank</h2>
+    <ul>
+      <li>Dashboard</li>
+      <li>Transactions</li>
+      <li>Approvals</li>
+      <li>Settings</li>
+      <li>Support</li>
+    </ul>
+  </div>
+  <div class="main">
+    <div class="header">
+      <div>Transfer Approval</div>
+      <div>User: John Doe</div>
+    </div>
+    <div class="content">
+      <div class="approval-card">
+        <div class="approval-header">
+          <img class="profile" src="https://via.placeholder.com/60" alt="Profile" />
+          <div class="recipient-info">
+            <h3>Jane Smith</h3>
+            <p>Zenith Bank - 2003929483</p>
           </div>
-          <div class="bg-gray-700 p-6 rounded-xl shadow-lg" data-aos="fade-up" data-aos-delay="100">
-            <h4 class="text-xl font-semibold mb-4">3D Product Renders</h4>
-            <p>Photorealistic visuals & animated product demos for marketing.</p>
-          </div>
-          <div class="bg-gray-700 p-6 rounded-xl shadow-lg" data-aos="fade-up" data-aos-delay="200">
-            <h4 class="text-xl font-semibold mb-4">Motion Graphics</h4>
-            <p>Branded logo animations, explainers, and social media reels.</p>
-          </div>
+          <img src="https://via.placeholder.com/50x50?text=ZB" alt="Bank Logo" />
+        </div>
+        <div class="approval-details">
+          <p><strong>Amount:</strong> ₦250,000</p>
+          <p><strong>Date:</strong> June 9, 2025</p>
+          <p><strong>Purpose:</strong> Business payment for supplies</p>
+        </div>
+        <div class="btn-group">
+          <button class="btn-approve">Approve</button>
+          <button class="btn-decline">Decline</button>
         </div>
       </div>
-    </section>
-
-    <!-- Portfolio -->
-    <section id="portfolio" class="py-24 px-6 bg-gray-900">
-      <div class="max-w-6xl mx-auto text-center">
-        <h3 class="text-3xl font-bold mb-12" data-aos="zoom-in">Our Portfolio</h3>
-        <div class="grid md:grid-cols-3 gap-10">
-          <div class="bg-gray-800 rounded-xl shadow-lg overflow-hidden" data-aos="fade-up">
-            <img src="https://via.placeholder.com/400x250" alt="Project 1" />
-            <div class="p-4">
-              <h5 class="font-semibold text-lg">Luxury Lounge 3D Render</h5>
-              <p class="text-sm text-gray-400">Interior visualization</p>
-            </div>
-          </div>
-          <div class="bg-gray-800 rounded-xl shadow-lg overflow-hidden" data-aos="fade-up" data-aos-delay="100">
-            <img src="https://via.placeholder.com/400x250" alt="Project 2" />
-            <div class="p-4">
-              <h5 class="font-semibold text-lg">Product Animation Ad</h5>
-              <p class="text-sm text-gray-400">30-sec VFX commercial</p>
-            </div>
-          </div>
-          <div class="bg-gray-800 rounded-xl shadow-lg overflow-hidden" data-aos="fade-up" data-aos-delay="200">
-            <img src="https://via.placeholder.com/400x250" alt="Project 3" />
-            <div class="p-4">
-              <h5 class="font-semibold text-lg">E-commerce Website</h5>
-              <p class="text-sm text-gray-400">Responsive web upgrade</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact" class="py-24 px-6 bg-gray-800">
-      <div class="max-w-2xl mx-auto text-center">
-        <h3 class="text-3xl font-bold mb-6" data-aos="fade-down">Let's Work Together</h3>
-        <p class="mb-6 text-gray-300">Got a project in mind? Reach out!</p>
-        <a
-          href="mailto:hello@webartistry.ng"
-          class="bg-pink-500 text-white py-3 px-6 rounded-full hover:bg-pink-600 transition"
-          data-aos="zoom-in"
-          >Contact Us</a
-        >
-      </div>
-    </section>
-
-    <footer class="bg-gray-900 py-6 text-center text-sm text-gray-400">
-      &copy; 2025 WebArtistry Creations. All rights reserved.
-    </footer>
-
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-      AOS.init({
-        duration: 1000,
-        once: true,
-      });
-    </script>
-  </body>
+    </div>
+  </div>
+</body>
 </html>
