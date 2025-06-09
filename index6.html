@@ -1,135 +1,192 @@
-<!DOCTYPE html><html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WebArtistry Creations</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script type="module" src="https://cdn.jsdelivr.net/npm/@splinetool/viewer@0.9.476/build/spline-viewer.js"></script>
-    <style>
-      .fade-enter {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Approval - Atlantic City Bank</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: url('https://images.unsplash.com/photo-1521791136064-7986c2920216') no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+      min-height: 100vh;
+      color: #333;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.85);
+      z-index: 0;
+    }
+
+    header {
+      position: relative;
+      z-index: 2;
+      padding: 0.8rem 2rem;
+      background: rgba(255, 255, 255, 0.95);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .nav-left, .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .logo {
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: #084c61;
+    }
+
+    .nav-link {
+      font-size: 0.95rem;
+      color: #444;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: #084c61;
+    }
+
+    .icon {
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+
+    .user-profile img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: calc(100vh - 140px);
+      padding: 2rem;
+    }
+
+    .approval-card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 480px;
+      padding: 2rem;
+      text-align: center;
+      animation: fadeSlideIn 1s ease forwards;
+    }
+
+    @keyframes fadeSlideIn {
+      from {
         opacity: 0;
-        transform: translateY(20px);
-        transition: all 0.5s ease-in-out;
+        transform: translateY(-30px);
       }
-      .fade-enter-active {
+      to {
         opacity: 1;
         transform: translateY(0);
       }
-    </style>
-  </head>
-  <body class="bg-gray-900 text-white transition-all duration-700 ease-in-out">
-    <div id="page" class="fade-enter">
-      <!-- Navigation -->
-      <nav class="p-4 bg-black bg-opacity-80 fixed w-full z-50">
-        <ul class="flex justify-around">
-          <li><a href="#home" class="hover:text-yellow-400">Home</a></li>
-          <li><a href="#about" class="hover:text-yellow-400">About</a></li>
-          <li><a href="#services" class="hover:text-yellow-400">Services</a></li>
-          <li><a href="#portfolio" class="hover:text-yellow-400">Portfolio</a></li>
-          <li><a href="#contact" class="hover:text-yellow-400">Contact</a></li>
-        </ul>
-      </nav><!-- Hero Section -->
-  <section id="home" class="min-h-screen flex flex-col justify-center items-center pt-20">
-    <h1 class="text-4xl md:text-6xl font-bold mb-4">Welcome to WebArtistry</h1>
-    <p class="text-xl text-gray-400 mb-8">Where Digital Art Meets Web Innovation</p>
-    <canvas id="three-canvas" class="w-full h-96"></canvas>
-  </section>
+    }
 
-  <!-- About Section -->
-  <section id="about" class="p-10" data-aos="fade-up">
-    <h2 class="text-3xl font-bold mb-6">About Us</h2>
-    <p class="text-gray-300 max-w-2xl">We are a Lagos-based creative agency combining 3D art, web development, and marketing to bring brands to life with stunning visuals and interactivity.</p>
-  </section>
+    .profile-img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1rem;
+    }
 
-  <!-- Services Section -->
-  <section id="services" class="p-10 bg-gray-800" data-aos="fade-up">
-    <h2 class="text-3xl font-bold mb-6">Our Services</h2>
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="bg-gray-700 p-6 rounded-xl hover:shadow-2xl transition-all duration-500">
-        <h3 class="text-xl font-semibold mb-2">Web Development</h3>
-        <p class="text-gray-300">Custom-built, high-performance websites tailored for your business goals.</p>
-      </div>
-      <div class="bg-gray-700 p-6 rounded-xl hover:shadow-2xl transition-all duration-500">
-        <h3 class="text-xl font-semibold mb-2">3D Animation & Renders</h3>
-        <p class="text-gray-300">Visually striking 3D animations for product showcases and branding.</p>
-      </div>
-      <div class="bg-gray-700 p-6 rounded-xl hover:shadow-2xl transition-all duration-500">
-        <h3 class="text-xl font-semibold mb-2">Digital Marketing</h3>
-        <p class="text-gray-300">Strategic content for impactful online visibility and engagement.</p>
+    .recipient-name {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .details {
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      color: #444;
+    }
+
+    .bank-logo {
+      width: 100px;
+      margin: 1.5rem auto 0;
+    }
+
+    footer {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 1rem;
+      background-color: rgba(255, 255, 255, 0.8);
+      font-size: 0.85rem;
+      color: #555;
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-left">
+      <div class="logo">Atlantic City Bank</div>
+      <a href="#" class="nav-link">Dashboard</a>
+      <a href="#" class="nav-link">Transfers</a>
+      <a href="#" class="nav-link">Accounts</a>
+      <a href="#" class="nav-link">Support</a>
+    </div>
+    <div class="nav-right">
+      <span class="icon">🔍</span>
+      <span class="icon">🔔</span>
+      <div class="user-profile">
+        <img src="https://randomuser.me/api/portraits/men/77.jpg" alt="User"/>
+        <span style="font-size: 0.95rem;">Okoro J.</span>
       </div>
     </div>
-  </section>
+  </header>
 
-  <!-- Portfolio Section -->
-  <section id="portfolio" class="p-10" data-aos="fade-up">
-    <h2 class="text-3xl font-bold mb-6">Portfolio</h2>
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="bg-black p-4 rounded-xl hover:scale-105 transform transition duration-300">
-        <img src="https://via.placeholder.com/300" class="rounded mb-4" alt="Portfolio item">
-        <h4 class="text-xl font-semibold">3D Product Visual</h4>
+  <div class="container">
+    <div class="approval-card">
+      <img class="profile-img" src="https://randomuser.me/api/portraits/men/75.jpg" alt="Recipient"/>
+      <div class="recipient-name">John Okoro</div>
+      <div class="details">
+        Transfer of ₦250,000 approved to Access Bank.<br/>
+        Transaction ID: #ACB908123<br/>
+        Date: June 9, 2025<br/>
+        Status: ✅ Approved
       </div>
-      <div class="bg-black p-4 rounded-xl hover:scale-105 transform transition duration-300">
-        <img src="https://via.placeholder.com/300" class="rounded mb-4" alt="Portfolio item">
-        <h4 class="text-xl font-semibold">E-commerce UI</h4>
-      </div>
-      <div class="bg-black p-4 rounded-xl hover:scale-105 transform transition duration-300">
-        <img src="https://via.placeholder.com/300" class="rounded mb-4" alt="Portfolio item">
-        <h4 class="text-xl font-semibold">Brand Animation</h4>
-      </div>
+      <img class="bank-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Access_Bank_logo.svg/2560px-Access_Bank_logo.svg.png" alt="Bank Logo"/>
     </div>
-  </section>
+  </div>
 
-  <!-- Contact Section -->
-  <section id="contact" class="p-10 bg-gray-800" data-aos="fade-up">
-    <h2 class="text-3xl font-bold mb-6">Contact Us</h2>
-    <form class="space-y-4 max-w-lg">
-      <input type="text" placeholder="Your Name" class="w-full p-3 rounded bg-gray-900 border border-gray-700" />
-      <input type="email" placeholder="Your Email" class="w-full p-3 rounded bg-gray-900 border border-gray-700" />
-      <textarea placeholder="Message" class="w-full p-3 rounded bg-gray-900 border border-gray-700 h-32"></textarea>
-      <button class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold px-6 py-3 rounded">Send Message</button>
-    </form>
-  </section>
-</div>
-
-<!-- Scripts -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://unpkg.com/@google/model-viewer"></script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-  AOS.init();
-
-  window.addEventListener('load', () => {
-    const page = document.getElementById('page');
-    page.classList.add('fade-enter-active');
-  });
-</script>
-<script type="module">
-  import * as THREE from 'https://cdn.skypack.dev/three';
-  import { GLTFLoader } from 'https://cdn.skypack.dev/three/examples/jsm/loaders/GLTFLoader.js';
-
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / 400, 0.1, 1000);
-  const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('three-canvas'), alpha: true });
-  renderer.setSize(window.innerWidth, 400);
-
-  const light = new THREE.HemisphereLight(0xffffff, 0x444444);
-  light.position.set(0, 20, 0);
-  scene.add(light);
-
-  const loader = new GLTFLoader();
-  loader.load('/models/your_model.glb', function (gltf) {
-    scene.add(gltf.scene);
-  });
-
-  camera.position.z = 5;
-
-  function animate() {
-    requestAnimationFrame(animate);
-    renderer.render(scene, camera);
-  }
-  animate();
-</script>
-
-  </body>
+  <footer>
+    Atlantic City Bank, Lagos — 42 Marina Road, Victoria Island, Lagos, Nigeria.
+  </footer>
+</body>
 </html>
