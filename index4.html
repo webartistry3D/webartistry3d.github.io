@@ -1,70 +1,158 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WebArtistry Creations</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <title>Atlantic City Bank | Transfer Approval</title>
   <style>
-    html { scroll-behavior: smooth; }
-    canvas { display: block; position: absolute; top: 0; left: 0; z-index: 0; }
-    #hero-text { position: relative; z-index: 10; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f7f9fc;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    .fade-in {
+      animation: fadeIn 1s ease-in;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .slide-down {
+      animation: slideDown 0.7s ease-out;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .top-nav {
+      background-color: #0b3d91;
+      color: #fff;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .top-nav .logo {
+      font-size: 1.25rem;
+      font-weight: bold;
+    }
+
+    .top-nav .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .nav-right img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #fff;
+    }
+
+    .approval-container {
+      max-width: 600px;
+      margin: 3rem auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    .approval-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .approval-header img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      animation: fadeIn 1s ease-in;
+    }
+
+    .approval-header .details {
+      font-size: 1.1rem;
+      animation: fadeIn 1s ease-in 0.3s both;
+    }
+
+    .approval-header .details strong {
+      display: block;
+      font-size: 1.2rem;
+    }
+
+    .approval-details {
+      font-size: 1rem;
+      line-height: 1.6;
+      animation: fadeIn 1s ease-in 0.5s both;
+    }
+
+    .approval-details div {
+      margin-bottom: 0.75rem;
+    }
+
+    .approve-btn {
+      display: block;
+      margin-top: 2rem;
+      width: 100%;
+      padding: 0.75rem;
+      background-color: #0b3d91;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      animation: slideDown 0.6s ease-out 1s both;
+    }
+
+    .approve-btn:hover {
+      background-color: #092e70;
+    }
   </style>
 </head>
-<body class="bg-gray-900 text-white font-sans">
-  <!-- Navbar -->
-  <nav class="flex justify-between items-center p-6 bg-gray-800 fixed top-0 w-full z-20 shadow-lg">
-    <h1 class="text-xl font-bold">WebArtistry</h1>
-    <div class="space-x-6">
-      <a href="#home" class="hover:text-pink-400">Home</a>
-      <a href="#about" class="hover:text-pink-400">About</a>
-      <a href="#services" class="hover:text-pink-400">Services</a>
-      <a href="#portfolio" class="hover:text-pink-400">Portfolio</a>
-      <a href="#contact" class="hover:text-pink-400">Contact</a>
+<body>
+
+  <header class="top-nav slide-down">
+    <div class="logo">Atlantic City Bank, Lagos</div>
+    <div class="nav-right">
+      <span>Welcome, Manager</span>
+      <img src="https://i.pravatar.cc/150?img=32" alt="Manager Profile" />
     </div>
-  </nav>  <!-- Hero with Three.js Canvas -->  <section id="home" class="h-screen relative flex items-center justify-center bg-black pt-20">
-    <canvas id="bg-canvas"></canvas>
-    <div id="hero-text" data-aos="fade-up" class="text-center">
-      <h2 class="text-4xl md:text-6xl font-extrabold mb-4">We Build Stunning Web & 3D Experiences</h2>
-      <p class="text-xl">Websites | 3D Visuals | Motion Graphics | Branding</p>
+  </header>
+
+  <main class="approval-container fade-in">
+    <div class="approval-header">
+      <img src="https://i.pravatar.cc/150?img=45" alt="Recipient Profile" />
+      <div class="details">
+        <strong>Femi Johnson</strong>
+        Zenith Bank • 1234567890
+      </div>
     </div>
-  </section>  <!-- Other sections here (same as before)... -->  <!-- Include AOS and Three.js -->  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>  <script>
-    AOS.init({ duration: 1000, once: true });
 
-    // THREE.js Background
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById("bg-canvas"), alpha: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    camera.position.z = 5;
+    <div class="approval-details">
+      <div><strong>Amount:</strong> ₦850,000.00</div>
+      <div><strong>Transaction ID:</strong> TXN20250608ABC456</div>
+      <div><strong>Date & Time:</strong> June 9, 2025 • 2:15 PM</div>
+      <div><strong>Purpose:</strong> Equipment Purchase</div>
+      <div><strong>Status:</strong> Pending Approval</div>
+    </div>
 
-    // Geometry
-    const geometry = new THREE.TorusKnotGeometry(1.3, 0.4, 100, 16);
-    const material = new THREE.MeshStandardMaterial({ color: 0xff00ff, metalness: 0.7, roughness: 0.2 });
-    const torusKnot = new THREE.Mesh(geometry, material);
-    scene.add(torusKnot);
+    <button class="approve-btn">Approve Transfer</button>
+  </main>
 
-    // Lighting
-    const pointLight = new THREE.PointLight(0xffffff, 1);
-    pointLight.position.set(5, 5, 5);
-    scene.add(pointLight);
-
-    const ambientLight = new THREE.AmbientLight(0x404040);
-    scene.add(ambientLight);
-
-    function animate() {
-      requestAnimationFrame(animate);
-      torusKnot.rotation.x += 0.01;
-      torusKnot.rotation.y += 0.01;
-      renderer.render(scene, camera);
-    }
-    animate();
-
-    // Responsive canvas
-    window.addEventListener("resize", () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-  </script></body>
+</body>
 </html>
