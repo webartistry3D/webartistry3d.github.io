@@ -1,325 +1,150 @@
-<!DOCTYPE html><html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WebArtistry.3D</title>
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-    <script type="module" src="https://unpkg.com/three@0.150.1/build/three.module.js"></script>
-    <script type="module" src="https://unpkg.com/three@0.150.1/examples/jsm/loaders/GLTFLoader.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-      canvas {
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 0;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DJ Swag XO | Official Landing Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background-color: #000;
+      color: #fff;
+    }
+    header {
+      background: url('Swag XO') no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 1rem;
+    }
+    header h1 {
+      font-size: 4rem;
+      margin: 0;
+    }
+    header p {
+      font-size: 1.5rem;
+      margin: 1rem 0;
+    }
+    .btn {
+      background: #ff0057;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 5px;
+      text-decoration: none;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.8; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    section {
+      padding: 4rem 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+    h2 {
+      color: #ff0057;
+      margin-bottom: 1rem;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .gallery img {
+      width: 100%;
+      border-radius: 10px;
+    }
+    .footer {
+      background: #111;
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    .socials a {
+      margin: 0 0.5rem;
+      color: #ff0057;
+      text-decoration: none;
+    }
+    form input, form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 1rem;
+      border-radius: 5px;
+      border: none;
+      font-family: 'Orbitron', sans-serif;
+    }
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2.5rem;
       }
-    </style>
-  </head>
-  <div id="galleryModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-80 flex items-center justify-center">
-  <div class="relative w-full max-w-3xl mx-auto px-4">
-    <button onclick="closeGallery()" class="absolute top-4 right-4 text-white text-3xl">&times;</button>
-    <div class="relative">
-      <img id="galleryImage" src="" class="w-full max-h-[80vh] object-contain rounded">
-      <button onclick="prevImage()" class="absolute top-1/2 left-0 transform -translate-y-1/2 text-white text-3xl bg-black bg-opacity-30 px-4 py-2">&larr;</button>
-      <button onclick="nextImage()" class="absolute top-1/2 right-0 transform -translate-y-1/2 text-white text-3xl bg-black bg-opacity-30 px-4 py-2">&rarr;</button>
-    </div>
-  </div>
-</div>
-  <body class="bg-gray-950 text-white font-sans relative overflow-x-hidden">
-    <!-- Navbar -->
-    <header class="fixed top-0 w-full z-50 bg-gray-900 bg-opacity-90">
-      <div class="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
-        <h1 class="text-2xl font-bold">WebArtistry.3D</h1>
-        <button id="menu-toggle" class="text-white md:hidden focus:outline-none">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
-        <nav id="menu" class="hidden md:flex space-x-6 text-sm">
-          <a href="#about" class="hover:text-blue-400">About</a>
-          <a href="#services" class="hover:text-blue-400">Services</a>
-          <a href="#portfolio" class="hover:text-blue-400">Portfolio</a>
-          <a href="#contact" class="hover:text-blue-400">Contact</a>
-        </nav>
-      </div>
-      <div id="mobile-menu" class="md:hidden hidden px-6 pb-4">
-        <a href="#about" class="block py-2 hover:text-blue-400">About</a>
-        <a href="#services" class="block py-2 hover:text-blue-400">Services</a>
-        <a href="#portfolio" class="block py-2 hover:text-blue-400">Portfolio</a>
-        <a href="#contact" class="block py-2 hover:text-blue-400">Contact</a>
-      </div>
-    </header><main class="pt-24">
-  <!-- Hero Section -->
-  <section class="min-h-screen flex flex-col justify-center items-center text-center px-6 z-10 relative bg-cover bg-no-repeat bg-center" style="background-image: url('Lagos01.png');">
-   <div class="bg-black bg-opacity-20 absolute inset-0 z-0"></div> <!-- Optional overlay -->
-    <h1 class="text-4xl md:text-6xl font-bold mb-4 relative z-10" data-aos="fade-up">
-    We Deliver Stunning Web Experiences in 3D
-    </h1>
-    <p class="text-xl md:text-2xl max-w-2xl relative z-10" data-aos="fade-up" data-aos-delay="200">
-    3D Visuals | Motion Graphics | Websites | Branding
-  </p>
-  </section>
-  <!--section class="min-h-screen flex flex-col justify-center items-center text-center px-6 z-10 relative">
-    <h1 class="text-4xl md:text-6xl font-bold mb-4" data-aos="fade-up">We Deliver Stunning Web Experiences in 3D</h1>
-    <p class="text-xl md:text-2xl max-w-2xl" data-aos="fade-up" data-aos-delay="200">3D Visuals | Motion Graphics | Websites | Branding</p>
-  </section-->
+      header p {
+        font-size: 1.2rem;
+      }
+      .btn {
+        font-size: 0.9rem;
+        padding: 0.6rem 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
 
-  <!-- About Section -->
-  <section class="py-20 px-6 text-center bg-gray-900" id="about">
-    <h2 class="text-4xl font-bold mb-6" data-aos="fade-up">About Us</h2>
-    <p class="text-lg max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="150">
-      We are a creative digital studio specialized in 3D modeling, motion graphics, web development, and animated storytelling. Our mission is to help individuals with the brightest ideas, as well as brands, shine and stand out with visually captivating, and meaningful web content.
-    </p>
+  <header>
+    <h1>DJ Swag XO</h1>
+    <p>Turning Nights into Memories</p>
+    <a href="#booking" class="btn">Book Now</a>
+  </header>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>I’m DJ Swag XO, spinning the best of Afrobeats, House, and EDM for over a decade. Known for electrifying stage presence and unforgettable mixes, I’ve performed at top clubs and festivals across Lagos and beyond.</p>
   </section>
 
-  <!-- Services Section -->
-  <section class="py-20 px-6 text-center bg-gray-950" id="services">
-    <h2 class="text-4xl font-bold mb-6" data-aos="fade-up">Our Services</h2>
-    <div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
-      <div class="p-6 bg-gray-800 relative bg-cover bg-no-repeat bg-center rounded-xl shadow-xl" data-aos="zoom-in" data-aos-delay="150" style="background-image: url('Lagos01.png');">
-        <div class="bg-black bg-opacity-30 rounded-xl absolute inset-0 z-0"></div> <!-- Optional overlay -->
-        <h3 class="text-2xl font-bold mb-2">3D Visualization</h3>
-        <p>High-quality 3D modeling and rendering for immersive product and brand experiences.</p>
-      </div>
-      <div class="p-6 bg-gray-800 relative bg-cover bg-no-repeat bg-center rounded-xl shadow-xl" data-aos="zoom-in" data-aos-delay="300" style="background-image: url('Lagos01.png');">
-        <div class="bg-black bg-opacity-30 rounded-xl absolute inset-0 z-0"></div> <!-- Optional overlay -->
-        <h3 class="text-2xl font-bold mb-2">Motion Graphics</h3>
-        <p>Short animations and VFX that amplify your message across social media and campaigns.</p>
-      </div>
-      <div class="p-6 bg-gray-800 relative bg-cover bg-no-repeat bg-center rounded-xl shadow-xl" data-aos="zoom-in" data-als-delay="450" style="background-image: url('Lagos01.png');">
-        <div class="bg-black bg-opacity-30 rounded-xl absolute inset-0 z-0"></div> <!-- Optional overlay -->
-        <h3 class="text-2xl font-bold mb-2">Web Development</h3>
-        <p>Responsive, fast and modern websites tailored for your brand and audience.</p>
-      </div>
+  <section id="mixes">
+    <h2>Latest Mixes</h2>
+    <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" 
+      src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/706415303&color=%23ff0057">
+    </iframe>
+  </section>
+
+  <section id="gallery">
+    <h2>Live Vibes</h2>
+    <div class="gallery">
+      <img src="https://source.unsplash.com/200x200/?dj,concert" alt="Gig 1">
+      <img src="https://source.unsplash.com/200x200/?party,club" alt="Gig 2">
+      <img src="https://source.unsplash.com/200x200/?music,dj" alt="Gig 3">
     </div>
   </section>
 
-  <!-- Portfolio Section -->
-  <section class="py-20 px-6 text-center bg-gray-800" id="portfolio">
-    <!--h2 class="text-4xl font-bold mb-6" data-aos="fade-up">Portfolio</h2>
-    <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto"-->
-      <section id="portfolio" class="py-20 bg-gray-800">
-  <div class="max-w-6xl mx-auto px-4">
-    <h2 class="text-4xl font-bold text-center mb-12">Our Portfolio</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-      <!-- Portfolio Item -->
-      <div class="group relative overflow-hidden bg-gray-100 rounded-lg shadow-lg overflow-hidden hover:shadow-xl" data-aos="fade-up" onclick="openGallery(0)" >
-        <img src="Lagos01.png" alt="Project 1" class="w-full h-60 object-cover group-hover:scale-110 transition-transform duration-300" />
-        <div class="absolute bottom-0 left-0 bg-black/70 text-white w-full p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          3D Product Showcase for Vaib
-        <div class="p-4">
-          <h3 class="text-xl font-semibold mb-2">Project 1</h3>
-          <p class="text-gray-700">Short description of Project 1.</p>
-        </div>
-      </div>
-      <!-- Repeat for more projects, incrementing openGallery index -->
-    </div>
-  </div>
-      </section>
-      <!--div class="group relative overflow-hidden rounded-lg shadow-lg" data-aos="fade-up">
-        <img src="/images/project1.jpg" alt="Project 1" class="w-full h-60 object-cover group-hover:scale-110 transition-transform duration-300" />
-    </div-->
-    </div>
-      <div class="group relative overflow-hidden rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="150">
-        <img src="/images/project2.jpg" alt="Project 2" class="w-full h-60 object-cover group-hover:scale-110 transition-transform duration-300" />
-        <div class="absolute bottom-0 left-0 bg-black/70 text-white w-full p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          Animated Logo Reveal for Tech Brand
-        </div>
-      </div>
-      <div class="group relative overflow-hidden rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="300">
-        <img src="/images/project3.jpg" alt="Project 3" class="w-full h-60 object-cover group-hover:scale-110 transition-transform duration-300" />
-        <div class="absolute bottom-0 left-0 bg-black/70 text-white w-full p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          Culture Preserve Nation Series Teaser
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section class="py-20 px-6 text-center bg-gray-950" id="contact">
-    <h2 class="text-4xl font-bold mb-6" data-aos="fade-up">Contact Us</h2>
-    <p class="mb-6 max-w-xl mx-auto" data-aos="fade-up" data-aos-delay="100">
-      Let’s bring your idea to life! Fill out the form below or email us at <a href="mailto:hello@webartistry.ng" class="underline text-blue-400">hello@webartistry.ng</a>.
-    </p>
-    <form class="grid gap-4 max-w-md mx-auto" data-aos="fade-up" data-aos-delay="200">
-      <input type="text" placeholder="Name" class="p-3 rounded bg-gray-800 border border-gray-700" required />
-      <input type="email" placeholder="Email" class="p-3 rounded bg-gray-800 border border-gray-700" required />
-      <textarea placeholder="Message" class="p-3 rounded bg-gray-800 border border-gray-700" rows="5" required></textarea>
-      <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-3 px-6 rounded">Send Message</button>
+  <section id="booking">
+    <h2>Book DJ Swag XO</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Email" required>
+      <textarea placeholder="Event Details" required></textarea>
+      <button type="submit" class="btn">Send Booking Request</button>
     </form>
   </section>
-</main>
 
-<div id="galleryModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-80 flex items-center justify-center">
-  <div class="relative w-full max-w-3xl mx-auto px-4">
-    <button onclick="closeGallery()" class="absolute top-4 right-4 text-white text-3xl">&times;</button>
-    <div class="relative">
-      <img id="galleryImage" src="" class="w-full max-h-[80vh] object-contain rounded">
-      <button onclick="prevImage()" class="absolute top-1/2 left-0 transform -translate-y-1/2 text-white text-3xl bg-black bg-opacity-30 px-4 py-2">&larr;</button>
-      <button onclick="nextImage()" class="absolute top-1/2 right-0 transform -translate-y-1/2 text-white text-3xl bg-black bg-opacity-30 px-4 py-2">&rarr;</button>
+  <div class="footer">
+    <p>Connect with me:</p>
+    <div class="socials">
+      <a href="#">Instagram</a> |
+      <a href="#">SoundCloud</a> |
+      <a href="#">YouTube</a>
     </div>
+    <p>&copy; 2025 DJ Swag XO. All rights reserved.</p>
   </div>
-</div>
-    
-<!-- Three.js GLTF Model -->
-<script type="module">
-  import * as THREE from 'https://unpkg.com/three@0.150.1/build/three.module.js';
-  import { GLTFLoader } from 'https://unpkg.com/three@0.150.1/examples/jsm/loaders/GLTFLoader.js';
 
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-  const renderer = new THREE.WebGLRenderer({ alpha: true });
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  document.body.appendChild(renderer.domElement);
-
-  const loader = new GLTFLoader();
-  loader.load('spaceship1.glb', function (gltf) {
-    const model = gltf.scene;
-    model.scale.set(2, 2, 2);
-    scene.add(model);
-    animate();
-  });
-
-  let model;
-    loader.load('spaceship1.glb', function (gltf) {
-    model = gltf.scene;
-    model.scale.set(2, 2, 2);
-    scene.add(model);
-    animate();
-  });
-
-  function animate() {
-  requestAnimationFrame(animate);
-  if (model) model.rotation.y += 0.01;
-  renderer.render(scene, camera);
-}
-
-  const light = new THREE.HemisphereLight(0xffffff, 0x000000, 1);
-  scene.add(light);
-
-  camera.position.z = 5;
-
-  function animate() {
-    requestAnimationFrame(animate);
-    scene.rotation.y += 0.003;
-    renderer.render(scene, camera);
-  }
-
-  window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  });
-</script>
-
-<script>
-  const galleryData = [
-    [ // Project 1 images
-      '/images/project1-1.jpg',
-      '/images/project1-2.jpg',
-      '/images/project1-3.jpg',
-    ],
-    [ // Project 2 images
-      '/images/project2-1.jpg',
-      '/images/project2-2.jpg',
-    ],
-    // Add more arrays per project
-  ];
-
-  let currentProjectIndex = 0;
-  let currentImageIndex = 0;
-
-  function openGallery(projectIndex) {
-    currentProjectIndex = projectIndex;
-    currentImageIndex = 0;
-    document.getElementById('galleryModal').classList.remove('hidden');
-    // updateGalleryImage();
-    document.body.style.overflow = 'hidden'; //Prevents background scroll
-  }
-
-  function closeGallery() {
-    document.getElementById('galleryModal').classList.add('hidden');
-    document.body.style.overflow = ''; //restore scroll
-
-  }
-  /*
-  function updateGalleryImage() {
-    const imageUrl = galleryData[currentProjectIndex][currentImageIndex];
-    document.getElementById('galleryImage').src = imageUrl;
-  }
-
-  function prevImage() {
-    if (currentImageIndex > 0) {
-      currentImageIndex--;
-    } else {
-      currentImageIndex = galleryData[currentProjectIndex].length - 1;
-    }
-    updateGalleryImage();
-  }
-
-  function nextImage() {
-    if (currentImageIndex < galleryData[currentProjectIndex].length - 1) {
-      currentImageIndex++;
-    } else {
-      currentImageIndex = 0;
-    }
-    updateGalleryImage();
-  }*/
-
-  function nextImage() {
-    currentIndex = (currentIndex + 1) % currentGallery.length;
-    updateModalImage();
-  }
-
-  function prevImage() {
-    currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
-    updateModalImage();
-  }
-
-  function updateModalImage() {
-    const modalImg = document.getElementById('modalImage');
-    modalImg.src = currentGallery[currentIndex];
-  }
-
-  // Touch Swipe Logic
-  let touchStartX = 0;
-  let touchEndX = 0;
-
-  const galleryModal = document.getElementById('galleryModal');
-
-  galleryModal.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-  });
-
-  galleryModal.addEventListener('touchend', (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
-  });
-
-  function handleSwipe() {
-    const swipeThreshold = 50; // Minimum swipe distance
-    const distance = touchEndX - touchStartX;
-
-    if (Math.abs(distance) > swipeThreshold) {
-      if (distance > 0) {
-        prevImage(); // Swipe right
-      } else {
-        nextImage(); // Swipe left
-  
-</script>
-
-    
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>AOS.init();</script>
-<script>
-  const menuToggle = document.getElementById('menu-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
-
-  menuToggle.addEventListener('click', () => {
-    mobileMenu.classList.toggle('hidden');
-  });
-</script>
-
-  </body>
+</body>
 </html>
