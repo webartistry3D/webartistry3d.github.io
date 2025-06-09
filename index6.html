@@ -3,246 +3,180 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Approval - Atlantic City Bank</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
+  <title>Atlantic City Bank | Transfer Approval</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
     body {
-      font-family: 'Inter', sans-serif;
-      background: url('https://images.unsplash.com/photo-1521791136064-7986c2920216') no-repeat center center fixed;
-      background-size: cover;
-      position: relative;
-      min-height: 100vh;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f7f9fc;
       color: #333;
+      background-image: url('https://images.unsplash.com/photo-1561414927-6d86591d0c4f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
     }
 
     body::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(255, 255, 255, 0.88);
-      z-index: 0;
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(255, 255, 255, 0.9);
+      z-index: -1;
     }
 
-    header {
-      position: relative;
-      z-index: 2;
-      padding: 1rem 1.5rem;
-      background: rgba(255, 255, 255, 0.95);
+    /* Top Navigation */
+    .top-nav {
+      background-color: #0b3d91;
+      color: #fff;
+      padding: 1rem 2rem;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      flex-wrap: wrap;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
-    .logo {
-      font-weight: 600;
-      font-size: 1.2rem;
-      color: #084c61;
+    .top-nav .logo {
+      font-size: 1.25rem;
+      font-weight: bold;
     }
 
-    .nav-toggle {
-      font-size: 1.5rem;
-      cursor: pointer;
-      display: none;
-    }
-
-    nav {
+    .top-nav .nav-right {
       display: flex;
       align-items: center;
       gap: 1rem;
     }
 
-    .nav-link {
-      font-size: 0.95rem;
-      color: #444;
-      text-decoration: none;
-    }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-left: auto;
-    }
-
-    .user-profile {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      cursor: pointer;
-    }
-
-    .user-profile img {
-      width: 32px;
-      height: 32px;
+    .nav-right img {
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       object-fit: cover;
+      border: 2px solid #fff;
     }
 
-    .icon {
-      font-size: 1.1rem;
-      cursor: pointer;
-    }
-
-    .container {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: calc(100vh - 160px);
-      padding: 2rem 1rem;
-    }
-
-    .approval-card {
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-      width: 100%;
-      max-width: 480px;
+    /* Main Section */
+    .approval-container {
+      max-width: 600px;
+      margin: 3rem auto;
+      background: #fff;
       padding: 2rem;
-      text-align: center;
-      animation: fadeSlideIn 1s ease forwards;
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
     }
 
-    @keyframes fadeSlideIn {
-      from {
-        opacity: 0;
-        transform: translateY(-30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .approval-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
     }
 
-    .profile-img {
-      width: 80px;
-      height: 80px;
+    .approval-header img {
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
       object-fit: cover;
-      margin-bottom: 1rem;
     }
 
-    .recipient-name {
-      font-size: 1.4rem;
-      font-weight: 600;
+    .approval-header .details {
+      font-size: 1.1rem;
     }
 
-    .details {
-      margin: 1.2rem 0;
-      font-size: 0.95rem;
-      color: #444;
+    .approval-header .details strong {
+      display: block;
+      font-size: 1.2rem;
     }
 
-    .bank-logo {
-      width: 100px;
-      margin: 1.5rem auto 0;
+    .approval-details {
+      font-size: 1rem;
+      line-height: 1.6;
     }
 
-    footer {
-      position: relative;
-      z-index: 2;
+    .approval-details div {
+      margin-bottom: 0.75rem;
+    }
+
+    .approve-btn {
+      display: block;
+      margin-top: 2rem;
+      width: 100%;
+      padding: 0.75rem;
+      background-color: #0b3d91;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .approve-btn:hover {
+      background-color: #092e70;
+    }
+
+    /* Footer Note */
+    .footer-note {
       text-align: center;
-      padding: 1rem;
-      background-color: rgba(255, 255, 255, 0.8);
       font-size: 0.85rem;
       color: #555;
+      padding: 1rem;
+      margin-top: 2rem;
     }
 
-    /* Mobile styles */
-    @media (max-width: 768px) {
-      .nav-right, nav {
-        display: none;
+    @media (max-width: 600px) {
+      .approval-container {
+        margin: 1rem;
+        padding: 1.5rem;
       }
 
-      .nav-toggle {
-        display: block;
+      .approval-header .details {
+        font-size: 1rem;
       }
 
-      .mobile-menu {
-        display: none;
-        flex-direction: column;
-        background: white;
-        padding: 1rem;
-        width: 100%;
-      }
-
-      .mobile-menu a {
-        margin: 0.5rem 0;
-        color: #333;
-        text-decoration: none;
-      }
-
-      .mobile-show {
-        display: flex !important;
+      .footer-note {
+        font-size: 0.75rem;
+        padding: 0.75rem;
       }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="logo">Atlantic City Bank</div>
-    <div class="nav-toggle" onclick="toggleMenu()">☰</div>
 
-    <nav>
-      <a href="#" class="nav-link">Dashboard</a>
-      <a href="#" class="nav-link">Transfers</a>
-      <a href="#" class="nav-link">Accounts</a>
-      <a href="#" class="nav-link">Support</a>
-    </nav>
-
+  <!-- Top Navigation -->
+  <header class="top-nav">
+    <div class="logo">Atlantic City Bank, Lagos</div>
     <div class="nav-right">
-      <span class="icon">🔍</span>
-      <span class="icon">🔔</span>
-      <div class="user-profile">
-        <img src="https://randomuser.me/api/portraits/men/77.jpg" alt="User"/>
-        <span style="font-size: 0.95rem;">Okoro J.</span>
-      </div>
-    </div>
-
-    <div class="mobile-menu" id="mobileMenu">
-      <a href="#">Dashboard</a>
-      <a href="#">Transfers</a>
-      <a href="#">Accounts</a>
-      <a href="#">Support</a>
-      <a href="#">Notifications</a>
-      <a href="#">Profile</a>
+      <span>Welcome, Manager</span>
+      <img src="https://i.pravatar.cc/150?img=32" alt="Manager Profile" />
     </div>
   </header>
 
-  <div class="container">
-    <div class="approval-card">
-      <img class="profile-img" src="https://randomuser.me/api/portraits/men/75.jpg" alt="Recipient"/>
-      <div class="recipient-name">John Okoro</div>
+  <!-- Approval Page Content -->
+  <main class="approval-container">
+    <div class="approval-header">
+      <img src="https://i.pravatar.cc/150?img=45" alt="Recipient Profile" />
       <div class="details">
-        Transfer of $1,500,000.00 approved to Access Bank.<br/>
-        Transaction ID: #ACB908123<br/>
-        Date: June 9, 2025<br/>
-        Status: ✅ Approved
+        <strong>Femi Johnson</strong>
+        Zenith Bank • 1234567890
       </div>
-      <img class="bank-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Access_Bank_logo.svg/2560px-Access_Bank_logo.svg.png" alt="Bank Logo"/>
     </div>
-  </div>
 
-  <footer>
-    Atlantic City Bank, Lagos — 42 Marina Road, Victoria Island, Lagos, Nigeria.
+    <div class="approval-details">
+      <div><strong>Amount:</strong> ₦850,000.00</div>
+      <div><strong>Transaction ID:</strong> TXN20250608ABC456</div>
+      <div><strong>Date & Time:</strong> June 9, 2025 • 2:15 PM</div>
+      <div><strong>Purpose:</strong> Equipment Purchase</div>
+      <div><strong>Status:</strong> Pending Approval</div>
+    </div>
+
+    <button class="approve-btn">Approve Transfer</button>
+  </main>
+
+  <!-- Footer Note -->
+  <footer class="footer-note">
+    &copy; 2025 Atlantic City Bank. All rights reserved.
   </footer>
 
-  <script>
-    function toggleMenu() {
-      const menu = document.getElementById('mobileMenu');
-      menu.classList.toggle('mobile-show');
-    }
-  </script>
 </body>
 </html>
