@@ -424,6 +424,53 @@
       if (e.key === "Escape") closeModal();
     });
   </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  const renderer = new THREE.WebGLRenderer({ alpha: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.getElementById('three-header').appendChild(renderer.domElement);
+
+  camera.position.z = 5;
+
+  // Create floating spheres
+  const spheres = [];
+  const geometry = new THREE.SphereGeometry(0.2, 32, 32);
+  const material = new THREE.MeshStandardMaterial({ color: 0xff0057 });
+
+  for (let i = 0; i < 10; i++) {
+    const sphere = new THREE.Mesh(geometry, material);
+    sphere.position.x = (Math.random() - 0.5) * 10;
+    sphere.position.y = (Math.random() - 0.5) * 6;
+    sphere.position.z = (Math.random() - 0.5) * 4;
+    spheres.push(sphere);
+    scene.add(sphere);
+  }
+
+  const light = new THREE.PointLight(0xffffff, 1, 100);
+  light.position.set(0, 0, 5);
+  scene.add(light);
+
+  // Animation loop
+  function animate() {
+    requestAnimationFrame(animate);
+    spheres.forEach((s, i) => {
+      s.position.y += 0.01 * Math.sin(Date.now() * 0.001 + i);
+      s.rotation.x += 0.005;
+      s.rotation.y += 0.005;
+    });
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  // Handle window resize
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+</script>
 
 </body>
 </html>
