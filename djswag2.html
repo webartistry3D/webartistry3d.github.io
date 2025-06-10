@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DJ Swag XO | Official Landing Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background-color: #000;
+      color: #fff;
+    }
+
+    #three-header {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Navbar */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.9);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      z-index: 1000;
+    }
+
+    .logo {
+      color: #ff0057;
+      font-size: 1.5rem;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.8rem;
+      color: white;
+      cursor: pointer;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #ff0057;
+    }
+
+    /* Header Section */
+    header {
+      background: url('SwagXO.jpg') no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 1rem;
+      position: relative;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 0;
+    }
+
+    header * {
+      z-index: 1;
+    }
+
+    header h1 {
+      font-size: 4rem;
+      margin: 0;
+    }
+
+    header p {
+      font-size: 1.5rem;
+      margin: 1rem 0;
+    }
+
+    .btn {
+      background: #ff0057;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+
+    section {
+      padding: 4rem 2rem;
+      max-width: 1000px;
+      margin: auto;
+      text-align: center;
+    }
+
+    /* Unique Backgrounds */
+    #about {
+      background: linear-gradient(to right, #1a1a1a, #333);
+    }
+
+    #mixes {
+      background: url('https://images.unsplash.com/photo-1642178225043-f299072af862?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bXVzaWMlMjBtaXh8ZW58MHx8MHx8fDA%3D') no-repeat center center/cover;
+    }
+
+    #gallery {
+      background: linear-gradient(to right, #1a1a1a, #333);
+    }
+
+    #tours {
+      background: url('https://images.unsplash.com/photo-1521337581100-8ca9a73a5f5d') no-repeat center center/cover;
+    }
+
+    #booking {
+      background: #1c0033;
+    }
+
+    h2 {
+      color: #ff0057;
+      margin-bottom: 1rem;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .footer {
+      background: #111;
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+
+    .socials a {
+      margin: 0 0.5rem;
+      color: #ff0057;
+      text-decoration: none;
+    }
+
+    form input, form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 1rem;
+      border-radius: 5px;
+      border: none;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    /* Mute/Unmute Button */
+    .audio-control {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1001;
+      background: #ff0057;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      padding-top: 60px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: rgba(0,0,0,0.9);
+    }
+
+    .modal-content {
+      margin: auto;
+      display: block;
+      max-width: 90%;
+      max-height: 80%;
+      animation: zoom 0.3s;
+    }
+
+    @keyframes zoom {
+      from { transform: scale(0.8); }
+      to { transform: scale(1); }
+    }
+
+    .close {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      color: #fff;
+      font-size: 2rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .modal-nav {
+      position: absolute;
+      top: 50%;
+      font-size: 3rem;
+      color: white;
+      cursor: pointer;
+      user-select: none;
+      padding: 0 15px;
+      transform: translateY(-50%);
+    }
+
+    .modal-nav.left { left: 0; }
+    .modal-nav.right { right: 0; }
+
+    @media (max-width: 768px) {
+      .menu-toggle { display: block; }
+      nav ul {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: #111;
+        flex-direction: column;
+        align-items: center;
+        display: none;
+        padding-bottom: 1rem;
+      }
+      nav ul.active { display: flex; }
+      nav ul li { margin: 1rem 0; }
+      header h1 { font-size: 2.5rem; }
+      header p { font-size: 1.2rem; }
+      .modal-content {
+        max-width: 95%;
+        max-height: 70%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Audio -->
+  <audio id="bgAudio" autoplay loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+  <button class="audio-control" onclick="toggleAudio()" id="audioBtn">🔊</button>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">DJ Swag XO</div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <ul id="navLinks">
+      <li><a href="#about" onclick="closeMenu()">About</a></li>
+      <li><a href="#mixes" onclick="closeMenu()">Mixes</a></li>
+      <li><a href="#gallery" onclick="closeMenu()">Gallery</a></li>
+      <li><a href="#tours" onclick="closeMenu()">Tour Dates</a></li>
+      <li><a href="#booking" onclick="closeMenu()">Booking</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <header>
+    <div id="three-header"></div>
+    <h1>DJ Swag XO</h1>
+    <p>Turning Nights into Memories</p>
+    <a href="#booking" class="btn">Book Now</a>
+  </header>
+
+  <!-- About -->
+  <section id="about">
+    <h2>About Me</h2>
+    <p>I’m DJ Swag XO, spinning the best of Afrobeats, House, and EDM for over a decade. Known for electrifying stage presence and unforgettable mixes, I’ve performed at top clubs and festivals across Lagos and beyond.</p>
+  </section>
+
+  <!-- Mixes -->
+  <section id="mixes">
+    <h2>Latest Mixes</h2>
+    <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+      src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/706415303&color=%23ff0057">
+    </iframe>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery">
+    <h2>Past Events</h2>
+    <div class="gallery">
+      <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800" onclick="openModal(0)">
+      <img src="https://images.unsplash.com/photo-1542628682-88321d2a4828?w=800" onclick="openModal(1)">
+      <img src="https://images.unsplash.com/photo-1493676304819-0d7a8d026dcf?w=800" onclick="openModal(2)">
+    </div>
+  </section>
+
+  <!-- Tours -->
+  <section id="tours">
+    <h2>Upcoming Tour Dates</h2>
+    <ul>
+      <li>July 12 - Lagos, Nigeria - Eko Hotel</li>
+      <li>August 3 - Abuja, Nigeria - Cubana Lounge</li>
+      <li>September 5 - Accra, Ghana - SkyBar</li>
+      <li>October 14 - Johannesburg, SA - Taboo Club</li>
+    </ul>
+  </section>
+
+  <!-- Booking -->
+  <section id="booking">
+    <h2>Book DJ Swag XO</h2>
+    <form action="#">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Email" required>
+      <textarea placeholder="Event Details" required></textarea>
+      <button type="submit" class="btn">Send Booking Request</button>
+    </form>
+  </section>
+
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImg">
+    <span class="modal-nav left" onclick="prevImage()">&#10094;</span>
+    <span class="modal-nav right" onclick="nextImage()">&#10095;</span>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Connect with me:</p>
+    <div class="socials">
+      <a href="#">Instagram</a>
+      <a href="#">Twitter</a>
+      <a href="#">YouTube</a>
+    </div>
+    <p>&copy; 2025 DJ Swag XO. All rights reserved.</p>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    // Toggle mobile nav
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('active');
+    }
+
+    function closeMenu() {
+      document.getElementById('navLinks').classList.remove('active');
+    }
+
+    // Audio toggle
+    function toggleAudio() {
+      const audio = document.getElementById('bgAudio');
+      const btn = document.getElementById('audioBtn');
+      if (audio.paused) {
+        audio.play();
+        btn.textContent = '🔊';
+      } else {
+        audio.pause();
+        btn.textContent = '🔇';
+      }
+    }
+
+    // Gallery Modal Logic
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modalImg');
+    const images = Array.from(document.querySelectorAll('.gallery img'));
+    let currentIndex = 0;
+
+    function openModal(index) {
+      currentIndex = index;
+      modal.style.display = 'block';
+      modalImg.src = images[currentIndex].src;
+    }
+
+    function closeModal() {
+      modal.style.display = 'none';
+    }
+
+    function prevImage() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      modalImg.src = images[currentIndex].src;
+    }
+
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % images.length;
+      modalImg.src = images[currentIndex].src;
+    }
+
+    // ESC to close modal
+    window.addEventListener('keydown', (e) => {
+      if (e.key === "Escape") closeModal();
+    });
+
+
+<script>
+  // Set up scene
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.z = 5;
+
+  const renderer = new THREE.WebGLRenderer({ alpha: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.getElementById('three-header').appendChild(renderer.domElement);
+
+  // Create floating spheres
+  const spheres = [];
+  const geometry = new THREE.SphereGeometry(0.2, 32, 32);
+  const material = new THREE.MeshStandardMaterial({ color: 0xff0057 });
+
+  for (let i = 0; i < 10; i++) {
+    const sphere = new THREE.Mesh(geometry, material);
+    sphere.position.x = (Math.random() - 0.5) * 10;
+    sphere.position.y = (Math.random() - 0.5) * 6;
+    sphere.position.z = (Math.random() - 0.5) * 4;
+    spheres.push(sphere);
+    scene.add(sphere);
+  }
+
+  const light = new THREE.PointLight(0xffffff, 1, 100);
+  light.position.set(0, 0, 5);
+  scene.add(light);
+
+  // Animation loop
+  function animate() {
+    requestAnimationFrame(animate);
+    spheres.forEach((s, i) => {
+      s.position.y += 0.01 * Math.sin(Date.now() * 0.001 + i);
+      s.rotation.x += 0.005;
+      s.rotation.y += 0.005;
+    });
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  // Responsive canvas
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+  </script>
+
+</body>
+</html>
