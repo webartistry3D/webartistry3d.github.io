@@ -498,104 +498,101 @@
     </footer>
 
     <script>
-        // Navigation functionality
-        const menuToggle = document.querySelector('.menu-toggle');
-        const navLinks = document.getElementById('navLinks');
-        
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
+  document.addEventListener('DOMContentLoaded', () => {
+    // Navigation functionality
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.getElementById('navLinks');
+
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    document.querySelectorAll('#navLinks a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+      });
+    });
+
+    // Contact form
+    const contactForm = document.getElementById('contactForm');
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Thank you for your message! We will contact you soon.');
+      contactForm.reset();
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
         });
-        
-        // Close menu when clicking on nav links
-        document.querySelectorAll('#navLinks a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-            });
-        });
-        
-        // Form handling
-        const contactForm = document.getElementById('contactForm');
-        
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Thank you for your message! We will contact you soon.');
-            contactForm.reset();
-        });
-        
-        // Smooth scroll for all links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-        
-        // Gallery Modal functionality
-        const modal = document.getElementById('galleryModal');
-        const modalImg = document.getElementById('modalImage');
-        const closeBtn = document.querySelector('.close');
-        const prevBtn = document.querySelector('.prev');
-        const nextBtn = document.querySelector('.next');
-        const galleryImages = document.querySelectorAll('.gallery img');
-        let currentSlideIndex = 0;
-        
-        // Open modal with clicked image
-        galleryImages.forEach((img, index) => {
-            img.addEventListener('click', () => {
-                currentSlideIndex = index;
-                modal.style.display = "block";
-                modalImg.src = img.src;
-                modalImg.alt = img.alt;
-                document.body.style.overflow = 'hidden';
-            });
-        });
-        
-        // Close modal
-        closeBtn.addEventListener('click', () => {
-            modal.style.display = "none";
-            document.body.style.overflow = 'auto';
-        });
-        
-        // Navigation between images
-        function navigateSlides(n) {
-            currentSlideIndex += n;
-            
-            if (currentSlideIndex >= galleryImages.length) {
-                currentSlideIndex = 0;
-            } else if (currentSlideIndex < 0) {
-                currentSlideIndex = galleryImages.length - 1;
-            }
-            
-            modalImg.src = galleryImages[currentSlideIndex].src;
-            modalImg.alt = galleryImages[currentSlideIndex].alt;
+      });
+    });
+
+    // Gallery modal functionality
+    const modal = document.getElementById('galleryModal');
+    const modalImg = document.getElementById('modalImage');
+    const closeBtn = document.querySelector('.close');
+    const prevBtn = document.querySelector('.prev');
+    const nextBtn = document.querySelector('.next');
+    const galleryImages = document.querySelectorAll('.gallery img');
+    let currentSlideIndex = 0;
+
+    galleryImages.forEach((img, index) => {
+      img.addEventListener('click', () => {
+        currentSlideIndex = index;
+        modal.style.display = "block";
+        modalImg.src = img.src;
+        modalImg.alt = img.alt;
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        modal.style.display = "none";
+        document.body.style.overflow = 'auto';
+      });
+    }
+
+    function navigateSlides(n) {
+      currentSlideIndex += n;
+
+      if (currentSlideIndex >= galleryImages.length) {
+        currentSlideIndex = 0;
+      } else if (currentSlideIndex < 0) {
+        currentSlideIndex = galleryImages.length - 1;
+      }
+
+      modalImg.src = galleryImages[currentSlideIndex].src;
+      modalImg.alt = galleryImages[currentSlideIndex].alt;
+    }
+
+    prevBtn.addEventListener('click', () => navigateSlides(-1));
+    nextBtn.addEventListener('click', () => navigateSlides(1));
+
+    window.addEventListener('click', (e) => {
+      if (e.target == modal) {
+        modal.style.display = "none";
+        document.body.style.overflow = 'auto';
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (modal.style.display === "block") {
+        if (e.key === "Escape") {
+          modal.style.display = "none";
+          document.body.style.overflow = 'auto';
+        } else if (e.key === "ArrowLeft") {
+          navigateSlides(-1);
+        } else if (e.key === "ArrowRight") {
+          navigateSlides(1);
         }
-        
-        prevBtn.addEventListener('click', () => navigateSlides(-1));
-        nextBtn.addEventListener('click', () => navigateSlides(1));
-        
-        // Close modal when clicking outside image
-        window.addEventListener('click', (e) => {
-            if (e.target == modal) {
-                modal.style.display = "none";
-                document.body.style.overflow = 'auto';
-            }
-        });
-        
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (modal.style.display === "block") {
-                if (e.key === "Escape") {
-                    modal.style.display = "none";
-                    document.body.style.overflow = 'auto';
-                } else if (e.key === "ArrowLeft") {
-                    navigateSlides(-1);
-                } else if (e.key === "ArrowRight") {
-                    navigateSlides(1);
-                }
-            }
-        });
-    </script>
+      }
+    });
+  });
+</script>
 </body>
 </html>
