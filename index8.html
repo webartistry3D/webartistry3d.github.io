@@ -392,6 +392,45 @@
       const nav = document.getElementById('navLinks');
       nav.classList.remove('active');
     }
+
+  const images = [
+    "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0",
+    "https://images.unsplash.com/photo-1542628682-88321d2a4828?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0",
+    "https://images.unsplash.com/photo-1493676304819-0d7a8d026dcf?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0"
+  ];
+
+  let currentIndex = 0;
+
+  function openModal(index) {
+    currentIndex = index;
+    document.getElementById('modalImg').src = images[currentIndex];
+    document.getElementById('imageModal').style.display = 'block';
+  }
+
+  function closeModal() {
+    document.getElementById('imageModal').style.display = 'none';
+  }
+
+  function changeSlide(direction) {
+    currentIndex += direction;
+    if (currentIndex < 0) currentIndex = images.length - 1;
+    if (currentIndex >= images.length) currentIndex = 0;
+    document.getElementById('modalImg').src = images[currentIndex];
+  }
+
+  // Optional: Swipe Support
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  document.getElementById('imageModal').addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+
+  document.getElementById('imageModal').addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].screenX;
+    if (touchEndX < touchStartX - 50) changeSlide(1);  // swipe left
+    if (touchEndX > touchStartX + 50) changeSlide(-1); // swipe right
+  });
   </script>
 <div id="imageModal" class="modal">
   <span class="close" onclick="closeModal()">&times;</span>
