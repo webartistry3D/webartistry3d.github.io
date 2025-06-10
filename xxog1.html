@@ -1,126 +1,86 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>XXOG - Fashion Store</title>
+  <title>XXOG - Immersive 3D Fashion Store</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      overflow-x: hidden;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; font-family: Arial, sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
     header {
       position: fixed;
       top: 0;
       width: 100%;
-      background: black;
-      color: white;
+      background-color: rgba(0, 0, 0, 0.85);
+      color: #fff;
       z-index: 1000;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1em;
+      padding: 1em 2em;
     }
-
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: #fff;
+    }
     .menu {
       display: none;
       flex-direction: column;
-      background: black;
       position: absolute;
       top: 100%;
       left: 0;
       width: 100%;
+      background: #000;
       padding: 1em;
     }
-
     .menu a {
-      color: white;
+      color: #fff;
       text-decoration: none;
       font-size: 1.2em;
-      padding: 0.5em 0;
-    }
-
-    .hamburger {
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-
-    .hamburger span {
-      height: 3px;
-      background: white;
-      width: 25px;
-      border-radius: 2px;
-    }
-
-    section {
-      height: 100vh;
-      padding: 6em 2em 2em;
-    }
-
-    #home {
-      background: url('https://source.unsplash.com/featured/?fashion') no-repeat center/cover;
-      color: white;
-    }
-
-    #about {
-      background-color: #f0f0f0;
-    }
-
-    #store {
-      background-color: #fff3e6;
-    }
-
-    #blog {
-      background-color: #e6f2ff;
-    }
-
-    #contact {
-      background-color: #f9e6ff;
-    }
-
-    canvas {
-      width: 100%;
-      height: 400px;
-      display: block;
-    }
-
-    @media (max-width: 768px) {
-      .menu.show {
-        display: flex;
-      }
-    }
-
-    h2 {
-      font-size: 2em;
       margin-bottom: 0.5em;
     }
+    .menu.show { display: flex; }section {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 5em 2em 2em;
+}
+#home { background: url('https://source.unsplash.com/1920x1080/?fashion,streetwear') no-repeat center/cover; color: white; }
+#about { background: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%); }
+#store { background: #1e1e1e; color: white; }
+#blog { background: #fafafa; }
+#contact { background: #eaeaea; }
 
-    p {
-      font-size: 1.1em;
-      line-height: 1.6em;
-    }
+canvas {
+  width: 100%;
+  max-width: 700px;
+  height: 500px;
+  display: block;
+  margin-top: 2em;
+}
+
+h1, h2 { margin-bottom: 0.5em; }
+p { max-width: 600px; text-align: center; font-size: 1.1em; }
+
+@media (max-width: 768px) {
+  canvas { height: 300px; }
+}
+
   </style>
 </head>
 <body>
   <header>
     <h1>XXOG</h1>
     <div class="hamburger" onclick="toggleMenu()">
-      <span></span>
-      <span></span>
-      <span></span>
+      <span></span><span></span><span></span>
     </div>
     <nav class="menu" id="menu">
       <a href="#home">Home</a>
@@ -129,57 +89,41 @@
       <a href="#blog">Blog</a>
       <a href="#contact">Contact</a>
     </nav>
-  </header>
-
-  <section id="home">
-    <h2>Welcome to XXOG</h2>
-    <p>Futuristic fashion for the bold and visionary.</p>
-  </section>
-
-  <section id="about">
+  </header>  <section id="home">
+    <h2>XXOG</h2>
+    <p>Next-gen fashion that breaks the rules of reality.</p>
+  </section>  <section id="about">
     <h2>About XXOG</h2>
-    <p>XXOG blends high-end fashion with cutting-edge technology to create wearable statements for tomorrow.</p>
-  </section>
-
-  <section id="store">
-    <h2>Store Preview</h2>
-    <p>Explore our 3D interactive sneaker model:</p>
+    <p>We fuse physical fashion with digital innovation. Our 3D collections allow you to explore style in immersive environments before you wear it.</p>
+  </section>  <section id="store">
+    <h2>Store Showcase</h2>
+    <p>Interact with our digital sneaker from the XXOG drop.</p>
     <canvas id="threeCanvas"></canvas>
-  </section>
-
-  <section id="blog">
-    <h2>Blog</h2>
-    <p>Catch the latest on trends, drops, and the future of fashion at XXOG.</p>
-  </section>
-
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Email: contact@xxog.com<br>Follow us on social: @xxogfashion</p>
-  </section>
-
-  <!-- Three.js + GLTFLoader -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r148/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.148.0/examples/js/loaders/GLTFLoader.min.js"></script>
-
-  <script>
+  </section>  <section id="blog">
+    <h2>XXOG Blog</h2>
+    <p>Read the latest on virtual wardrobes, digital fashion trends, and what’s next in wearable tech.</p>
+  </section>  <section id="contact">
+    <h2>Contact Us</h2>
+    <p>Reach out via <a href="mailto:contact@xxog.com">contact@xxog.com</a> or follow @xxogfashion on social media.</p>
+  </section>  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r148/three.min.js"></script>  <script src="https://cdn.jsdelivr.net/npm/three@0.148.0/examples/js/loaders/GLTFLoader.min.js"></script>  <script>
     function toggleMenu() {
       document.getElementById('menu').classList.toggle('show');
     }
 
-    // Setup Three.js Scene
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(50, window.innerWidth / 400, 0.1, 1000);
-    camera.position.set(0, 1.5, 3);
+    const camera = new THREE.PerspectiveCamera(50, window.innerWidth / 500, 0.1, 1000);
+    camera.position.set(0, 1.5, 4);
 
-    const renderer = new THREE.WebGLRenderer({
-      canvas: document.getElementById('threeCanvas'),
-      alpha: true
-    });
-    renderer.setSize(window.innerWidth, 400);
+    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('threeCanvas'), alpha: true });
+    renderer.setSize(window.innerWidth, 500);
     renderer.setPixelRatio(window.devicePixelRatio);
 
-    const light = new THREE.HemisphereLight(0xffffff, 0x444444, 1.5);
-    scene.add(light);
+    const light1 = new THREE.HemisphereLight(0xffffff, 0x444444, 1);
+    scene.add(light1);
+
+    const light2 = new THREE.DirectionalLight(0xffffff, 0.8);
+    light2.position.set(5, 10, 7.5);
+    scene.add(light2);
 
     const loader = new THREE.GLTFLoader();
     loader.load(
@@ -197,15 +141,14 @@
       },
       undefined,
       function (error) {
-        console.error('Failed to load model:', error);
+        console.error('Error loading GLTF model:', error);
       }
     );
 
     window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / 400;
+      camera.aspect = window.innerWidth / 500;
       camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, 400);
+      renderer.setSize(window.innerWidth, 500);
     });
-  </script>
-</body>
+  </script></body>
 </html>
