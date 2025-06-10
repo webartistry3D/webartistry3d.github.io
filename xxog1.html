@@ -1,23 +1,33 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>XXOG - Immersive 3D Fashion Store</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XXOG – Futuristic Luxury Fashion</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { width: 100%; height: 100%; font-family: Arial, sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
+    html, body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0e0e0e;
+      color: #fff;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+    body { line-height: 1.6; }
+
     header {
       position: fixed;
-      top: 0;
+      top: 0; left: 0;
       width: 100%;
-      background-color: rgba(0, 0, 0, 0.85);
-      color: #fff;
-      z-index: 1000;
+      background: rgba(0, 0, 0, 0.85);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1em 2em;
+      padding: 1rem 2rem;
+      z-index: 1000;
     }
+    h1 { font-size: 1.5rem; letter-spacing: 2px; }
+
     .hamburger {
       display: flex;
       flex-direction: column;
@@ -25,9 +35,10 @@
       cursor: pointer;
     }
     .hamburger span {
-      width: 25px;
       height: 3px;
-      background: #fff;
+      background: white;
+      width: 25px;
+      border-radius: 2px;
     }
     .menu {
       display: none;
@@ -36,44 +47,63 @@
       top: 100%;
       left: 0;
       width: 100%;
-      background: #000;
+      background: #111;
       padding: 1em;
     }
     .menu a {
-      color: #fff;
+      color: #ccc;
       text-decoration: none;
       font-size: 1.2em;
-      margin-bottom: 0.5em;
+      margin: 0.5em 0;
     }
-    .menu.show { display: flex; }section {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding: 5em 2em 2em;
-}
-#home { background: url('https://source.unsplash.com/1920x1080/?fashion,streetwear') no-repeat center/cover; color: white; }
-#about { background: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%); }
-#store { background: #1e1e1e; color: white; }
-#blog { background: #fafafa; }
-#contact { background: #eaeaea; }
+    .menu.show { display: flex; }
 
-canvas {
-  width: 100%;
-  max-width: 700px;
-  height: 500px;
-  display: block;
-  margin-top: 2em;
-}
+    section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 5em 2em;
+    }
 
-h1, h2 { margin-bottom: 0.5em; }
-p { max-width: 600px; text-align: center; font-size: 1.1em; }
+    #home {
+      background: linear-gradient(145deg, #000000 30%, #1e1e1e 100%);
+      color: #e0e0e0;
+      text-align: center;
+    }
+    #about { background: #141414; }
+    #store { background: #0e0e0e; }
+    #blog { background: #121212; }
+    #contact { background: #181818; }
 
-@media (max-width: 768px) {
-  canvas { height: 300px; }
-}
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    p {
+      max-width: 700px;
+      text-align: center;
+      font-size: 1.1rem;
+      color: #aaa;
+    }
 
+    canvas {
+      width: 100%;
+      max-width: 600px;
+      height: 400px;
+      display: block;
+      margin-top: 2rem;
+      border: 1px solid #333;
+      border-radius: 8px;
+    }
+
+    a:hover { color: #fff; }
+    @media (max-width: 768px) {
+      canvas { height: 300px; }
+    }
   </style>
 </head>
 <body>
@@ -89,66 +119,83 @@ p { max-width: 600px; text-align: center; font-size: 1.1em; }
       <a href="#blog">Blog</a>
       <a href="#contact">Contact</a>
     </nav>
-  </header>  <section id="home">
-    <h2>XXOG</h2>
-    <p>Next-gen fashion that breaks the rules of reality.</p>
-  </section>  <section id="about">
-    <h2>About XXOG</h2>
-    <p>We fuse physical fashion with digital innovation. Our 3D collections allow you to explore style in immersive environments before you wear it.</p>
-  </section>  <section id="store">
-    <h2>Store Showcase</h2>
-    <p>Interact with our digital sneaker from the XXOG drop.</p>
+  </header>
+
+  <section id="home">
+    <h2>Welcome to XXOG</h2>
+    <p>The intersection of fashion and futuristic digital luxury. Explore, interact, and wear the future.</p>
+  </section>
+
+  <section id="about">
+    <h2>About</h2>
+    <p>XXOG is where avant-garde style meets immersive 3D experiences. We craft fashion that transcends the physical – a journey into the luxury multiverse.</p>
+  </section>
+
+  <section id="store">
+    <h2>Digital Sneaker</h2>
+    <p>Preview our ultra-lux 3D footwear model from the XXOG Genesis Drop.</p>
     <canvas id="threeCanvas"></canvas>
-  </section>  <section id="blog">
-    <h2>XXOG Blog</h2>
-    <p>Read the latest on virtual wardrobes, digital fashion trends, and what’s next in wearable tech.</p>
-  </section>  <section id="contact">
-    <h2>Contact Us</h2>
-    <p>Reach out via <a href="mailto:contact@xxog.com">contact@xxog.com</a> or follow @xxogfashion on social media.</p>
-  </section>  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r148/three.min.js"></script>  <script src="https://cdn.jsdelivr.net/npm/three@0.148.0/examples/js/loaders/GLTFLoader.min.js"></script>  <script>
+  </section>
+
+  <section id="blog">
+    <h2>XXOG Insights</h2>
+    <p>Dive deep into the latest on tech-fashion fusion, virtual wardrobes, and the post-physical aesthetic.</p>
+  </section>
+
+  <section id="contact">
+    <h2>Connect</h2>
+    <p>Email us at <a href="mailto:contact@xxog.com">contact@xxog.com</a> or follow us @xxogfashion across platforms.</p>
+  </section>
+
+  <!-- 3D Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.148.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.148.0/examples/js/loaders/GLTFLoader.js"></script>
+
+  <script>
     function toggleMenu() {
       document.getElementById('menu').classList.toggle('show');
     }
 
+    // Setup Three.js
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(50, window.innerWidth / 500, 0.1, 1000);
-    camera.position.set(0, 1.5, 4);
+    const camera = new THREE.PerspectiveCamera(55, window.innerWidth / 400, 0.1, 1000);
+    camera.position.set(0, 1.2, 3.5);
 
     const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('threeCanvas'), alpha: true });
-    renderer.setSize(window.innerWidth, 500);
+    renderer.setSize(window.innerWidth, 400);
     renderer.setPixelRatio(window.devicePixelRatio);
 
-    const light1 = new THREE.HemisphereLight(0xffffff, 0x444444, 1);
-    scene.add(light1);
+    const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444, 1);
+    scene.add(hemiLight);
 
-    const light2 = new THREE.DirectionalLight(0xffffff, 0.8);
-    light2.position.set(5, 10, 7.5);
-    scene.add(light2);
+    const dirLight = new THREE.DirectionalLight(0xffffff, 0.6);
+    dirLight.position.set(0, 10, 10);
+    scene.add(dirLight);
 
     const loader = new THREE.GLTFLoader();
     loader.load(
       'https://modelviewer.dev/shared-assets/models/Sneaker.glb',
       function (gltf) {
-        gltf.scene.scale.set(1.5, 1.5, 1.5);
-        scene.add(gltf.scene);
+        const model = gltf.scene;
+        model.scale.set(1.8, 1.8, 1.8);
+        scene.add(model);
 
-        function animate() {
+        const animate = () => {
           requestAnimationFrame(animate);
-          gltf.scene.rotation.y += 0.01;
+          model.rotation.y += 0.01;
           renderer.render(scene, camera);
-        }
+        };
         animate();
       },
       undefined,
-      function (error) {
-        console.error('Error loading GLTF model:', error);
-      }
+      (error) => console.error('Model load error:', error)
     );
 
     window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / 500;
+      camera.aspect = window.innerWidth / 400;
       camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, 500);
+      renderer.setSize(window.innerWidth, 400);
     });
-  </script></body>
+  </script>
+</body>
 </html>
