@@ -1,232 +1,373 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>7 Tons Urban | Interior Excellence</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Roboto&display=swap" rel="stylesheet">
-  <style>
-    html {
-      scroll-behavior: smooth;
-    }body {
-  margin: 0;
-  font-family: 'Roboto', sans-serif;
-  background-color: #111;
-  color: #fff;
-}
-
-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  background: rgba(0, 0, 0, 0.95);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  z-index: 1000;
-}
-
-.logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.8rem;
-  color: #d4af37;
-}
-
-.menu-toggle {
-  display: none;
-  font-size: 1.8rem;
-  color: white;
-  cursor: pointer;
-}
-
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 1.5rem;
-  margin: 0;
-  padding: 0;
-}
-
-nav ul li a {
-  text-decoration: none;
-  color: white;
-  font-size: 1rem;
-  transition: color 0.3s;
-}
-
-nav ul li a:hover {
-  color: #d4af37;
-}
-
-header {
-  background: url('https://images.unsplash.com/photo-1507089947368-19c1da9775ae') no-repeat center center/cover;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  position: relative;
-}
-
-header::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: 0;
-}
-
-header * {
-  z-index: 1;
-}
-
-header h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 3.5rem;
-  margin: 0;
-  color: #fff;
-}
-
-header p {
-  font-size: 1.2rem;
-  color: #d4af37;
-  margin: 1rem 0;
-}
-
-.btn {
-  background: #d4af37;
-  padding: 0.75rem 1.5rem;
-  border: none;
-  color: #111;
-  font-size: 1rem;
-  cursor: pointer;
-  border-radius: 5px;
-  text-decoration: none;
-}
-
-section {
-  padding: 4rem 2rem;
-  max-width: 1000px;
-  margin: auto;
-  text-align: center;
-}
-
-section h2 {
-  font-family: 'Playfair Display', serif;
-  color: #d4af37;
-  margin-bottom: 1rem;
-}
-
-.services, .gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 2rem;
-}
-
-.services div, .gallery img {
-  background: #222;
-  padding: 1.5rem;
-  border-radius: 10px;
-}
-
-.gallery img {
-  width: 100%;
-  object-fit: cover;
-  cursor: pointer;
-}
-
-form input, form textarea {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 1rem;
-  border-radius: 5px;
-  border: none;
-}
-
-.footer {
-  background: #000;
-  text-align: center;
-  padding: 2rem;
-  font-size: 0.9rem;
-}
-
-.socials a {
-  margin: 0 0.5rem;
-  color: #d4af37;
-  text-decoration: none;
-}
-
-@media (max-width: 768px) {
-  .menu-toggle { display: block; }
-  nav ul {
-    position: absolute;
-    top: 70px;
-    left: 0;
-    right: 0;
-    background: #111;
-    flex-direction: column;
-    align-items: center;
-    display: none;
-  }
-  nav ul.active { display: flex; }
-  nav ul li { margin: 1rem 0; }
-}
-
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7 Tons Urban | Interior Excellence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        html { 
+            scroll-behavior: smooth; 
+        }
+        
+        body { 
+            margin: 0; 
+            font-family: 'Roboto', sans-serif; 
+            background-color: #111; 
+            color: #fff; 
+            line-height: 1.6;
+        }
+        
+        nav { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            background: rgba(0, 0, 0, 0.95); 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 1rem 2rem; 
+            z-index: 1000; 
+        }
+        
+        .logo { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 1.8rem; 
+            color: #d4af37; 
+            font-weight: 700;
+            text-decoration: none;
+        }
+        
+        .menu-toggle { 
+            display: none; 
+            font-size: 1.8rem; 
+            color: white; 
+            cursor: pointer; 
+            background: none;
+            border: none;
+            padding: 0.5rem;
+        }
+        
+        #navLinks { 
+            list-style: none; 
+            display: flex; 
+            gap: 1.5rem; 
+            margin: 0; 
+            padding: 0; 
+        }
+        
+        #navLinks li a { 
+            text-decoration: none; 
+            color: white; 
+            font-size: 1rem; 
+            transition: color 0.3s; 
+            padding: 0.5rem;
+        }
+        
+        #navLinks li a:hover { 
+            color: #d4af37; 
+        }
+        
+        header { 
+            background: url('https://images.unsplash.com/photo-1507089947368-19c1da9775ae') no-repeat center center/cover; 
+            height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            text-align: center; 
+            position: relative; 
+        }
+        
+        header::before { 
+            content: ""; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            bottom: 0; 
+            background: rgba(0, 0, 0, 0.6); 
+            z-index: 0; 
+        }
+        
+        header * { 
+            z-index: 1; 
+        }
+        
+        header h1 { 
+            font-family: 'Playfair Display', serif; 
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            margin: 0; 
+            color: #fff; 
+            font-weight: 700;
+        }
+        
+        header p { 
+            font-size: 1.2rem; 
+            color: #d4af37; 
+            margin: 1rem 0 2rem;
+            max-width: 600px;
+            padding: 0 1rem;
+        }
+        
+        .btn { 
+            background: #d4af37; 
+            padding: 0.75rem 1.5rem; 
+            border: none; 
+            color: #111; 
+            font-size: 1rem; 
+            cursor: pointer; 
+            border-radius: 5px; 
+            text-decoration: none; 
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background: #e8c252;
+            transform: translateY(-2px);
+        }
+        
+        section { 
+            padding: 5rem 2rem; 
+            max-width: 1200px; 
+            margin: auto; 
+        }
+        
+        section h2 { 
+            font-family: 'Playfair Display', serif; 
+            color: #d4af37; 
+            margin-bottom: 2rem;
+            text-align: center;
+            font-size: 2.2rem;
+        }
+        
+        .services, .gallery { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            gap: 2rem; 
+        }
+        
+        .service-card { 
+            background: #222; 
+            padding: 2rem; 
+            border-radius: 10px; 
+            transition: transform 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-card h3 {
+            color: #d4af37;
+            margin-top: 0;
+        }
+        
+        .gallery img { 
+            width: 100%; 
+            height: 250px;
+            object-fit: cover; 
+            cursor: pointer; 
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+        
+        .gallery img:hover {
+            transform: scale(1.03);
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        form input, form textarea, form select { 
+            width: 100%; 
+            padding: 12px; 
+            margin-bottom: 1.5rem; 
+            border-radius: 5px; 
+            border: none; 
+            background: #222;
+            color: white;
+            font-family: inherit;
+        }
+        
+        form textarea {
+            min-height: 150px;
+        }
+        
+        .footer { 
+            background: #000; 
+            text-align: center; 
+            padding: 3rem 2rem; 
+            font-size: 0.9rem; 
+        }
+        
+        .socials { 
+            margin: 1.5rem 0;
+        }
+        
+        .socials a { 
+            margin: 0 0.75rem; 
+            color: #d4af37; 
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+        
+        .socials a:hover {
+            color: #e8c252;
+        }
+        
+        .copyright {
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) { 
+            .menu-toggle { 
+                display: block; 
+            } 
+            
+            #navLinks { 
+                position: absolute; 
+                top: 70px; 
+                left: 0; 
+                right: 0; 
+                background: #111; 
+                flex-direction: column; 
+                align-items: center; 
+                padding: 1rem 0 2rem;
+                display: none; 
+            } 
+            
+            #navLinks.active { 
+                display: flex; 
+            } 
+            
+            #navLinks li { 
+                margin: 0.5rem 0; 
+            }
+            
+            header h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
 </head>
-<body>  <nav>
-    <div class="logo">7 Tons Urban</div>
-    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-    <ul id="navLinks">
-      <li><a href="#about" onclick="closeMenu()">About</a></li>
-      <li><a href="#services" onclick="closeMenu()">Services</a></li>
-      <li><a href="#gallery" onclick="closeMenu()">Gallery</a></li>
-      <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
-    </ul>
-  </nav>  <header>
-    <h1>7 Tons Urban</h1>
-    <p>Luxury Interior Design & Renovation</p>
-    <a href="#contact" class="btn">Get in Touch</a>
-  </header>  <section id="about">
-    <h2>About Us</h2>
-    <p>At 7 Tons Urban, we craft luxury interiors and living experiences that blend functionality with aesthetic excellence. Whether renovating historic properties or installing bespoke kitchens, our design philosophy is rooted in precision and elegance.</p>
-  </section>  <section id="services">
-    <h2>Our Services</h2>
-    <div class="services">
-      <div><h3>Interior Design</h3><p>Transforming spaces with bespoke design and curated furnishings.</p></div>
-      <div><h3>Property Renovation</h3><p>Modernizing and restoring properties with high-end finishes.</p></div>
-      <div><h3>Luxury Furniture</h3><p>Custom and designer furniture pieces tailored to your style.</p></div>
-      <div><h3>Bathroom & Kitchen Fittings</h3><p>Premium fittings with timeless appeal and superior craftsmanship.</p></div>
-    </div>
-  </section>  <section id="gallery">
-    <h2>Project Gallery</h2>
-    <div class="gallery">
-      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="Luxury Interior">
-      <img src="https://images.unsplash.com/photo-1588854337117-2d996a30c7c5" alt="Modern Kitchen">
-      <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be" alt="Elegant Bathroom">
-    </div>
-  </section>  <section id="contact">
-    <h2>Contact Us</h2>
-    <form action="#">
-      <input type="text" placeholder="Your Name" required>
-      <input type="email" placeholder="Email" required>
-      <textarea placeholder="Your Message" required></textarea>
-      <button type="submit" class="btn">Submit</button>
-    </form>
-  </section>  <div class="footer">
-    <p>Follow us:</p>
-    <div class="socials">
-      <a href="#">Instagram</a>
-      <a href="#">Pinterest</a>
-      <a href="#">LinkedIn</a>
-    </div>
-    <p>&copy; 2025 7 Tons Urban. All rights reserved.</p>
-  </div>  <script>
-    function toggleMenu() {
-      document.getElementById('navLinks').classList.toggle('active');
-    }
-    function closeMenu() {
-      document.getElementById('navLinks').classList.remove('active');
-    }
-  </script></body>
+<body>
+    <nav>
+        <a href="#" class="logo">7 Tons Urban</a>
+        <button class="menu-toggle" aria-label="Menu" onclick="toggleMenu()">☰</button>
+        <ul id="navLinks">
+            <li><a href="#about" onclick="closeMenu()">About</a></li>
+            <li><a href="#services" onclick="closeMenu()">Services</a></li>
+            <li><a href="#gallery" onclick="closeMenu()">Gallery</a></li>
+            <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <h1>7 Tons Urban</h1>
+        <p>Luxury Interior Design & Renovation</p>
+        <a href="#contact" class="btn">Get in Touch</a>
+    </header>
+
+    <section id="about">
+        <h2>About Us</h2>
+        <p>At 7 Tons Urban, we craft luxury interiors and living experiences that blend functionality with aesthetic excellence. Whether renovating historic properties or installing bespoke kitchens, our design philosophy is rooted in precision and elegance.</p>
+    </section>
+
+    <section id="services">
+        <h2>Our Services</h2>
+        <div class="services">
+            <div class="service-card">
+                <h3>Interior Design</h3>
+                <p>Transforming spaces with bespoke design and curated furnishings.</p>
+            </div>
+            <div class="service-card">
+                <h3>Property Renovation</h3>
+                <p>Modernizing and restoring properties with high-end finishes.</p>
+            </div>
+            <div class="service-card">
+                <h3>Luxury Furniture</h3>
+                <p>Custom and designer furniture pieces tailored to your style.</p>
+            </div>
+            <div class="service-card">
+                <h3>Bathroom & Kitchen Fittings</h3>
+                <p>Premium fittings with timeless appeal and superior craftsmanship.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <h2>Project Gallery</h2>
+        <div class="gallery">
+            <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace" alt="Modern living room design">
+            <img src="https://images.unsplash.com/photo-1600210492493-0946911123ea" alt="Luxury kitchen renovation">
+            <img src="https://images.unsplash.com/photo-1600121848594-d8644e57abab" alt="Contemporary bedroom design">
+            <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3" alt="Elegant bathroom fittings">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="Bespoke furniture design">
+            <img src="https://images.unsplash.com/photo-1600121848594-d8644e57abab" alt="Property renovation project">
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <div class="contact-form">
+            <form id="contactForm" onsubmit="handleSubmit(event)">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <input type="tel" placeholder="Phone Number">
+                <select required>
+                    <option value="">Select Service</option>
+                    <option>Interior Design</option>
+                    <option>Property Renovation</option>
+                    <option>Luxury Furniture</option>
+                    <option>Bathroom & Kitchen Fittings</option>
+                </select>
+                <textarea placeholder="Your Message" required></textarea>
+                <button type="submit" class="btn">Submit</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="socials">
+            <a href="#" aria-label="Instagram">Instagram</a>
+            <a href="#" aria-label="Pinterest">Pinterest</a>
+            <a href="#" aria-label="LinkedIn">LinkedIn</a>
+        </div>
+        <p class="copyright">© 2025 7 Tons Urban. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+        
+        function closeMenu() {
+            document.getElementById('navLinks').classList.remove('active');
+        }
+        
+        function handleSubmit(event) {
+            event.preventDefault();
+            alert('Thank you for your message! We will contact you soon.');
+            document.getElementById('contactForm').reset();
+        }
+        
+        // Smooth scroll for all links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
 </html>
