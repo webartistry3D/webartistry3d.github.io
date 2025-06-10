@@ -1,93 +1,232 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bank Transfer Approval</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>7 Tons Urban | Interior Excellence</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Roboto&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #f4f6f8;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+    html {
+      scroll-behavior: smooth;
+    }body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: #111;
+  color: #fff;
+}
 
-    .approval-card {
-      background: #ffffff;
-      width: 400px;
-      padding: 2rem;
-      border-radius: 16px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-      text-align: center;
-    }
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  z-index: 1000;
+}
 
-    .bank-logo {
-      width: 100px;
-      margin-bottom: 1rem;
-    }
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  color: #d4af37;
+}
 
-    .profile-img {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 1rem;
-      border: 2px solid #0077b6;
-    }
+.menu-toggle {
+  display: none;
+  font-size: 1.8rem;
+  color: white;
+  cursor: pointer;
+}
 
-    .recipient-name {
-      font-size: 1.5rem;
-      font-weight: 600;
-      margin-bottom: 0.25rem;
-    }
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
 
-    .recipient-account {
-      color: #6b7280;
-      margin-bottom: 1rem;
-    }
+nav ul li a {
+  text-decoration: none;
+  color: white;
+  font-size: 1rem;
+  transition: color 0.3s;
+}
 
-    .approval-status {
-      background-color: #e0f7ec;
-      color: #008744;
-      padding: 0.5rem 1rem;
-      border-radius: 12px;
-      font-weight: 600;
-      margin-bottom: 1.5rem;
-      display: inline-block;
-    }
+nav ul li a:hover {
+  color: #d4af37;
+}
 
-    .details {
-      text-align: left;
-      margin-top: 1rem;
-    }
+header {
+  background: url('https://images.unsplash.com/photo-1507089947368-19c1da9775ae') no-repeat center center/cover;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
 
-    .details p {
-      margin: 0.25rem 0;
-    }
+header::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 0;
+}
+
+header * {
+  z-index: 1;
+}
+
+header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem;
+  margin: 0;
+  color: #fff;
+}
+
+header p {
+  font-size: 1.2rem;
+  color: #d4af37;
+  margin: 1rem 0;
+}
+
+.btn {
+  background: #d4af37;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  color: #111;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+section {
+  padding: 4rem 2rem;
+  max-width: 1000px;
+  margin: auto;
+  text-align: center;
+}
+
+section h2 {
+  font-family: 'Playfair Display', serif;
+  color: #d4af37;
+  margin-bottom: 1rem;
+}
+
+.services, .gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+}
+
+.services div, .gallery img {
+  background: #222;
+  padding: 1.5rem;
+  border-radius: 10px;
+}
+
+.gallery img {
+  width: 100%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+form input, form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  border: none;
+}
+
+.footer {
+  background: #000;
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.9rem;
+}
+
+.socials a {
+  margin: 0 0.5rem;
+  color: #d4af37;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .menu-toggle { display: block; }
+  nav ul {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background: #111;
+    flex-direction: column;
+    align-items: center;
+    display: none;
+  }
+  nav ul.active { display: flex; }
+  nav ul li { margin: 1rem 0; }
+}
+
   </style>
 </head>
-<body>
-  <div class="approval-card">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/FirstBank_Logo.svg/2560px-FirstBank_Logo.svg.png" alt="Bank Logo" class="bank-logo">
-
-    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile Image" class="profile-img">
-
-    <div class="recipient-name">Michael Johnson</div>
-    <div class="recipient-account">Acct No: 3021234567 - First Bank</div>
-
-    <div class="approval-status">✔ Transfer Approved</div>
-
-    <div class="details">
-      <p><strong>Amount:</strong> ₦250,000.00</p>
-      <p><strong>Transfer Date:</strong> June 3, 2025</p>
-      <p><strong>Reference ID:</strong> TXR56482FNB</p>
-      <p><strong>Initiated By:</strong> Amanda Okoye</p>
+<body>  <nav>
+    <div class="logo">7 Tons Urban</div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <ul id="navLinks">
+      <li><a href="#about" onclick="closeMenu()">About</a></li>
+      <li><a href="#services" onclick="closeMenu()">Services</a></li>
+      <li><a href="#gallery" onclick="closeMenu()">Gallery</a></li>
+      <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+    </ul>
+  </nav>  <header>
+    <h1>7 Tons Urban</h1>
+    <p>Luxury Interior Design & Renovation</p>
+    <a href="#contact" class="btn">Get in Touch</a>
+  </header>  <section id="about">
+    <h2>About Us</h2>
+    <p>At 7 Tons Urban, we craft luxury interiors and living experiences that blend functionality with aesthetic excellence. Whether renovating historic properties or installing bespoke kitchens, our design philosophy is rooted in precision and elegance.</p>
+  </section>  <section id="services">
+    <h2>Our Services</h2>
+    <div class="services">
+      <div><h3>Interior Design</h3><p>Transforming spaces with bespoke design and curated furnishings.</p></div>
+      <div><h3>Property Renovation</h3><p>Modernizing and restoring properties with high-end finishes.</p></div>
+      <div><h3>Luxury Furniture</h3><p>Custom and designer furniture pieces tailored to your style.</p></div>
+      <div><h3>Bathroom & Kitchen Fittings</h3><p>Premium fittings with timeless appeal and superior craftsmanship.</p></div>
     </div>
-  </div>
-</body>
+  </section>  <section id="gallery">
+    <h2>Project Gallery</h2>
+    <div class="gallery">
+      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="Luxury Interior">
+      <img src="https://images.unsplash.com/photo-1588854337117-2d996a30c7c5" alt="Modern Kitchen">
+      <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be" alt="Elegant Bathroom">
+    </div>
+  </section>  <section id="contact">
+    <h2>Contact Us</h2>
+    <form action="#">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Email" required>
+      <textarea placeholder="Your Message" required></textarea>
+      <button type="submit" class="btn">Submit</button>
+    </form>
+  </section>  <div class="footer">
+    <p>Follow us:</p>
+    <div class="socials">
+      <a href="#">Instagram</a>
+      <a href="#">Pinterest</a>
+      <a href="#">LinkedIn</a>
+    </div>
+    <p>&copy; 2025 7 Tons Urban. All rights reserved.</p>
+  </div>  <script>
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('active');
+    }
+    function closeMenu() {
+      document.getElementById('navLinks').classList.remove('active');
+    }
+  </script></body>
 </html>
