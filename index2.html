@@ -2,132 +2,333 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Transfer Approval - Atlantic City Bank, Lagos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>7 Tons Urban | Interior Excellence</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Roboto&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
+    html { scroll-behavior: smooth; }
     body {
-      display: flex;
-      height: 100vh;
-      background-color: #f4f7fb;
-    }
-    .sidebar {
-      width: 240px;
-      background-color: #002b5b;
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: #111;
       color: #fff;
-      padding: 20px;
     }
-    .sidebar h2 {
-      margin-bottom: 40px;
-    }
-    .sidebar ul {
-      list-style: none;
-    }
-    .sidebar ul li {
-      margin: 20px 0;
-      cursor: pointer;
-    }
-    .header {
-      height: 60px;
-      background-color: #fff;
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(0, 0, 0, 0.95);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0 20px;
-      box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+      padding: 1rem 2rem;
+      z-index: 1000;
     }
-    .main {
-      flex-grow: 1;
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: #d4af37;
+    }
+    .menu-toggle {
+      display: none;
+      font-size: 1.8rem;
+      color: white;
+      cursor: pointer;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+    nav ul li a:hover {
+      color: #d4af37;
+    }
+    header {
+      background: url('https://images.unsplash.com/photo-1507089947368-19c1da9775ae') no-repeat center center/cover;
+      height: 100vh;
       display: flex;
       flex-direction: column;
-    }
-    .content {
-      padding: 30px;
-    }
-    .approval-card {
-      background-color: #fff;
-      border-radius: 8px;
-      padding: 25px;
-      max-width: 600px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
-    }
-    .approval-card img.profile {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      margin-right: 20px;
-    }
-    .approval-header {
-      display: flex;
+      justify-content: center;
       align-items: center;
-      margin-bottom: 20px;
+      text-align: center;
+      position: relative;
+      padding: 1rem;
     }
-    .recipient-info {
-      flex-grow: 1;
+    header::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 0;
     }
-    .approval-details {
-      margin-bottom: 20px;
+    header * { z-index: 1; }
+    header h1 {
+      font-size: 3.5rem;
+      color: #fff;
+      font-family: 'Playfair Display', serif;
     }
-    .btn-group button {
-      padding: 10px 20px;
-      margin-right: 10px;
+    header p {
+      font-size: 1.2rem;
+      color: #d4af37;
+      max-width: 600px;
+      margin: 1rem auto 2rem;
+    }
+    .btn {
+      background: #d4af37;
+      padding: 0.75rem 1.5rem;
       border: none;
-      border-radius: 5px;
+      color: #111;
+      font-size: 1rem;
       cursor: pointer;
+      border-radius: 5px;
+      text-decoration: none;
       font-weight: bold;
     }
-    .btn-approve {
-      background-color: #28a745;
+    section {
+      padding: 4rem 2rem;
+      max-width: 1000px;
+      margin: auto;
+      text-align: center;
+    }
+    section#about {
+      background-color: #1a1a1a;
+    }
+    section#services {
+      background: url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace') center/cover no-repeat;
+      background-attachment: fixed;
+    }
+    section#gallery {
+      background-color: #222;
+    }
+    section#contact {
+      background: url('https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3') center/cover no-repeat;
+      background-attachment: fixed;
+    }
+    h2 {
+      color: #d4af37;
+      margin-bottom: 1rem;
+      font-family: 'Playfair Display', serif;
+    }
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+    }
+    .services div {
+      background: #222;
+      padding: 1.5rem;
+      border-radius: 10px;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .gallery img {
+      width: 100%;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .modal-content {
+      max-width: 90%;
+      max-height: 80%;
+    }
+    .close {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      color: #d4af37;
+      font-size: 2rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      color: #d4af37;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .nav-btn.left { left: 20px; }
+    .nav-btn.right { right: 20px; }
+    form input, form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 1rem;
+      border-radius: 5px;
+      border: none;
+      background: #333;
       color: #fff;
     }
-    .btn-decline {
-      background-color: #dc3545;
-      color: #fff;
+    .footer {
+      background: #000;
+      text-align: center;
+      padding: 2rem;
+    }
+    .socials a {
+      margin: 0 0.5rem;
+      color: #d4af37;
+      text-decoration: none;
+    }
+    @media (max-width: 768px) {
+      .menu-toggle { display: block; }
+      nav ul {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: #111;
+        flex-direction: column;
+        align-items: center;
+        display: none;
+        padding-bottom: 1rem;
+      }
+      nav ul.active { display: flex; }
     }
   </style>
 </head>
 <body>
-  <div class="sidebar">
-    <h2>Atlantic City Bank</h2>
-    <ul>
-      <li>Dashboard</li>
-      <li>Transactions</li>
-      <li>Approvals</li>
-      <li>Settings</li>
-      <li>Support</li>
+  <nav>
+    <div class="logo">7 Tons Urban</div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <ul id="navLinks">
+      <li><a href="#about" onclick="closeMenu()">About</a></li>
+      <li><a href="#services" onclick="closeMenu()">Services</a></li>
+      <li><a href="#gallery" onclick="closeMenu()">Gallery</a></li>
+      <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
     </ul>
-  </div>
-  <div class="main">
-    <div class="header">
-      <div>Transfer Approval</div>
-      <div>User: John Doe</div>
+  </nav>
+
+  <header>
+    <h1>7 Tons Urban</h1>
+    <p>Luxury Interior Design & Renovation</p>
+    <a href="#contact" class="btn">Get in Touch</a>
+  </header>
+
+  <section id="about">
+    <h2>About Us</h2>
+    <p>At 7 Tons Urban, we craft luxury interiors and living experiences that blend functionality with aesthetic excellence.</p>
+  </section>
+
+  <section id="services">
+    <h2>Our Services</h2>
+    <div class="services">
+      <div><h3>Interior Design</h3><p>Transforming spaces with bespoke design and curated furnishings.</p></div>
+      <div><h3>Property Renovation</h3><p>Modernizing and restoring properties with high-end finishes.</p></div>
+      <div><h3>Luxury Furniture</h3><p>Custom and designer furniture tailored to your style.</p></div>
+      <div><h3>Bathroom & Kitchen Fittings</h3><p>Premium fittings with timeless appeal.</p></div>
     </div>
-    <div class="content">
-      <div class="approval-card">
-        <div class="approval-header">
-          <img class="profile" src="https://via.placeholder.com/60" alt="Profile" />
-          <div class="recipient-info">
-            <h3>Jane Smith</h3>
-            <p>Zenith Bank - 2003929483</p>
-          </div>
-          <img src="https://via.placeholder.com/50x50?text=ZB" alt="Bank Logo" />
-        </div>
-        <div class="approval-details">
-          <p><strong>Amount:</strong> ₦250,000</p>
-          <p><strong>Date:</strong> June 9, 2025</p>
-          <p><strong>Purpose:</strong> Business payment for supplies</p>
-        </div>
-        <div class="btn-group">
-          <button class="btn-approve">Approve</button>
-          <button class="btn-decline">Decline</button>
-        </div>
-      </div>
+  </section>
+
+  <section id="gallery">
+    <h2>Gallery</h2>
+    <div class="gallery" id="galleryImages">
+      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="Gallery Image 1">
+      <img src="https://images.unsplash.com/photo-1588854337117-2d996a30c7c5" alt="Gallery Image 2">
+      <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be" alt="Gallery Image 3">
     </div>
+  </section>
+
+  <div class="modal" id="imageModal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <button class="nav-btn left" onclick="changeSlide(-1)">&#10094;</button>
+    <img class="modal-content" id="modalImg">
+    <button class="nav-btn right" onclick="changeSlide(1)">&#10095;</button>
   </div>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message" required></textarea>
+      <button type="submit" class="btn">Submit</button>
+    </form>
+  </section>
+
+  <div class="footer">
+    <p>Follow us:</p>
+    <div class="socials">
+      <a href="#">Instagram</a>
+      <a href="#">Pinterest</a>
+      <a href="#">LinkedIn</a>
+    </div>
+    <p>&copy; 2025 7 Tons Urban. All rights reserved.</p>
+  </div>
+
+  <script>
+    let currentIndex = 0;
+    let galleryImages = [];
+
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('active');
+    }
+
+    function closeMenu() {
+      document.getElementById('navLinks').classList.remove('active');
+    }
+
+    function openModal(index) {
+      currentIndex = index;
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImg');
+      modal.style.display = 'flex';
+      modalImg.src = galleryImages[currentIndex].src;
+    }
+
+    function closeModal() {
+      document.getElementById('imageModal').style.display = 'none';
+    }
+
+    function changeSlide(direction) {
+      currentIndex = (currentIndex + direction + galleryImages.length) % galleryImages.length;
+      document.getElementById('modalImg').src = galleryImages[currentIndex].src;
+    }
+
+    window.onload = function() {
+      galleryImages = Array.from(document.querySelectorAll('#galleryImages img'));
+      galleryImages.forEach((img, index) => {
+        img.addEventListener('click', () => openModal(index));
+      });
+    }
+
+    window.onclick = function(e) {
+      const modal = document.getElementById('imageModal');
+      if (e.target === modal) {
+        closeModal();
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      const modal = document.getElementById('imageModal');
+      if (modal.style.display === 'flex') {
+        if (e.key === 'Escape') closeModal();
+        if (e.key === 'ArrowRight') changeSlide(1);
+        if (e.key === 'ArrowLeft') changeSlide(-1);
+      }
+    });
+  </script>
 </body>
 </html>
