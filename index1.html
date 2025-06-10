@@ -325,6 +325,11 @@
             font-size: 40px;
             font-weight: bold;
             cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close:hover {
+            color: #e8c252;
         }
         
         .prev, .next {
@@ -339,20 +344,20 @@
             font-size: 30px;
             transition: 0.3s;
             user-select: none;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 50%;
         }
         
         .next {
-            right: 0;
-            border-radius: 3px 0 0 3px;
+            right: 30px;
         }
         
         .prev {
-            left: 0;
-            border-radius: 0 3px 3px 0;
+            left: 30px;
         }
         
         .prev:hover, .next:hover {
-            background-color: rgba(212, 175, 55, 0.2);
+            background-color: rgba(212, 175, 55, 0.3);
         }
         
         @media (max-width: 768px) { 
@@ -388,18 +393,23 @@
                 max-width: 95%;
                 max-height: 80%;
             }
+            
+            .prev, .next {
+                padding: 10px;
+                font-size: 24px;
+            }
         }
     </style>
 </head>
 <body>
     <nav>
         <a href="#" class="logo">7 Tons Urban</a>
-        <button class="menu-toggle" aria-label="Menu" onclick="toggleMenu()">☰</button>
+        <button class="menu-toggle" aria-label="Menu">☰</button>
         <ul id="navLinks">
-            <li><a href="#about" onclick="closeMenu()">About</a></li>
-            <li><a href="#services" onclick="closeMenu()">Services</a></li>
-            <li><a href="#gallery" onclick="closeMenu()">Gallery</a></li>
-            <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
 
@@ -439,29 +449,29 @@
     <section id="gallery">
         <h2>Project Gallery</h2>
         <div class="gallery">
-            <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace" alt="Modern living room design" onclick="openModal(0)">
-            <img src="https://images.unsplash.com/photo-1600210492493-0946911123ea" alt="Luxury kitchen renovation" onclick="openModal(1)">
-            <img src="https://images.unsplash.com/photo-1600121848594-d8644e57abab" alt="Contemporary bedroom design" onclick="openModal(2)">
-            <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3" alt="Elegant bathroom fittings" onclick="openModal(3)">
-            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="Bespoke furniture design" onclick="openModal(4)">
-            <img src="https://images.unsplash.com/photo-1600121848594-d8644e57abab" alt="Property renovation project" onclick="openModal(5)">
+            <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace" alt="Modern living room design">
+            <img src="https://images.unsplash.com/photo-1600210492493-0946911123ea" alt="Luxury kitchen renovation">
+            <img src="https://images.unsplash.com/photo-1600121848594-d8644e57abab" alt="Contemporary bedroom design">
+            <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3" alt="Elegant bathroom fittings">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="Bespoke furniture design">
+            <img src="https://images.unsplash.com/photo-1600121848594-d8644e57abab" alt="Property renovation project">
         </div>
     </section>
 
     <!-- The Modal -->
     <div id="galleryModal" class="modal">
-        <span class="close" onclick="closeModal()">&times;</span>
+        <span class="close">&times;</span>
         <div class="modal-content">
-            <span class="prev" onclick="plusSlides(-1)">&#10094;</span>
+            <span class="prev">&#10094;</span>
             <img class="modal-img" id="modalImage" src="" alt="">
-            <span class="next" onclick="plusSlides(1)">&#10095;</span>
+            <span class="next">&#10095;</span>
         </div>
     </div>
 
     <section id="contact">
         <h2>Contact Us</h2>
         <div class="contact-form">
-            <form id="contactForm" onsubmit="handleSubmit(event)">
+            <form id="contactForm">
                 <input type="text" placeholder="Your Name" required>
                 <input type="email" placeholder="Your Email" required>
                 <input type="tel" placeholder="Phone Number">
@@ -488,21 +498,29 @@
     </footer>
 
     <script>
-        // Navigation functions
-        function toggleMenu() {
-            document.getElementById('navLinks').classList.toggle('active');
-        }
+        // Navigation functionality
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.getElementById('navLinks');
         
-        function closeMenu() {
-            document.getElementById('navLinks').classList.remove('active');
-        }
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Close menu when clicking on nav links
+        document.querySelectorAll('#navLinks a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
         
         // Form handling
-        function handleSubmit(event) {
-            event.preventDefault();
+        const contactForm = document.getElementById('contactForm');
+        
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
             alert('Thank you for your message! We will contact you soon.');
-            document.getElementById('contactForm').reset();
-        }
+            contactForm.reset();
+        });
         
         // Smooth scroll for all links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -515,82 +533,66 @@
         });
         
         // Gallery Modal functionality
-const galleryModal = (function() {
-    let currentSlideIndex = 0;
-    const galleryImages = document.querySelectorAll('.gallery img');
-    const modal = document.getElementById('galleryModal');
-    const modalImg = document.getElementById('modalImage');
-    
-    function openModal(index) {
-        currentSlideIndex = index;
-        modal.style.display = "block";
-        modalImg.src = galleryImages[index].src;
-        modalImg.alt = galleryImages[index].alt;
-        document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
-    }
-    
-    function closeModal() {
-        modal.style.display = "none";
-        document.body.style.overflow = 'auto'; // Re-enable scrolling
-    }
-    
-    function plusSlides(n) {
-        currentSlideIndex += n;
+        const modal = document.getElementById('galleryModal');
+        const modalImg = document.getElementById('modalImage');
+        const closeBtn = document.querySelector('.close');
+        const prevBtn = document.querySelector('.prev');
+        const nextBtn = document.querySelector('.next');
+        const galleryImages = document.querySelectorAll('.gallery img');
+        let currentSlideIndex = 0;
         
-        // Wrap around if at beginning or end
-        if (currentSlideIndex >= galleryImages.length) {
-            currentSlideIndex = 0;
-        } else if (currentSlideIndex < 0) {
-            currentSlideIndex = galleryImages.length - 1;
+        // Open modal with clicked image
+        galleryImages.forEach((img, index) => {
+            img.addEventListener('click', () => {
+                currentSlideIndex = index;
+                modal.style.display = "block";
+                modalImg.src = img.src;
+                modalImg.alt = img.alt;
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        // Close modal
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = "none";
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Navigation between images
+        function navigateSlides(n) {
+            currentSlideIndex += n;
+            
+            if (currentSlideIndex >= galleryImages.length) {
+                currentSlideIndex = 0;
+            } else if (currentSlideIndex < 0) {
+                currentSlideIndex = galleryImages.length - 1;
+            }
+            
+            modalImg.src = galleryImages[currentSlideIndex].src;
+            modalImg.alt = galleryImages[currentSlideIndex].alt;
         }
         
-        modalImg.src = galleryImages[currentSlideIndex].src;
-        modalImg.alt = galleryImages[currentSlideIndex].alt;
-    }
-    
-    return {
-        openModal,
-        closeModal,
-        plusSlides
-    };
-})();
-
-// Update the event listeners to use the modal module
-document.querySelectorAll('.gallery img').forEach((img, index) => {
-    img.addEventListener('click', () => galleryModal.openModal(index));
-});
-
-document.querySelector('.close').addEventListener('click', () => galleryModal.closeModal());
-
-window.addEventListener('click', function(event) {
-    const modal = document.getElementById('galleryModal');
-    if (event.target == modal) {
-        galleryModal.closeModal();
-    }
-});
-
-document.addEventListener('keydown', function(event) {
-    const modal = document.getElementById('galleryModal');
-    if (modal.style.display === "block") {
-        if (event.key === "Escape") {
-            galleryModal.closeModal();
-        } else if (event.key === "ArrowLeft") {
-            galleryModal.plusSlides(-1);
-        } else if (event.key === "ArrowRight") {
-            galleryModal.plusSlides(1);
-        }
-    }
-});
+        prevBtn.addEventListener('click', () => navigateSlides(-1));
+        nextBtn.addEventListener('click', () => navigateSlides(1));
         
-        // Keyboard navigation for modal
-        document.addEventListener('keydown', function(event) {
+        // Close modal when clicking outside image
+        window.addEventListener('click', (e) => {
+            if (e.target == modal) {
+                modal.style.display = "none";
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
             if (modal.style.display === "block") {
-                if (event.key === "Escape") {
-                    closeModal();
-                } else if (event.key === "ArrowLeft") {
-                    plusSlides(-1);
-                } else if (event.key === "ArrowRight") {
-                    plusSlides(1);
+                if (e.key === "Escape") {
+                    modal.style.display = "none";
+                    document.body.style.overflow = 'auto';
+                } else if (e.key === "ArrowLeft") {
+                    navigateSlides(-1);
+                } else if (e.key === "ArrowRight") {
+                    navigateSlides(1);
                 }
             }
         });
