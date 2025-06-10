@@ -5,11 +5,20 @@
   <title>7 Tons Urban | Interior Excellence</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Roboto&display=swap" rel="stylesheet">
   <style>
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
+      padding: 0;
+    }
+    body {
       font-family: 'Roboto', sans-serif;
       background-color: #111;
       color: #fff;
+      line-height: 1.6;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
     }
     nav {
       background: #000;
@@ -26,15 +35,13 @@
       font-family: 'Playfair Display', serif;
       color: #d4af37;
       font-size: 1.5rem;
-      text-decoration: none;
     }
     .nav-links {
       display: flex;
       gap: 1.5rem;
     }
-    .nav-links a {
-      color: white;
-      text-decoration: none;
+    .nav-links a:hover {
+      color: #d4af37;
     }
     header {
       height: 100vh;
@@ -45,6 +52,7 @@
       align-items: center;
       text-align: center;
       position: relative;
+      padding: 0 1rem;
     }
     header::before {
       content: "";
@@ -64,6 +72,8 @@
     header p {
       color: #d4af37;
       font-size: 1.2rem;
+      max-width: 600px;
+      margin: 1rem 0;
     }
     .btn {
       background: #d4af37;
@@ -71,16 +81,37 @@
       padding: 0.75rem 1.5rem;
       border: none;
       border-radius: 5px;
-      text-decoration: none;
       font-weight: bold;
+      transition: background 0.3s;
     }
-    .gallery-section {
-      padding: 4rem 2rem;
+    .btn:hover {
+      background: #f0c741;
+    }
+    section {
+      padding: 5rem 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+    section h2 {
       text-align: center;
-    }
-    .gallery-section h2 {
       color: #d4af37;
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
       margin-bottom: 2rem;
+    }
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+    .service {
+      background: #222;
+      padding: 2rem;
+      border-radius: 10px;
+    }
+    .service h3 {
+      color: #d4af37;
+      margin-bottom: 1rem;
     }
     .gallery {
       display: grid;
@@ -93,18 +124,44 @@
       object-fit: cover;
       border-radius: 8px;
       cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .gallery img:hover {
+      transform: scale(1.03);
+    }
+    .contact-form {
+      max-width: 600px;
+      margin: auto;
+      background: #222;
+      padding: 2rem;
+      border-radius: 10px;
+    }
+    form input, form textarea {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border-radius: 5px;
+      border: none;
+      background: #333;
+      color: #fff;
+    }
+    footer {
+      background: #000;
+      color: #aaa;
+      text-align: center;
+      padding: 2rem;
     }
     .modal {
       display: none;
       position: fixed;
-      z-index: 2000;
+      z-index: 1001;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.9);
-      align-items: center;
+      background: rgba(0, 0, 0, 0.9);
       justify-content: center;
+      align-items: center;
     }
     .modal img {
       max-width: 90%;
@@ -114,66 +171,96 @@
       position: absolute;
       top: 20px;
       right: 30px;
-      color: #d4af37;
       font-size: 40px;
-      font-weight: bold;
+      color: #d4af37;
       cursor: pointer;
-    }
-    footer {
-      background: #000;
-      color: #aaa;
-      text-align: center;
-      padding: 2rem;
     }
   </style>
 </head>
-<body>  <nav>
-    <a href="#" class="logo">7 Tons Urban</a>
+<body>
+  <nav>
+    <div class="logo">7 Tons Urban</div>
     <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
       <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
     </div>
   </nav>  <header>
     <h1>7 Tons Urban</h1>
     <p>Luxury Interior Design & Renovation</p>
-    <a href="#gallery" class="btn">View Gallery</a>
-  </header>  <section id="gallery" class="gallery-section">
-    <h2>Project Gallery</h2>
+    <a href="#contact" class="btn">Get in Touch</a>
+  </header>  <section id="about">
+    <h2>About Us</h2>
+    <p>At 7 Tons Urban, we craft luxury interiors and living experiences that blend functionality with aesthetic excellence. Whether renovating historic properties or installing bespoke kitchens, our design philosophy is rooted in precision and elegance.</p>
+  </section>  <section id="services">
+    <h2>Our Services</h2>
+    <div class="services">
+      <div class="service">
+        <h3>Interior Design</h3>
+        <p>Transforming spaces with bespoke design and curated furnishings.</p>
+      </div>
+      <div class="service">
+        <h3>Property Renovation</h3>
+        <p>Modernizing and restoring properties with high-end finishes.</p>
+      </div>
+      <div class="service">
+        <h3>Luxury Furniture</h3>
+        <p>Custom and designer furniture pieces tailored to your style.</p>
+      </div>
+      <div class="service">
+        <h3>Bathroom & Kitchen Fittings</h3>
+        <p>Premium fittings with timeless appeal and superior craftsmanship.</p>
+      </div>
+    </div>
+  </section>  <section id="gallery">
+    <h2>Gallery</h2>
     <div class="gallery">
       <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="Interior 1">
       <img src="https://images.unsplash.com/photo-1588854337117-2d996a30c7c5" alt="Interior 2">
       <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be" alt="Interior 3">
     </div>
   </section>  <div id="modal" class="modal">
-    <span class="close" id="closeBtn">&times;</span>
-    <img id="modalImage" src="" alt="Modal Content">
-  </div>  <footer>
-    &copy; 2025 7 Tons Urban. All rights reserved.
+    <span id="closeBtn" class="close">&times;</span>
+    <img id="modalImg" src="" alt="Modal Image">
+  </div>  <section id="contact">
+    <h2>Contact Us</h2>
+    <div class="contact-form">
+      <form>
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea placeholder="Your Message" required></textarea>
+        <button type="submit" class="btn">Submit</button>
+      </form>
+    </div>
+  </section>  <footer>
+    <p>&copy; 2025 7 Tons Urban. All rights reserved.</p>
   </footer>  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const modal = document.getElementById("modal");
-      const modalImg = document.getElementById("modalImage");
-      const closeBtn = document.getElementById("closeBtn");
-      const galleryImages = document.querySelectorAll(".gallery img");
+    document.addEventListener('DOMContentLoaded', () => {
+      const modal = document.getElementById('modal');
+      const modalImg = document.getElementById('modalImg');
+      const closeBtn = document.getElementById('closeBtn');
+      const images = document.querySelectorAll('.gallery img');
 
-      galleryImages.forEach(img => {
-        img.addEventListener("click", () => {
-          modal.style.display = "flex";
+      images.forEach(img => {
+        img.addEventListener('click', () => {
+          modal.style.display = 'flex';
           modalImg.src = img.src;
           modalImg.alt = img.alt;
         });
       });
 
-      closeBtn.addEventListener("click", () => {
-        modal.style.display = "none";
-        modalImg.src = "";
-        modalImg.alt = "";
+      closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+        modalImg.src = '';
+        modalImg.alt = '';
       });
 
-      window.addEventListener("click", e => {
+      window.addEventListener('click', (e) => {
         if (e.target === modal) {
-          modal.style.display = "none";
-          modalImg.src = "";
-          modalImg.alt = "";
+          modal.style.display = 'none';
+          modalImg.src = '';
+          modalImg.alt = '';
         }
       });
     });
