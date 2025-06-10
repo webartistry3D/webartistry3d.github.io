@@ -5,9 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>XXOG - Fashion Store</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body, html { font-family: 'Segoe UI', sans-serif; overflow-x: hidden; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      overflow-x: hidden;
+    }
 
     header {
       position: fixed;
@@ -64,10 +75,21 @@
       color: white;
     }
 
-    #about { background-color: #f0f0f0; }
-    #store { background-color: #fff3e6; }
-    #blog { background-color: #e6f2ff; }
-    #contact { background-color: #f9e6ff; }
+    #about {
+      background-color: #f0f0f0;
+    }
+
+    #store {
+      background-color: #fff3e6;
+    }
+
+    #blog {
+      background-color: #e6f2ff;
+    }
+
+    #contact {
+      background-color: #f9e6ff;
+    }
 
     canvas {
       width: 100%;
@@ -76,7 +98,9 @@
     }
 
     @media (max-width: 768px) {
-      .menu.show { display: flex; }
+      .menu.show {
+        display: flex;
+      }
     }
 
     h2 {
@@ -119,7 +143,7 @@
 
   <section id="store">
     <h2>Store Preview</h2>
-    <p>Explore our 3D interactive item:</p>
+    <p>Explore our 3D interactive sneaker model:</p>
     <canvas id="threeCanvas"></canvas>
   </section>
 
@@ -130,55 +154,58 @@
 
   <section id="contact">
     <h2>Contact</h2>
-    <p>Email us: contact@xxog.com<br>Follow us on social: @xxogfashion</p>
+    <p>Email: contact@xxog.com<br>Follow us on social: @xxogfashion</p>
   </section>
 
+  <!-- Three.js + GLTFLoader -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r148/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.148.0/examples/js/loaders/GLTFLoader.min.js"></script>
-<script>
-  // Hamburger toggle
-  function toggleMenu() {
-    document.getElementById('menu').classList.toggle('show');
-  }
+  <script src="https://cdn.jsdelivr.net/npm/three@0.148.0/examples/js/loaders/GLTFLoader.min.js"></script>
 
-  // Three.js + GLTF model setup
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(50, window.innerWidth / 400, 0.1, 1000);
-  camera.position.set(0, 1.5, 3);
-
-  const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('threeCanvas'), alpha: true });
-  renderer.setSize(window.innerWidth, 400);
-  renderer.setPixelRatio(window.devicePixelRatio);
-
-  const light = new THREE.HemisphereLight(0xffffff, 0x444444, 1.5);
-  scene.add(light);
-
-  const loader = new THREE.GLTFLoader();
-  loader.load(
-    // Example fashion model: sneaker
-    'https://modelviewer.dev/shared-assets/models/Sneaker.glb',
-    function (gltf) {
-      gltf.scene.scale.set(1.5, 1.5, 1.5);
-      scene.add(gltf.scene);
-
-      function animate() {
-        requestAnimationFrame(animate);
-        gltf.scene.rotation.y += 0.01;
-        renderer.render(scene, camera);
-      }
-      animate();
-    },
-    undefined,
-    function (error) {
-      console.error('Error loading GLTF model:', error);
+  <script>
+    function toggleMenu() {
+      document.getElementById('menu').classList.toggle('show');
     }
-  );
 
-  window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / 400;
-    camera.updateProjectionMatrix();
+    // Setup Three.js Scene
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(50, window.innerWidth / 400, 0.1, 1000);
+    camera.position.set(0, 1.5, 3);
+
+    const renderer = new THREE.WebGLRenderer({
+      canvas: document.getElementById('threeCanvas'),
+      alpha: true
+    });
     renderer.setSize(window.innerWidth, 400);
-  });
-</script>
+    renderer.setPixelRatio(window.devicePixelRatio);
+
+    const light = new THREE.HemisphereLight(0xffffff, 0x444444, 1.5);
+    scene.add(light);
+
+    const loader = new THREE.GLTFLoader();
+    loader.load(
+      'https://modelviewer.dev/shared-assets/models/Sneaker.glb',
+      function (gltf) {
+        gltf.scene.scale.set(1.5, 1.5, 1.5);
+        scene.add(gltf.scene);
+
+        function animate() {
+          requestAnimationFrame(animate);
+          gltf.scene.rotation.y += 0.01;
+          renderer.render(scene, camera);
+        }
+        animate();
+      },
+      undefined,
+      function (error) {
+        console.error('Failed to load model:', error);
+      }
+    );
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / 400;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, 400);
+    });
+  </script>
 </body>
 </html>
