@@ -1,117 +1,119 @@
 <!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>7 Tons Urban | Interior Excellence</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Roboto&display=swap" rel="stylesheet">
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    html {
+      scroll-behavior: smooth;
     }
     body {
+      margin: 0;
       font-family: 'Roboto', sans-serif;
       background-color: #111;
       color: #fff;
-      line-height: 1.6;
-    }
-    a {
-      text-decoration: none;
-      color: inherit;
     }
     nav {
-      background: #000;
-      padding: 1rem 2rem;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(0, 0, 0, 0.95);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: fixed;
-      top: 0;
-      width: 100%;
+      padding: 1rem 2rem;
       z-index: 1000;
     }
     .logo {
       font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
       color: #d4af37;
-      font-size: 1.5rem;
     }
-    .nav-links {
+    .menu-toggle {
+      display: none;
+      font-size: 1.8rem;
+      color: white;
+      cursor: pointer;
+    }
+    nav ul {
+      list-style: none;
       display: flex;
       gap: 1.5rem;
+      margin: 0;
+      padding: 0;
     }
-    .nav-links a:hover {
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+    nav ul li a:hover {
       color: #d4af37;
     }
     header {
+      background: url('https://images.unsplash.com/photo-1507089947368-19c1da9775ae') no-repeat center center/cover;
       height: 100vh;
-      background: url('https://images.unsplash.com/photo-1507089947368-19c1da9775ae') center/cover no-repeat;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
       position: relative;
-      padding: 0 1rem;
+      padding: 1rem;
     }
     header::before {
       content: "";
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background-color: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 0;
     }
     header * {
-      position: relative;
       z-index: 1;
     }
     header h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 3rem;
+      font-size: 3.5rem;
       color: #fff;
+      font-family: 'Playfair Display', serif;
     }
     header p {
-      color: #d4af37;
       font-size: 1.2rem;
+      color: #d4af37;
       max-width: 600px;
-      margin: 1rem 0;
+      margin: 1rem auto 2rem;
     }
     .btn {
       background: #d4af37;
-      color: #111;
       padding: 0.75rem 1.5rem;
       border: none;
+      color: #111;
+      font-size: 1rem;
+      cursor: pointer;
       border-radius: 5px;
+      text-decoration: none;
       font-weight: bold;
-      transition: background 0.3s;
-    }
-    .btn:hover {
-      background: #f0c741;
     }
     section {
-      padding: 5rem 2rem;
-      max-width: 1200px;
+      padding: 4rem 2rem;
+      max-width: 1000px;
       margin: auto;
-    }
-    section h2 {
       text-align: center;
+    }
+    h2 {
       color: #d4af37;
+      margin-bottom: 1rem;
       font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      margin-bottom: 2rem;
     }
     .services {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 2rem;
     }
-    .service {
+    .services div {
       background: #222;
-      padding: 2rem;
+      padding: 1.5rem;
       border-radius: 10px;
-    }
-    .service h3 {
-      color: #d4af37;
-      margin-bottom: 1rem;
     }
     .gallery {
       display: grid;
@@ -120,149 +122,143 @@
     }
     .gallery img {
       width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: transform 0.3s;
-    }
-    .gallery img:hover {
-      transform: scale(1.03);
-    }
-    .contact-form {
-      max-width: 600px;
-      margin: auto;
-      background: #222;
-      padding: 2rem;
       border-radius: 10px;
+      cursor: pointer;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      padding-top: 60px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+    }
+    .modal-content {
+      margin: auto;
+      display: block;
+      max-width: 90%;
+      max-height: 80%;
+    }
+    .close {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      color: #d4af37;
+      font-size: 2rem;
+      font-weight: bold;
+      cursor: pointer;
     }
     form input, form textarea {
       width: 100%;
-      padding: 0.75rem;
+      padding: 10px;
       margin-bottom: 1rem;
       border-radius: 5px;
       border: none;
       background: #333;
       color: #fff;
     }
-    footer {
+    .footer {
       background: #000;
-      color: #aaa;
       text-align: center;
       padding: 2rem;
     }
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1001;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.9);
-      justify-content: center;
-      align-items: center;
-    }
-    .modal img {
-      max-width: 90%;
-      max-height: 90%;
-    }
-    .close {
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      font-size: 40px;
+    .socials a {
+      margin: 0 0.5rem;
       color: #d4af37;
-      cursor: pointer;
+      text-decoration: none;
+    }
+    @media (max-width: 768px) {
+      .menu-toggle { display: block; }
+      nav ul {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: #111;
+        flex-direction: column;
+        align-items: center;
+        display: none;
+        padding-bottom: 1rem;
+      }
+      nav ul.active { display: flex; }
     }
   </style>
 </head>
 <body>
   <nav>
     <div class="logo">7 Tons Urban</div>
-    <div class="nav-links">
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#contact">Contact</a>
-    </div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <ul id="navLinks">
+      <li><a href="#about" onclick="closeMenu()">About</a></li>
+      <li><a href="#services" onclick="closeMenu()">Services</a></li>
+      <li><a href="#gallery" onclick="closeMenu()">Gallery</a></li>
+      <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+    </ul>
   </nav>  <header>
     <h1>7 Tons Urban</h1>
     <p>Luxury Interior Design & Renovation</p>
     <a href="#contact" class="btn">Get in Touch</a>
   </header>  <section id="about">
     <h2>About Us</h2>
-    <p>At 7 Tons Urban, we craft luxury interiors and living experiences that blend functionality with aesthetic excellence. Whether renovating historic properties or installing bespoke kitchens, our design philosophy is rooted in precision and elegance.</p>
+    <p>At 7 Tons Urban, we craft luxury interiors and living experiences that blend functionality with aesthetic excellence.</p>
   </section>  <section id="services">
     <h2>Our Services</h2>
     <div class="services">
-      <div class="service">
-        <h3>Interior Design</h3>
-        <p>Transforming spaces with bespoke design and curated furnishings.</p>
-      </div>
-      <div class="service">
-        <h3>Property Renovation</h3>
-        <p>Modernizing and restoring properties with high-end finishes.</p>
-      </div>
-      <div class="service">
-        <h3>Luxury Furniture</h3>
-        <p>Custom and designer furniture pieces tailored to your style.</p>
-      </div>
-      <div class="service">
-        <h3>Bathroom & Kitchen Fittings</h3>
-        <p>Premium fittings with timeless appeal and superior craftsmanship.</p>
-      </div>
+      <div><h3>Interior Design</h3><p>Transforming spaces with bespoke design and curated furnishings.</p></div>
+      <div><h3>Property Renovation</h3><p>Modernizing and restoring properties with high-end finishes.</p></div>
+      <div><h3>Luxury Furniture</h3><p>Custom and designer furniture tailored to your style.</p></div>
+      <div><h3>Bathroom & Kitchen Fittings</h3><p>Premium fittings with timeless appeal.</p></div>
     </div>
   </section>  <section id="gallery">
     <h2>Gallery</h2>
     <div class="gallery">
-      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="Interior 1">
-      <img src="https://images.unsplash.com/photo-1588854337117-2d996a30c7c5" alt="Interior 2">
-      <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be" alt="Interior 3">
+      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" onclick="openModal(this)" alt="Gallery Image 1">
+      <img src="https://images.unsplash.com/photo-1588854337117-2d996a30c7c5" onclick="openModal(this)" alt="Gallery Image 2">
+      <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be" onclick="openModal(this)" alt="Gallery Image 3">
     </div>
-  </section>  <div id="modal" class="modal">
-    <span id="closeBtn" class="close">&times;</span>
-    <img id="modalImg" src="" alt="Modal Image">
+  </section>  <div class="modal" id="imageModal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImg">
   </div>  <section id="contact">
     <h2>Contact Us</h2>
-    <div class="contact-form">
-      <form>
-        <input type="text" placeholder="Your Name" required>
-        <input type="email" placeholder="Your Email" required>
-        <textarea placeholder="Your Message" required></textarea>
-        <button type="submit" class="btn">Submit</button>
-      </form>
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message" required></textarea>
+      <button type="submit" class="btn">Submit</button>
+    </form>
+  </section>  <div class="footer">
+    <p>Follow us:</p>
+    <div class="socials">
+      <a href="#">Instagram</a>
+      <a href="#">Pinterest</a>
+      <a href="#">LinkedIn</a>
     </div>
-  </section>  <footer>
     <p>&copy; 2025 7 Tons Urban. All rights reserved.</p>
-  </footer>  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const modal = document.getElementById('modal');
+  </div>  <script>
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('active');
+    }
+    function closeMenu() {
+      document.getElementById('navLinks').classList.remove('active');
+    }
+    function openModal(img) {
+      const modal = document.getElementById('imageModal');
       const modalImg = document.getElementById('modalImg');
-      const closeBtn = document.getElementById('closeBtn');
-      const images = document.querySelectorAll('.gallery img');
-
-      images.forEach(img => {
-        img.addEventListener('click', () => {
-          modal.style.display = 'flex';
-          modalImg.src = img.src;
-          modalImg.alt = img.alt;
-        });
-      });
-
-      closeBtn.addEventListener('click', () => {
+      modal.style.display = 'block';
+      modalImg.src = img.src;
+    }
+    function closeModal() {
+      document.getElementById('imageModal').style.display = 'none';
+    }
+    window.onclick = function(e) {
+      const modal = document.getElementById('imageModal');
+      if (e.target === modal) {
         modal.style.display = 'none';
-        modalImg.src = '';
-        modalImg.alt = '';
-      });
-
-      window.addEventListener('click', (e) => {
-        if (e.target === modal) {
-          modal.style.display = 'none';
-          modalImg.src = '';
-          modalImg.alt = '';
-        }
-      });
-    });
+      }
+    }
   </script></body>
 </html>
