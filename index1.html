@@ -96,21 +96,6 @@
       margin: auto;
       text-align: center;
     }
-    section#about {
-      background-color: #1a1a1a;
-    }
-    section#services {
-      background: url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace') center/cover no-repeat;
-      background-attachment: fixed;
-      color: #fff;
-    }
-    section#gallery {
-      background-color: #222;
-    }
-    section#contact {
-      background: url('https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3') center/cover no-repeat;
-      background-attachment: fixed;
-    }
     h2 {
       color: #d4af37;
       margin-bottom: 1rem;
@@ -122,7 +107,7 @@
       gap: 2rem;
     }
     .services div {
-      background: rgba(0,0,0,0.7);
+      background: #222;
       padding: 1.5rem;
       border-radius: 10px;
     }
@@ -210,4 +195,108 @@
   </style>
 </head>
 <body>
-<!-- rest of body remains unchanged -->
+  <nav>
+    <div class="logo">7 Tons Urban</div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <ul id="navLinks">
+      <li><a href="#about" onclick="closeMenu()">About</a></li>
+      <li><a href="#services" onclick="closeMenu()">Services</a></li>
+      <li><a href="#gallery" onclick="closeMenu()">Gallery</a></li>
+      <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+    </ul>
+  </nav>  <header>
+    <h1>7 Tons Urban</h1>
+    <p>Luxury Interior Design & Renovation</p>
+    <a href="#contact" class="btn">Get in Touch</a>
+  </header>  <section id="about">
+    <h2>About Us</h2>
+    <p>At 7 Tons Urban, we craft luxury interiors and living experiences that blend functionality with aesthetic excellence.</p>
+  </section>  <section id="services">
+    <h2>Our Services</h2>
+    <div class="services">
+      <div><h3>Interior Design</h3><p>Transforming spaces with bespoke design and curated furnishings.</p></div>
+      <div><h3>Property Renovation</h3><p>Modernizing and restoring properties with high-end finishes.</p></div>
+      <div><h3>Luxury Furniture</h3><p>Custom and designer furniture tailored to your style.</p></div>
+      <div><h3>Bathroom & Kitchen Fittings</h3><p>Premium fittings with timeless appeal.</p></div>
+    </div>
+  </section>  <section id="gallery">
+    <h2>Gallery</h2>
+    <div class="gallery" id="galleryImages">
+      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="Gallery Image 1">
+      <img src="https://images.unsplash.com/photo-1588854337117-2d996a30c7c5" alt="Gallery Image 2">
+      <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be" alt="Gallery Image 3">
+    </div>
+  </section>  <div class="modal" id="imageModal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <button class="nav-btn left" onclick="changeSlide(-1)">&#10094;</button>
+    <img class="modal-content" id="modalImg">
+    <button class="nav-btn right" onclick="changeSlide(1)">&#10095;</button>
+  </div>  <section id="contact">
+    <h2>Contact Us</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message" required></textarea>
+      <button type="submit" class="btn">Submit</button>
+    </form>
+  </section>  <div class="footer">
+    <p>Follow us:</p>
+    <div class="socials">
+      <a href="#">Instagram</a>
+      <a href="#">Pinterest</a>
+      <a href="#">LinkedIn</a>
+    </div>
+    <p>&copy; 2025 7 Tons Urban. All rights reserved.</p>
+  </div>  <script>
+    let currentIndex = 0;
+    let galleryImages = [];
+
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('active');
+    }
+
+    function closeMenu() {
+      document.getElementById('navLinks').classList.remove('active');
+    }
+
+    function openModal(index) {
+      currentIndex = index;
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImg');
+      modal.style.display = 'flex';
+      modalImg.src = galleryImages[currentIndex].src;
+    }
+
+    function closeModal() {
+      document.getElementById('imageModal').style.display = 'none';
+    }
+
+    function changeSlide(direction) {
+      currentIndex = (currentIndex + direction + galleryImages.length) % galleryImages.length;
+      document.getElementById('modalImg').src = galleryImages[currentIndex].src;
+    }
+
+    window.onload = function() {
+      galleryImages = Array.from(document.querySelectorAll('#galleryImages img'));
+      galleryImages.forEach((img, index) => {
+        img.addEventListener('click', () => openModal(index));
+      });
+    }
+
+    window.onclick = function(e) {
+      const modal = document.getElementById('imageModal');
+      if (e.target === modal) {
+        closeModal();
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      const modal = document.getElementById('imageModal');
+      if (modal.style.display === 'flex') {
+        if (e.key === 'Escape') closeModal();
+        if (e.key === 'ArrowRight') changeSlide(1);
+        if (e.key === 'ArrowLeft') changeSlide(-1);
+      }
+    });
+  </script></body>
+</html>
