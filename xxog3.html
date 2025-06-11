@@ -59,12 +59,12 @@
     #portfolio { background: #2b3e50; }
     #contact { background: #34495e; }
 
-    canvas#webgl {
+    canvas #webgl {
       position: absolute;
       top: 0;
       left: 0;
       width: 50%;
-      height: 50%;
+      height: 70%;
       z-index: 0;
     }
 
@@ -157,8 +157,9 @@
 
     const loader = new GLTFLoader();
     loader.load(
+      '/spaceship1.glb',
       // You can replace this with your own model.glb path
-      'https://modelviewer.dev/shared-assets/models/Astronaut.glb',
+      //'https://modelviewer.dev/shared-assets/models/Astronaut.glb',
       gltf => scene.add(gltf.scene),
       xhr => console.log((xhr.loaded / xhr.total) * 100 + '% loaded'),
       err => {
