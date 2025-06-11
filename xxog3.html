@@ -151,7 +151,7 @@
     scene.add(light);
     scene.add(new THREE.AmbientLight(0x404040, 1));
 
-    let objects;
+    let object;
 
     let controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
@@ -159,12 +159,12 @@
     controls.autoRotateSpeed = 1;
 
     const loader = new GLTFLoader();
-    loader.load('https://github.com/webartistry3D/webartistry3d.github.io/blob/main/Lowpolybuilding.gltf',
+    loader.load('/Lowpolybuilding.gltf',
      gltf => {
-       const model = gltf.scene;
-       model.scale.set(5, 5, 5); // Adjust scale here if needed
-       model.position.set(0, 0, 0); // Center the model
-       scene.add(model);
+       object = gltf.scene;
+       object.scale.set(5, 5, 5); // Adjust scale here if needed
+       object.position.set(0, 0, 0); // Center the model
+       scene.add(object);
      },
      xhr => console.log((xhr.loaded / xhr.total) * 100 + '% loaded'),
      err => {
