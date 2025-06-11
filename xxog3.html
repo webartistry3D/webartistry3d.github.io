@@ -145,6 +145,10 @@
 
     let object;
 
+    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('webgl'), alpha: true, antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
     let controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.autoRotate = true;
@@ -176,10 +180,6 @@
 
     const ambientLight = new THREE.AmbientLight(0x333333);
     scene.add(ambientLight);
-
-    const renderer = new THREE.WebGLRenderer({ /*canvas: document.getElementById('webgl'),*/ alpha: true, antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
     function animate() {
       requestAnimationFrame(animate);
