@@ -1,91 +1,136 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>3D Landing Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tech Startup Landing Page</title>
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-    }
+    }html, body {
+  font-family: 'Segoe UI', sans-serif;
+  scroll-behavior: smooth;
+  width: 100%;
+  height: 100%;
+}
 
-    html, body {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-    }
+section {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  padding: 2rem;
+}
 
-    #home {
-      width: 100vw;
-      height: 100vh;
-      position: relative;
-    }
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  z-index: 1000;
+}
 
-    canvas#webgl {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
+nav a {
+  margin: 0 1rem;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#home { background: #0d1117; }
+#about { background: #1e2a38; }
+#services { background: #223344; }
+#portfolio { background: #2b3e50; }
+#contact { background: #34495e; }
+
+canvas#webgl {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.content {
+  z-index: 1;
+  position: relative;
+}
+
   </style>
 </head>
 <body>
-  <section id="home">
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#contact">Contact</a>
+  </nav>  <section id="home">
     <canvas id="webgl"></canvas>
-  </section>
-
-  <script type="module">
+    <div class="content">
+      <h1>Welcome to TechNova</h1>
+      <p>Innovating Tomorrow, Today.</p>
+    </div>
+  </section>  <section id="about">
+    <div class="content">
+      <h2>About Us</h2>
+      <p>We are a forward-thinking tech startup building solutions for the future.</p>
+    </div>
+  </section>  <section id="services">
+    <div class="content">
+      <h2>Our Services</h2>
+      <p>From AI to Cloud Solutions, we cover the entire tech spectrum.</p>
+    </div>
+  </section>  <section id="portfolio">
+    <div class="content">
+      <h2>Portfolio</h2>
+      <p>Check out our recent innovations and case studies.</p>
+    </div>
+  </section>  <section id="contact">
+    <div class="content">
+      <h2>Contact Us</h2>
+      <p>Get in touch for partnerships and collaborations.</p>
+    </div>
+  </section>  <script type="module">
     import * as THREE from 'https://cdn.skypack.dev/three@0.150.1';
     import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.150.1/examples/jsm/loaders/GLTFLoader.js';
     import { OrbitControls } from 'https://cdn.skypack.dev/three@0.150.1/examples/jsm/controls/OrbitControls.js';
 
-    // Scene setup
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xffffff);
-
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 100);
     camera.position.set(0, 1.5, 3);
 
-    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('webgl'), antialias: true });
+    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('webgl'), alpha: true, antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
 
-    // Lighting
     const light = new THREE.DirectionalLight(0xffffff, 1);
-    light.position.set(1, 1, 1);
+    light.position.set(5, 5, 5);
     scene.add(light);
+    scene.add(new THREE.AmbientLight(0x404040));
 
-    const ambient = new THREE.AmbientLight(0xffffff, 0.5);
-    scene.add(ambient);
-
-    // Controls
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
 
-    // Load GLB model
     const loader = new GLTFLoader();
-    loader.load(
-      'spaceship1.glb', // 👈 put your model file in same directory
-      gltf => {
-        scene.add(gltf.scene);
-      },
-      xhr => {
-        console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-      },
-      err => {
-        console.error('An error occurred loading the model', err);
-      }
-    );
+    loader.load('model.glb', gltf => scene.add(gltf.scene), undefined, error => console.error(error));
 
-    // Resize handler
     window.addEventListener('resize', () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
-    // Animate
     function animate() {
       requestAnimationFrame(animate);
       controls.update();
@@ -93,6 +138,5 @@
     }
 
     animate();
-  </script>
-</body>
+  </script></body>
 </html>
