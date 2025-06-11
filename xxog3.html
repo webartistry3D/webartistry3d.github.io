@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TechNova</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WebArtistry.3D</title>
   <style>
     * {
       margin: 0;
@@ -11,12 +11,30 @@
       box-sizing: border-box;
     }
 
-    html, body {
-      font-family: 'Segoe UI', sans-serif;
+    html {
       scroll-behavior: smooth;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+      background: #111;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    body {
+      position: relative;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      overflow-x: hidden;
+      z-index: 0;
+      pointer-events: none;
     }
 
     nav {
@@ -24,167 +42,179 @@
       top: 0;
       left: 0;
       width: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      color: white;
-      padding: 1rem 0.5rem;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
+      background: rgba(0, 0, 0, 0.8);
       z-index: 1000;
-    }
-
-    nav a {
-      margin: 0.5rem 1rem;
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: clamp(0.9rem, 2vw, 1rem);
-    }
-
-    section {
-      width: 100vw;
-      height: 100vh;
-      position: relative;
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      padding: 2rem;
-      text-align: center;
-      color: white;
-    }
-
-    #home { background: #0d1117; }
-    #about { background: #1e2a38; }
-    #services { background: #223344; }
-    #portfolio { background: #2b3e50; }
-    #contact { background: #34495e; }
-
-    #webgl {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .content {
-      z-index: 1;
-      position: relative;
       padding: 1rem;
     }
 
-    h1, h2 {
-      font-size: clamp(1.5rem, 5vw, 3rem);
+    .menu {
+      display: flex;
+      gap: 1rem;
     }
 
-    p {
-      font-size: clamp(1rem, 2.5vw, 1.25rem);
-      max-width: 90%;
-      margin: 0 auto;
+    .menu a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    .menu a:hover {
+      color: #00ffaa;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background: white;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger.active div:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active div:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active div:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    .section {
+      position: relative;
+      min-height: 100vh;
+      padding: 6rem 2rem 2rem;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      .menu {
+        display: none;
+        flex-direction: column;
+        background: rgba(0, 0, 0, 0.9);
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        text-align: center;
+      }
+
+      .menu.active {
+        display: flex;
+      }
+
+      .hamburger {
+        display: flex;
+      }
     }
   </style>
 </head>
 <body>
   <canvas id="webgl"></canvas>
+
   <nav>
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a href="#portfolio">Portfolio</a>
-    <a href="#contact">Contact</a>
+    <div class="logo">WebArtistry.3D</div>
+    <div class="hamburger" id="hamburger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div class="menu" id="menu">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+    </div>
   </nav>
 
-  <section id="home">
-    <div class="content">
-      <h1>Welcome to TechNova</h1>
-      <p>Innovating Tomorrow, Today.</p>
-    </div>
+  <section class="section" id="home">
+    <h1>Welcome to WebArtistry.3D</h1>
+    <p>Spinning cube and smooth sections</p>
   </section>
 
-  <section id="about">
-    <div class="content">
-      <h2>About Us</h2>
-      <p>We are a forward-thinking tech startup building solutions for the future.</p>
-    </div>
+  <section class="section" id="about">
+    <h2>About Us</h2>
+    <p>We create immersive digital experiences using 3D graphics.</p>
   </section>
 
-  <section id="services">
-    <div class="content">
-      <h2>Our Services</h2>
-      <p>From AI to Cloud Solutions, we cover the entire tech spectrum.</p>
-    </div>
+  <section class="section" id="services">
+    <h2>Services</h2>
+    <p>Web design, 3D modeling, animation, and development.</p>
   </section>
 
-  <section id="portfolio">
-    <div class="content">
-      <h2>Portfolio</h2>
-      <p>Check out our recent innovations and case studies.</p>
-    </div>
+  <section class="section" id="gallery">
+    <h2>Gallery</h2>
+    <p>Explore our stunning 3D work portfolio.</p>
   </section>
 
-  <section id="contact">
-    <div class="content">
-      <h2>Contact Us</h2>
-      <p>Get in touch for partnerships and collaborations.</p>
-    </div>
+  <section class="section" id="contact">
+    <h2>Contact Us</h2>
+    <p>Get in touch for collaborations and inquiries.</p>
   </section>
 
   <script type="module">
     import * as THREE from 'https://cdn.skypack.dev/three@0.150.1';
-    import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.150.1/examples/jsm/loaders/GLTFLoader.js';
-    import { OrbitControls } from 'https://cdn.skypack.dev/three@0.150.1/examples/jsm/controls/OrbitControls.js';
 
-    const scene = new THREE.Scene();
-    scene.background = null;
-
-    const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 100);
-    camera.position.set(0, 1.5, 5);
-
-    let object;
-
-    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('webgl'), alpha: true, antialias: true });
+    const canvas = document.getElementById('webgl');
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-    let controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-    controls.autoRotate = true;
-    controls.autoRotateSpeed = 1;
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
+    camera.position.z = 2;
 
-    const loader = new GLTFLoader();
-    loader.load("https://modelviewer.dev/shared-assets/models/Astronaut.glb",
-     gltf => {
-       object = gltf.scene;
-       object.scale.set(2, 2, 2); // Adjust scale here if needed
-       object.position.set(0, 0, 0); // Center the model
-       scene.add(object);
-     },
-     xhr => console.log((xhr.loaded / xhr.total) * 100 + '% loaded'),
-     err => {
-       console.error('Model load failed, showing fallback cube.', err);
-       const geometry = new THREE.BoxGeometry();
-       const material = new THREE.MeshStandardMaterial({ color: 0x00ffaa });
-       const cube = new THREE.Mesh(geometry, material);
-       scene.add(cube);
-     }
-    );
-
-    const light = new THREE.DirectionalLight(0xffffff, 1.2);
-    light.position.set(500, 500, 500);
-    light.castShadow = true;
+    const light = new THREE.HemisphereLight(0xffffff, 0x444444, 1.2);
     scene.add(light);
-    scene.add(new THREE.AmbientLight(0x404040, 1));
 
-    const ambientLight = new THREE.AmbientLight(0x333333);
-    scene.add(ambientLight);
+    // Section-specific cubes
+    const cubes = [];
+    const sections = document.querySelectorAll('.section');
+    sections.forEach((_, index) => {
+      const geometry = new THREE.BoxGeometry();
+      const material = new THREE.MeshStandardMaterial({ color: new THREE.Color(`hsl(${index * 60}, 100%, 50%)`) });
+      const cube = new THREE.Mesh(geometry, material);
+      cube.position.x = (index - 2) * 3; // Spread cubes across X
+      scene.add(cube);
+      cubes.push(cube);
+    });
 
     function animate() {
       requestAnimationFrame(animate);
-      controls.update();
+      cubes.forEach(c => {
+        c.rotation.x += 0.01;
+        c.rotation.y += 0.01;
+      });
       renderer.render(scene, camera);
     }
+
+    animate();
 
     window.addEventListener('resize', () => {
       camera.aspect = window.innerWidth / window.innerHeight;
@@ -192,7 +222,28 @@
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
-    animate();
+    // Hamburger menu toggle with animation
+    const hamburger = document.getElementById('hamburger');
+    const menu = document.getElementById('menu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      menu.classList.toggle('active');
+    });
+
+    // Scroll-triggered animations
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    document.querySelectorAll('.section').forEach(section => {
+      observer.observe(section);
+    });
   </script>
 </body>
 </html>
