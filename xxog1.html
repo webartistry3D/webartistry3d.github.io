@@ -119,9 +119,11 @@
       <a href="#blog">Blog</a>
       <a href="#contact">Contact</a>
     </nav>
-  </header>
+  </header>  
 
   <section id="home">
+    <!-- Use it like any other HTML element -->
+    <model-viewer alt="Neil Armstrong's Spacesuit" src="shared-assets/models/NeilArmstrong.glb" ar environment-image="shared-assets/environments/moon_1k.hdr" poster="shared-assets/models/NeilArmstrong.webp" shadow-intensity="1" camera-controls touch-action="pan-y"></model-viewer>
     <h2>Welcome to XXOG</h2>
     <p>The intersection of fashion and futuristic digital luxury. Explore, interact, and wear the future.</p>
   </section>
@@ -152,9 +154,6 @@
   <script src="https://cdn.jsdelivr.net/npm/three@0.148.0/examples/js/loaders/GLTFLoader.js"></script>  
   <!-- Import the component -->
   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
-
-  <!-- Use it like any other HTML element -->
-<model-viewer alt="Neil Armstrong's Spacesuit from the Smithsonian Digitization Programs Office and National Air and Space Museum" src="shared-assets/models/NeilArmstrong.glb" ar environment-image="shared-assets/environments/moon_1k.hdr" poster="shared-assets/models/NeilArmstrong.webp" shadow-intensity="1" camera-controls touch-action="pan-y"></model-viewer>
   
   <script>
     function toggleMenu() {
