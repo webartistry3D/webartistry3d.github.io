@@ -103,7 +103,7 @@
       justify-content: center;
       text-align: center;
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(50px);
       transition: opacity 0.8s ease, transform 0.8s ease;
     }
 
@@ -188,28 +188,27 @@
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
-    camera.position.z = 2;
+    camera.position.z = 5;
 
     const light = new THREE.HemisphereLight(0xffffff, 0x444444, 1.2);
     scene.add(light);
 
-    // Section-specific cubes
-    const cubes = [];
-    const sections = document.querySelectorAll('.section');
-    sections.forEach((_, index) => {
-      const geometry = new THREE.BoxGeometry();
-      const material = new THREE.MeshStandardMaterial({ color: new THREE.Color(`hsl(${index * 60}, 100%, 50%)`) });
-      const cube = new THREE.Mesh(geometry, material);
-      cube.position.x = (index - 2) * 3; // Spread cubes across X
-      scene.add(cube);
-      cubes.push(cube);
+    const sectionMeshes = [];
+    const sectionColors = [0x00ffaa, 0xff2255, 0x2266ff, 0xffcc00, 0x44ff44];
+    document.querySelectorAll('.section').forEach((section, index) => {
+      const geometry = new THREE.TorusKnotGeometry(0.8, 0.3, 100, 16);
+      const material = new THREE.MeshStandardMaterial({ color: sectionColors[index % sectionColors.length] });
+      const mesh = new THREE.Mesh(geometry, material);
+      mesh.position.y = -index * 10;
+      sectionMeshes.push(mesh);
+      scene.add(mesh);
     });
 
     function animate() {
       requestAnimationFrame(animate);
-      cubes.forEach(c => {
-        c.rotation.x += 0.01;
-        c.rotation.y += 0.01;
+      sectionMeshes.forEach(mesh => {
+        mesh.rotation.x += 0.005;
+        mesh.rotation.y += 0.005;
       });
       renderer.render(scene, camera);
     }
@@ -222,7 +221,6 @@
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
-    // Hamburger menu toggle with animation
     const hamburger = document.getElementById('hamburger');
     const menu = document.getElementById('menu');
     hamburger.addEventListener('click', () => {
@@ -230,7 +228,6 @@
       menu.classList.toggle('active');
     });
 
-    // Scroll-triggered animations
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -238,11 +235,19 @@
         }
       });
     }, {
-      threshold: 0.1
+      threshold: 0.3
     });
 
     document.querySelectorAll('.section').forEach(section => {
       observer.observe(section);
+    });
+
+    // Scroll-linked camera movement
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const sectionHeight = window.innerHeight;
+      const cameraY = -(scrollY / sectionHeight) * 10;
+      camera.position.y = cameraY;
     });
   </script>
 </body>
