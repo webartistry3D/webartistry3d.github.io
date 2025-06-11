@@ -157,19 +157,21 @@
     controls.autoRotateSpeed = 1;
 
     const loader = new GLTFLoader();
-    loader.load(
-      'lowpolybuilding.gltf',
-      // You can replace this with your own model.glb path
-      //'https://modelviewer.dev/shared-assets/models/Astronaut.glb',
-      gltf => scene.add(gltf.scene),
-      xhr => console.log((xhr.loaded / xhr.total) * 100 + '% loaded'),
-      err => {
-        console.error('Model load failed, showing fallback cube.', err);
-        const geometry = new THREE.BoxGeometry();
-        const material = new THREE.MeshStandardMaterial({ color: 0x00ffaa });
-        const cube = new THREE.Mesh(geometry, material);
-        scene.add(cube);
-      }
+    loader.load('lowpolybuilding.gltf',
+     gltf => {
+       const model = gltf.scene;
+       model.scale.set(1, 1, 1); // Adjust scale here if needed
+       model.position.set(0, 0, 0); // Center the model
+       scene.add(model);
+     },
+     xhr => console.log((xhr.loaded / xhr.total) * 100 + '% loaded'),
+     err => {
+       console.error('Model load failed, showing fallback cube.', err);
+       const geometry = new THREE.BoxGeometry();
+       const material = new THREE.MeshStandardMaterial({ color: 0x00ffaa });
+       const cube = new THREE.Mesh(geometry, material);
+       scene.add(cube);
+     }
     );
 
     window.addEventListener('resize', () => {
