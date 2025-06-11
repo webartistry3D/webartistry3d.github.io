@@ -142,15 +142,6 @@
     const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 100);
     camera.position.set(0, 1.5, 3);
 
-    const light = new THREE.DirectionalLight(0xffffff, 1.2);
-    light.position.set(500, 500, 500);
-    light.castShadow = true;
-    scene.add(light);
-    scene.add(new THREE.AmbientLight(0x404040, 1));
-
-    const ambientLight = new THREE.AmbientLight(0x333333);
-    scene.add(ambientLight);
-
     let object;
 
     let controls = new OrbitControls(camera, renderer.domElement);
@@ -176,21 +167,30 @@
      }
     );
 
-    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('webgl'), alpha: true, antialias: true });
+    const light = new THREE.DirectionalLight(0xffffff, 1.2);
+    light.position.set(500, 500, 500);
+    light.castShadow = true;
+    scene.add(light);
+    scene.add(new THREE.AmbientLight(0x404040, 1));
+
+    const ambientLight = new THREE.AmbientLight(0x333333);
+    scene.add(ambientLight);
+
+    const renderer = new THREE.WebGLRenderer({ /*canvas: document.getElementById('webgl'),*/ alpha: true, antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    
+
+    function animate() {
+      requestAnimationFrame(animate);
+      /*controls.update();
+      renderer.render(scene, camera);*/
+    }
+
     window.addEventListener('resize', () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
-
-    function animate() {
-      requestAnimationFrame(animate);
-      controls.update();
-      renderer.render(scene, camera);
-    }
 
     animate();
   </script>
