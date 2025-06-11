@@ -151,7 +151,9 @@
     scene.add(light);
     scene.add(new THREE.AmbientLight(0x404040, 1));
 
-    const controls = new OrbitControls(camera, renderer.domElement);
+    let objects;
+
+    let controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.autoRotate = true;
     controls.autoRotateSpeed = 1;
