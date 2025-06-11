@@ -123,7 +123,7 @@ canvas#webgl {
     controls.enableDamping = true;
 
     const loader = new GLTFLoader();
-    loader.load('Spaceship2.glb', gltf => scene.add(gltf.scene), undefined, error => console.error(error));
+    loader.load('spaceship1.glb', gltf => scene.add(gltf.scene), undefined, error => console.error(error));
 
     window.addEventListener('resize', () => {
       camera.aspect = window.innerWidth / window.innerHeight;
