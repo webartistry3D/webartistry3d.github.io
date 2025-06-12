@@ -1,0 +1,82 @@
+import React from "react"; import { Button } from "@/components/ui/button"; import { Card, CardContent } from "@/components/ui/card"; import { motion } from "framer-motion";
+
+export default function LandingPage() { return ( <main className="bg-black text-white min-h-screen font-sans"> {/* Hero Section */} <section className="h-screen flex flex-col items-center justify-center text-center px-6"> <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-5xl md:text-7xl font-bold"> Immersive 3D Web Design for Bold Global Brands </motion.h1> <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }} className="mt-6 text-lg max-w-2xl"> We craft interactive, future-forward websites that captivate, convert, and command attention. </motion.p> <div className="mt-8 flex gap-4"> <Button variant="default">Book a Free Discovery Call</Button> <Button variant="outline">View Portfolio</Button> </div> </section>
+
+{/* Trusted Brands */}
+  <section className="py-20 bg-gray-900 text-center">
+    <h2 className="text-3xl mb-4 font-semibold">Trusted by Global Visionaries</h2>
+    <p className="mb-8 text-gray-400">Partnered with brands in Tokyo, Paris, Dubai, and New York.</p>
+    <div className="flex justify-center gap-8 flex-wrap">
+      {/* Placeholder Logos */}
+      <span className="text-gray-600">[Logo1]</span>
+      <span className="text-gray-600">[Logo2]</span>
+      <span className="text-gray-600">[Logo3]</span>
+      <span className="text-gray-600">[Logo4]</span>
+    </div>
+  </section>
+
+  {/* Why WebArtistry.3D */}
+  <section className="py-20 px-6 bg-black">
+    <h2 className="text-3xl text-center font-semibold mb-12">Why WebArtistry.3D?</h2>
+    <div className="grid md:grid-cols-3 gap-8">
+      <Card><CardContent className="p-6">Tailored UX for elite audiences</CardContent></Card>
+      <Card><CardContent className="p-6">Next-gen WebGL & 3D experiences</CardContent></Card>
+      <Card><CardContent className="p-6">High-end brand positioning</CardContent></Card>
+    </div>
+  </section>
+
+  {/* Featured Projects */}
+  <section className="py-20 bg-gray-950 px-6">
+    <h2 className="text-3xl text-center font-semibold mb-12">Featured Projects</h2>
+    <div className="grid md:grid-cols-3 gap-6">
+      {[1,2,3].map((i) => (
+        <Card key={i} className="hover:scale-105 transition-transform">
+          <CardContent className="p-6">Project {i} Preview</CardContent>
+        </Card>
+      ))}
+    </div>
+  </section>
+
+  {/* Services */}
+  <section className="py-20 px-6 bg-black">
+    <h2 className="text-3xl text-center font-semibold mb-12">Services for the Elite</h2>
+    <div className="grid md:grid-cols-2 gap-8">
+      <Card><CardContent className="p-6">Immersive Brand Websites</CardContent></Card>
+      <Card><CardContent className="p-6">Luxury eCommerce Experiences</CardContent></Card>
+      <Card><CardContent className="p-6">Interactive Product Launches</CardContent></Card>
+      <Card><CardContent className="p-6">Custom 3D Portfolio Design</CardContent></Card>
+    </div>
+  </section>
+
+  {/* Results */}
+  <section className="py-20 bg-gray-900 px-6 text-center">
+    <h2 className="text-3xl font-semibold mb-12">Client Results</h2>
+    <div className="grid md:grid-cols-4 gap-6">
+      <div>+43% Conversions</div>
+      <div>2x Engagement</div>
+      <div>95% Return Clients</div>
+      <div>Clients in 7+ Countries</div>
+    </div>
+  </section>
+
+  {/* Work With Us */}
+  <section className="py-20 px-6 bg-black">
+    <h2 className="text-3xl text-center font-semibold mb-12">Work With Us – Global & Effortless</h2>
+    <div className="max-w-3xl mx-auto text-center space-y-6">
+      <p><strong>Step 1:</strong> Discovery Call</p>
+      <p><strong>Step 2:</strong> Concept & Proposal</p>
+      <p><strong>Step 3:</strong> Launch Globally</p>
+      <Button className="mt-6">Request Discovery Call</Button>
+    </div>
+  </section>
+
+  {/* Footer */}
+  <footer className="py-10 text-center bg-gray-950 text-gray-500">
+    <p>© 2025 WebArtistry.3D – All rights reserved.</p>
+    <div className="mt-4">EN | FR | JP</div>
+    <div className="mt-2">Instagram · Behance · LinkedIn</div>
+  </footer>
+</main>
+
+); }
+
