@@ -3,12 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WebArtistry.3D</title>
+  <title>3D Cube Site with Snow</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    html, body { height: 100%; font-family: 'Segoe UI', sans-serif; overflow-x: hidden; }
-    body { position: relative; background-color: #000; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+      background: #111;
+      color: white;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    body {
+      position: relative;
+    }
 
     canvas {
       position: fixed;
@@ -17,7 +32,7 @@
       width: 100%;
       height: 100%;
       z-index: 0;
-      pointer-events: auto;
+      pointer-events: none;
     }
 
     nav {
@@ -31,7 +46,6 @@
       justify-content: space-between;
       align-items: center;
       padding: 1rem;
-      color: white;
     }
 
     .menu {
@@ -46,7 +60,9 @@
       transition: color 0.3s;
     }
 
-    .menu a:hover { color: #00ffaa; }
+    .menu a:hover {
+      color: #00ffaa;
+    }
 
     .hamburger {
       display: none;
@@ -66,9 +82,11 @@
     .hamburger.active div:nth-child(1) {
       transform: rotate(45deg) translate(5px, 5px);
     }
+
     .hamburger.active div:nth-child(2) {
       opacity: 0;
     }
+
     .hamburger.active div:nth-child(3) {
       transform: rotate(-45deg) translate(5px, -5px);
     }
@@ -82,22 +100,7 @@
       flex-direction: column;
       justify-content: center;
       text-align: center;
-      opacity: 0;
-      transform: translateY(50px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-      color: white;
     }
-
-    .section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    #home    { background-color: rgba(13, 17, 23, 0.8); }
-    #about   { background-color: rgba(26, 26, 46, 0.8); }
-    #services{ background-color: rgba(20, 33, 61, 0.8); }
-    #gallery { background-color: rgba(33, 37, 41, 0.8); }
-    #contact { background-color: rgba(28, 31, 38, 0.8); }
 
     @media (max-width: 768px) {
       .menu {
@@ -110,8 +113,14 @@
         width: 100%;
         text-align: center;
       }
-      .menu.active { display: flex; }
-      .hamburger { display: flex; }
+
+      .menu.active {
+        display: flex;
+      }
+
+      .hamburger {
+        display: flex;
+      }
     }
   </style>
 </head>
@@ -119,8 +128,8 @@
   <canvas id="webgl"></canvas>
 
   <nav>
-    <div class="logo">WebArtistry.3D</div>
-    <div class="hamburger" id="hamburger">
+    <div class="logo">3D Site</div>
+    <div class="hamburger" id="hamburger" role="button" aria-label="Toggle menu">
       <div></div>
       <div></div>
       <div></div>
@@ -135,21 +144,25 @@
   </nav>
 
   <section class="section" id="home">
-    <h1>Welcome to WebArtistry.3D</h1>
-    <p>Immersive digital experiences with 3D design</p>
+    <h1>Welcome to 3D World</h1>
+    <p>Spinning cube and smooth sections</p>
   </section>
+
   <section class="section" id="about">
     <h2>About Us</h2>
     <p>We create immersive digital experiences using 3D graphics.</p>
   </section>
+
   <section class="section" id="services">
     <h2>Services</h2>
     <p>Web design, 3D modeling, animation, and development.</p>
   </section>
+
   <section class="section" id="gallery">
     <h2>Gallery</h2>
     <p>Explore our stunning 3D work portfolio.</p>
   </section>
+
   <section class="section" id="contact">
     <h2>Contact Us</h2>
     <p>Get in touch for collaborations and inquiries.</p>
@@ -157,7 +170,6 @@
 
   <script type="module">
     import * as THREE from 'https://cdn.skypack.dev/three@0.150.1';
-    import { OrbitControls } from 'https://cdn.skypack.dev/three@0.150.1/examples/jsm/controls/OrbitControls.js';
 
     const canvas = document.getElementById('webgl');
     const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
@@ -165,51 +177,67 @@
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
-    camera.position.set(0, 0, 5);
-    camera.lookAt(0, 0, 0);
 
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-    controls.enableZoom = true;
-    controls.enableRotate = true;
-    controls.enablePan = false;
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
+    camera.position.z = 2;
+
+    // Cube
+    const geometry = new THREE.BoxGeometry();
+    const material = new THREE.MeshStandardMaterial({ color: 0x00ffaa });
+    const cube = new THREE.Mesh(geometry, material);
+    scene.add(cube);
 
     const light = new THREE.HemisphereLight(0xffffff, 0x444444, 1.2);
     scene.add(light);
-    const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
-    dirLight.position.set(0, 10, 10);
-    scene.add(dirLight);
 
-    const sectionObjects = [];
-    const geometries = [
-      new THREE.TorusKnotGeometry(0.8, 0.3, 100, 16),
-      new THREE.IcosahedronGeometry(1, 1),
-      new THREE.ConeGeometry(1, 2, 32),
-      new THREE.BoxGeometry(1.5, 1.5, 1.5),
-      new THREE.DodecahedronGeometry(1)
-    ];
-    const colors = [0x00ffaa, 0xff2255, 0x2266ff, 0xffcc00, 0x44ff44];
+    // Snow Particles
+    const snowflakeCount = 500;
+    const snowGeometry = new THREE.BufferGeometry();
+    const snowPositions = [];
 
-    document.querySelectorAll('.section').forEach((section, index) => {
-      const geometry = geometries[index % geometries.length];
-      const material = new THREE.MeshStandardMaterial({ color: colors[index % colors.length] });
-      const mesh = new THREE.Mesh(geometry, material);
-      mesh.position.y = -index * 10;
-      scene.add(mesh);
-      sectionObjects.push(mesh);
+    for (let i = 0; i < snowflakeCount; i++) {
+      snowPositions.push(
+        (Math.random() - 0.5) * 10,
+        Math.random() * 10,
+        (Math.random() - 0.5) * 10
+      );
+    }
+
+    snowGeometry.setAttribute(
+      'position',
+      new THREE.Float32BufferAttribute(snowPositions, 3)
+    );
+
+    const snowMaterial = new THREE.PointsMaterial({
+      color: 0xffffff,
+      size: 0.05,
+      transparent: true,
+      opacity: 0.8
     });
 
+    const snowParticles = new THREE.Points(snowGeometry, snowMaterial);
+    scene.add(snowParticles);
+
+    // Animate
     function animate() {
       requestAnimationFrame(animate);
-      sectionObjects.forEach(obj => {
-        obj.rotation.x += 0.01;
-        obj.rotation.y += 0.01;
-      });
-      controls.update();
+
+      // Rotate cube
+      cube.rotation.x += 0.01;
+      cube.rotation.y += 0.01;
+
+      // Snow falling animation
+      const positions = snowGeometry.attributes.position.array;
+      for (let i = 1; i < positions.length; i += 3) {
+        positions[i] -= 0.02;
+        if (positions[i] < -2) {
+          positions[i] = 10;
+        }
+      }
+      snowGeometry.attributes.position.needsUpdate = true;
+
       renderer.render(scene, camera);
     }
-    animate();
 
     window.addEventListener('resize', () => {
       camera.aspect = window.innerWidth / window.innerHeight;
@@ -217,22 +245,15 @@
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
+    animate();
+
+    // Hamburger menu toggle
     const hamburger = document.getElementById('hamburger');
     const menu = document.getElementById('menu');
     hamburger.addEventListener('click', () => {
       hamburger.classList.toggle('active');
       menu.classList.toggle('active');
     });
-
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.3 });
-
-    document.querySelectorAll('.section').forEach(section => observer.observe(section));
   </script>
 </body>
 </html>
