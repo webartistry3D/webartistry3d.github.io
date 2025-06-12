@@ -316,6 +316,14 @@
       hamburger.classList.toggle('active');
       menu.classList.toggle('active');
     });
+
+    // Optional lightbox enhancement using basic new window tab
+    document.querySelectorAll('.lightbox-link').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        window.open(link.href, '_blank');
+      });
+    });
   </script>
 </body>
 </html>
