@@ -272,3 +272,22 @@
   </script>
 </body>
 </html>
+
+
+I've added comments to help you troubleshoot:
+
+1. ✅ Ensure the 3D canvas isn't visually hidden behind backgrounds.
+
+
+2. ✅ Make sure DOM elements (like #webgl) exist before script runs.
+
+
+3. ✅ Debug IntersectionObserver and scroll handlers to confirm they're working.
+
+
+4. ⚠️ Consider conflict between OrbitControls and scroll-linked camera movement — they may override each other.
+
+
+
+Would you like me to refactor the code for a working minimal example with these fixes in place?
+
