@@ -205,6 +205,7 @@
     }
   </style>
 </head>
+
 <body>
   <canvas id="webgl"></canvas>
 
@@ -288,3 +289,99 @@
     <p>Ready to launch your vision in 3D? Let's make it happen.</p>
     <p>Email: <a href="mailto:studio@webartistry3d.com">studio@webartistry3d.com</a></p>
   </section>
+
+<script type="module">
+  import * as THREE from 'https://cdn.skypack.dev/three@0.150.1';
+
+  // WebGL Renderer setup
+  const canvas = document.getElementById('webgl');
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  // Scene and Camera
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
+  camera.position.z = 2;
+
+  // Cube
+  const geometry = new THREE.BoxGeometry();
+  const material = new THREE.MeshStandardMaterial({ color: 0x00ffaa });
+  const cube = new THREE.Mesh(geometry, material);
+  scene.add(cube);
+
+  // Lighting
+  const light = new THREE.HemisphereLight(0xffffff, 0x444444, 1.2);
+  scene.add(light);
+
+  // Snow Particles
+  const snowflakeCount = 500;
+  const snowGeometry = new THREE.BufferGeometry();
+  const snowPositions = [];
+
+  for (let i = 0; i < snowflakeCount; i++) {
+    snowPositions.push(
+      (Math.random() - 0.5) * 10,
+      Math.random() * 10,
+      (Math.random() - 0.5) * 10
+    );
+  }
+
+  snowGeometry.setAttribute(
+    'position',
+    new THREE.Float32BufferAttribute(snowPositions, 3)
+  );
+
+  const snowMaterial = new THREE.PointsMaterial({
+    color: 0xffffff,
+    size: 0.05,
+    transparent: true,
+    opacity: 0.8
+  });
+
+  const snowParticles = new THREE.Points(snowGeometry, snowMaterial);
+  scene.add(snowParticles);
+
+  // Animation Loop
+  function animate() {
+    requestAnimationFrame(animate);
+    cube.rotation.x += 0.01;
+    cube.rotation.y += 0.01;
+
+    const positions = snowGeometry.attributes.position.array;
+    for (let i = 1; i < positions.length; i += 3) {
+      positions[i] -= 0.02;
+      if (positions[i] < -2) positions[i] = 10;
+    }
+    snowGeometry.attributes.position.needsUpdate = true;
+
+    renderer.render(scene, camera);
+  }
+
+  // Responsive adjustments
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+
+  animate();
+
+  // Hamburger menu toggle
+  const hamburger = document.getElementById('hamburger');
+  const menu = document.getElementById('menu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    menu.classList.toggle('active');
+  });
+
+  // Optional: Lightbox behavior
+  document.querySelectorAll('.project-card a').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      window.open(link.href, '_blank');
+    });
+  });
+</script>
+</body>
+</html>
