@@ -5,25 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>WebArtistry.3D</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    html, body {
-      height: 100%;
-      font-family: 'Segoe UI', sans-serif;
-      overflow-x: hidden;
-    }
-
-    body {
-      position: relative;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body { height: 100%; font-family: 'Segoe UI', sans-serif; overflow-x: hidden; }
+    body { position: relative; background-color: #000; }
 
     canvas {
       position: fixed;
@@ -61,9 +46,7 @@
       transition: color 0.3s;
     }
 
-    .menu a:hover {
-      color: #00ffaa;
-    }
+    .menu a:hover { color: #00ffaa; }
 
     .hamburger {
       display: none;
@@ -83,11 +66,9 @@
     .hamburger.active div:nth-child(1) {
       transform: rotate(45deg) translate(5px, 5px);
     }
-
     .hamburger.active div:nth-child(2) {
       opacity: 0;
     }
-
     .hamburger.active div:nth-child(3) {
       transform: rotate(-45deg) translate(5px, -5px);
     }
@@ -112,11 +93,11 @@
       transform: translateY(0);
     }
 
-    #home { background-color: #0d1117; }
-    #about { background-color: #1a1a2e; }
-    #services { background-color: #14213d; }
-    #gallery { background-color: #212529; }
-    #contact { background-color: #1c1f26; }
+    #home    { background-color: rgba(13, 17, 23, 0.8); }
+    #about   { background-color: rgba(26, 26, 46, 0.8); }
+    #services{ background-color: rgba(20, 33, 61, 0.8); }
+    #gallery { background-color: rgba(33, 37, 41, 0.8); }
+    #contact { background-color: rgba(28, 31, 38, 0.8); }
 
     @media (max-width: 768px) {
       .menu {
@@ -129,14 +110,8 @@
         width: 100%;
         text-align: center;
       }
-
-      .menu.active {
-        display: flex;
-      }
-
-      .hamburger {
-        display: flex;
-      }
+      .menu.active { display: flex; }
+      .hamburger { display: flex; }
     }
   </style>
 </head>
@@ -163,22 +138,18 @@
     <h1>Welcome to WebArtistry.3D</h1>
     <p>Immersive digital experiences with 3D design</p>
   </section>
-
   <section class="section" id="about">
     <h2>About Us</h2>
     <p>We create immersive digital experiences using 3D graphics.</p>
   </section>
-
   <section class="section" id="services">
     <h2>Services</h2>
     <p>Web design, 3D modeling, animation, and development.</p>
   </section>
-
   <section class="section" id="gallery">
     <h2>Gallery</h2>
     <p>Explore our stunning 3D work portfolio.</p>
   </section>
-
   <section class="section" id="contact">
     <h2>Contact Us</h2>
     <p>Get in touch for collaborations and inquiries.</p>
@@ -195,15 +166,20 @@
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
-    camera.position.z = 5;
+    camera.position.set(0, 0, 5);
+    camera.lookAt(0, 0, 0);
 
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.enableZoom = true;
     controls.enableRotate = true;
+    controls.enablePan = false;
 
     const light = new THREE.HemisphereLight(0xffffff, 0x444444, 1.2);
     scene.add(light);
+    const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    dirLight.position.set(0, 10, 10);
+    scene.add(dirLight);
 
     const sectionObjects = [];
     const geometries = [
@@ -233,7 +209,6 @@
       controls.update();
       renderer.render(scene, camera);
     }
-
     animate();
 
     window.addEventListener('resize', () => {
@@ -255,39 +230,9 @@
           entry.target.classList.add('visible');
         }
       });
-    }, {
-      threshold: 0.3
-    });
+    }, { threshold: 0.3 });
 
-    document.querySelectorAll('.section').forEach(section => {
-      observer.observe(section);
-    });
-
-    window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
-      const sectionHeight = window.innerHeight;
-      const cameraY = -(scrollY / sectionHeight) * 10;
-      camera.position.y = cameraY;
-    });
+    document.querySelectorAll('.section').forEach(section => observer.observe(section));
   </script>
 </body>
 </html>
-
-
-I've added comments to help you troubleshoot:
-
-1. ✅ Ensure the 3D canvas isn't visually hidden behind backgrounds.
-
-
-2. ✅ Make sure DOM elements (like #webgl) exist before script runs.
-
-
-3. ✅ Debug IntersectionObserver and scroll handlers to confirm they're working.
-
-
-4. ⚠️ Consider conflict between OrbitControls and scroll-linked camera movement — they may override each other.
-
-
-
-Would you like me to refactor the code for a working minimal example with these fixes in place?
-
